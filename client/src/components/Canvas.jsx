@@ -1,12 +1,11 @@
-import { useState } from 'react'
 import './Canvas.css'
 import Draw from './Hooks'
 
-const Canvas = ({ width, height, hexColor }) => {
-  //   const [canvasArray, setCanvasArray] = useState([])
+const Canvas = ({ width, height }) => {
   const canvasArray = []
 
-  const onSketch = (ctx, point) => {
+  const onSketch = (ctx, point, hexColor) => {
+    console.log(hexColor)
     if (point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height) {
       ctx.fillStyle = hexColor
       ctx.beginPath()
@@ -16,6 +15,7 @@ const Canvas = ({ width, height, hexColor }) => {
       ctx.fill()
     }
   }
+
   const setCanvasRef = Draw(onSketch)
 
   return (

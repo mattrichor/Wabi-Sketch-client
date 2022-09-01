@@ -1,7 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useContext } from 'react'
+import { ColorProvider } from '../App'
 
 const Draw = (onSketch) => {
   const canvasRef = useRef(null)
+
+  const hexColor = useContext(ColorProvider)
+
+  const isDrawingRef = useRef(false)
 
   const setCanvasRef = (ref) => {
     if (!ref) {
@@ -9,19 +14,29 @@ const Draw = (onSketch) => {
     } else {
       canvasRef.current = ref
       initializeMouseMoveListener()
+      initializeMouseClickListener()
     }
+  }
+
+  const initializeMouseClickListener = () => {
+    if (!canvasRef.current) {
+      return
+    }
+    const listener = () => {
+      isDrawingRef.current = true
+    }
+    canvasRef.current.addEventListener('mousedown', listener)
   }
 
   const initializeMouseMoveListener = () => {
     const mouseMoveListener = (event) => {
       const pointInCanvas = getCanvasCoords(event.clientX, event.clientY)
       const context = canvasRef.current.getContext('2d')
-      if (onSketch && canvasRef.current) {
-        onSketch(context, pointInCanvas)
+      if (isDrawingRef.current) {
+        onSketch(context, pointInCanvas, hexColor)
       }
     }
     return mouseMoveListener
-    // ref.addEventListener('mousemove', mouseMoveListener)
   }
 
   useEffect(() => {
