@@ -32,10 +32,13 @@
 
 ---
 
-##### Wireframe
+##### ERD
+
+link here: (https://app.diagrams.net/#G1YUuk2hW3p0iHv1a-WdaQcjNIftVk7wTD)
+
+#### CHD
 
 link here: ()
-
 ---
 
 ### **_Screenshots_**
