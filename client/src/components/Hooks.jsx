@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 const Draw = (onSketch) => {
   const canvasRef = useRef(null)
@@ -19,10 +19,20 @@ const Draw = (onSketch) => {
       if (onSketch && canvasRef.current) {
         onSketch(context, pointInCanvas)
       }
-      //   console.log(pointInCanvas)
     }
-    window.addEventListener('mousemove', mouseMoveListener)
+    return mouseMoveListener
+    // ref.addEventListener('mousemove', mouseMoveListener)
   }
+
+  useEffect(() => {
+    let mouseMoveListener = initializeMouseMoveListener()
+    if (canvasRef) {
+      window.addEventListener('mousemove', mouseMoveListener)
+    }
+    return () => {
+      window.removeEventListener('mousemove', mouseMoveListener)
+    }
+  }, [canvasRef])
 
   const getCanvasCoords = (x, y) => {
     if (canvasRef.current) {
