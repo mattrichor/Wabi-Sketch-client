@@ -29,7 +29,8 @@ const Canvas = ({ width, height }) => {
     ctx.fill()
   }
 
-  const setCanvasRef = Draw(onSketch)
+  const { drawAndSaveLine, setCanvasRef } = Draw(onSketch)
+  // const setCanvasRef = Draw(onSketch)
 
   return (
     <div className="canvas-container">
@@ -38,6 +39,7 @@ const Canvas = ({ width, height }) => {
         height={height}
         className="canvas"
         ref={setCanvasRef}
+        onMouseDown={drawAndSaveLine}
       ></canvas>
     </div>
   )
