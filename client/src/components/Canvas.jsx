@@ -2,14 +2,14 @@ import './Canvas.css'
 import Draw from './Hooks'
 
 const Canvas = ({ width, height }) => {
-  const canvasArray = []
+  const lineArray = []
 
   const onSketch = (ctx, point, hexColor, prevPoint) => {
     // console.log(hexColor)
     if (point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height) {
       fillPoints(prevPoint, point, ctx, hexColor, 4)
       ctx.fillStyle = hexColor
-      console.log(canvasArray)
+      console.log(lineArray)
     }
   }
 
@@ -25,7 +25,7 @@ const Canvas = ({ width, height }) => {
     ctx.stroke()
     ctx.beginPath()
     ctx.arc(start.x, start.y, 1.8, 0, 1.8 * Math.PI)
-    canvasArray.push({ x: start.x, y: start.y, hexColor })
+    lineArray.push({ start: start, end: end, hexColor })
     ctx.fill()
   }
 
