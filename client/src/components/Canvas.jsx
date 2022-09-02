@@ -9,7 +9,7 @@ const Canvas = ({ width, height }) => {
     if (point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height) {
       fillPoints(prevPoint, point, ctx, hexColor, 4)
       ctx.fillStyle = hexColor
-      console.log(lineArray)
+      // console.log(lineArray)
     }
   }
 
