@@ -10,7 +10,6 @@ export const ColorProvider = createContext('#8A1B19')
 function App() {
   const [hexColor, setHexColor] = useState('#000000')
 
-  console.log(hexColor)
   return (
     <ColorProvider.Provider value={hexColor}>
       <div className="App">

@@ -4,16 +4,29 @@ import Draw from './Hooks'
 const Canvas = ({ width, height }) => {
   const canvasArray = []
 
-  const onSketch = (ctx, point, hexColor) => {
-    console.log(hexColor)
+  const onSketch = (ctx, point, hexColor, prevPoint) => {
+    // console.log(hexColor)
     if (point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height) {
+      fillPoints(prevPoint, point, ctx, hexColor, 4)
       ctx.fillStyle = hexColor
-      ctx.beginPath()
-      ctx.arc(point.x, point.y, 2, 0, 2 * Math.PI)
-      canvasArray.push({ x: point.x, y: point.y, hexColor })
       console.log(canvasArray)
-      ctx.fill()
     }
+  }
+
+  const fillPoints = (start, end, ctx, hexColor, width) => {
+    if (!start) {
+      start = end
+    }
+    ctx.beginPath()
+    ctx.lineWidth = width
+    ctx.strokeStyle = hexColor
+    ctx.moveTo(start.x, start.y)
+    ctx.lineTo(end.x, end.y)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.arc(start.x, start.y, 1.8, 0, 1.8 * Math.PI)
+    canvasArray.push({ x: start.x, y: start.y, hexColor })
+    ctx.fill()
   }
 
   const setCanvasRef = Draw(onSketch)

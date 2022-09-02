@@ -7,6 +7,7 @@ const Draw = (onSketch) => {
   const hexColor = useContext(ColorProvider)
 
   const isDrawingRef = useRef(false)
+  const prevPoint = useRef(null)
 
   const setCanvasRef = (ref) => {
     if (!ref) {
@@ -15,6 +16,7 @@ const Draw = (onSketch) => {
       canvasRef.current = ref
       initializeMouseMoveListener()
       initializeMouseClickListener()
+      initializeMouseUnclickListener()
     }
   }
 
@@ -28,12 +30,22 @@ const Draw = (onSketch) => {
     canvasRef.current.addEventListener('mousedown', listener)
   }
 
+  const initializeMouseUnclickListener = () => {
+    const listener = () => {
+      isDrawingRef.current = false
+      prevPoint.current = null
+    }
+    window.addEventListener('mouseup', listener)
+  }
+
   const initializeMouseMoveListener = () => {
     const mouseMoveListener = (event) => {
       const pointInCanvas = getCanvasCoords(event.clientX, event.clientY)
       const context = canvasRef.current.getContext('2d')
       if (isDrawingRef.current) {
-        onSketch(context, pointInCanvas, hexColor)
+        onSketch(context, pointInCanvas, hexColor, prevPoint.current)
+        prevPoint.current = pointInCanvas
+        console.log()
       }
     }
     return mouseMoveListener
@@ -41,11 +53,15 @@ const Draw = (onSketch) => {
 
   useEffect(() => {
     let mouseMoveListener = initializeMouseMoveListener()
+    let mouseClickListener = initializeMouseClickListener()
+    let mouseUnclickListener = initializeMouseUnclickListener()
     if (canvasRef) {
       window.addEventListener('mousemove', mouseMoveListener)
     }
     return () => {
       window.removeEventListener('mousemove', mouseMoveListener)
+      canvasRef.current.removeEventListener('mousedown', mouseClickListener)
+      window.removeEventListener('mouseup', mouseUnclickListener)
     }
   }, [canvasRef])
 
