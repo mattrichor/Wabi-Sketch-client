@@ -14,6 +14,7 @@ const Draw = (onSketch, width, height) => {
   const lineArray = useRef([])
   const canvasData = useRef([])
   const canvasArray = useRef([])
+  const lineCount = useRef(-1)
 
   useEffect(() => {
     const initializeMouseMoveListener = () => {
@@ -82,16 +83,24 @@ const Draw = (onSketch, width, height) => {
       canvasData.current = ctx.getImageData(0, 0, width, height)
       console.log(canvasData.current)
       canvasArray.current.push(canvasData.current)
-      console.log(canvasArray.current)
       lineArray.current = []
+      lineCount.current++
+      console.log(lineCount.current)
       // console.log(canvasArray)
     }
   }
 
   const undoLine = () => {
-    console.log('CLICKED ')
     const ctx = canvasRef.current.getContext('2d')
-    ctx.putImageData(canvasArray.current[0], 0, 0)
+    if (lineCount.current === 0) {
+      ctx.clearRect(0, 0, width, height)
+      canvasArray.current.pop()
+      lineCount.current--
+    } else {
+      ctx.putImageData(canvasArray.current[lineCount.current - 1], 0, 0)
+      canvasArray.current.pop()
+      lineCount.current--
+    }
   }
 
   return {
