@@ -1,7 +1,7 @@
 import { useEffect, useRef, useContext } from 'react'
 import { ColorProvider } from '../App'
 
-const Draw = (onSketch) => {
+const Draw = (onSketch, width, height) => {
   const hexColor = useContext(ColorProvider)
 
   const canvasRef = useRef(null)
@@ -12,24 +12,23 @@ const Draw = (onSketch) => {
   const mouseUnclickRef = useRef(null)
 
   const lineArray = useRef([])
+  const canvasData = useRef([])
   const canvasArray = useRef([])
 
   useEffect(() => {
     const initializeMouseMoveListener = () => {
       const mouseMoveListener = (event) => {
         const pointInCanvas = getCanvasCoords(event.clientX, event.clientY)
-        const context = canvasRef.current.getContext('2d')
+        const ctx = canvasRef.current.getContext('2d')
         if (isDrawingRef.current) {
           lineArray.current.push({
-            ctx: context,
+            ctx: ctx,
             start: prevPoint.current,
             end: pointInCanvas,
             hexColor
           })
-          // console.log(lineArray)
           onSketch(lineArray.current)
           prevPoint.current = pointInCanvas
-          console.log(lineArray)
         }
       }
       mouseMoveRef.current = mouseMoveListener
@@ -79,15 +78,26 @@ const Draw = (onSketch) => {
     } else if (isDrawingRef.current) {
       isDrawingRef.current = false
       prevPoint.current = null
-      canvasArray.current.push(lineArray.current)
+      const ctx = canvasRef.current.getContext('2d')
+      canvasData.current = ctx.getImageData(0, 0, width, height)
+      console.log(canvasData.current)
+      canvasArray.current.push(canvasData.current)
+      console.log(canvasArray.current)
       lineArray.current = []
-      console.log(canvasArray)
+      // console.log(canvasArray)
     }
+  }
+
+  const undoLine = () => {
+    console.log('CLICKED ')
+    const ctx = canvasRef.current.getContext('2d')
+    ctx.putImageData(canvasArray.current[0], 0, 0)
   }
 
   return {
     setCanvasRef,
-    drawAndSaveLine
+    drawAndSaveLine,
+    undoLine
   }
 }
 

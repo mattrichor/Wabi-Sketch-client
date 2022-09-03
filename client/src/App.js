@@ -6,7 +6,7 @@ import { createContext } from 'react'
 import React from 'react'
 import Draw from './components/Hooks'
 
-export const ColorProvider = createContext('#8A1B19')
+export const ColorProvider = createContext('#000000')
 
 // const canvasArray
 
@@ -23,7 +23,6 @@ function App() {
       <div className="App">
         <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
         <Canvas width={700} height={500} hexColor={hexColor} />
-        <button onClick={undoLine}>UNDO</button>
       </div>
     </ColorProvider.Provider>
   )
