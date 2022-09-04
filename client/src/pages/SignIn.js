@@ -37,11 +37,7 @@ const SignIn = (props) => {
     <div className="bg-sign-in">
       <div className="signin-col-ch">
         <div className="card-overlay-centered-ch">
-          {loginToggle ? (
-            <h1 className="login-title">Your Workout Awaits!</h1>
-          ) : (
-            <h1 className="login-title">Your Team Awaits Orders!</h1>
-          )}
+          We Welcome You Freely
           <form className="col" onSubmit={handleSubmit}>
             <div className="input-wrapper">
               <label htmlFor="email"></label>
@@ -67,15 +63,6 @@ const SignIn = (props) => {
                 required
               />
             </div>
-            Login As:
-            <div className="toggle-box">
-              <div className="coach">Coach</div>
-              <label className="login-toggle">
-                <input type="checkbox" onClick={() => toggleLogin()} />
-                <span className="slider"></span>
-              </label>
-              <div className="player">Player</div>
-            </div>
             <div className="button-div">
               <button
                 disabled={!formValues.email || !formValues.password}
@@ -91,7 +78,7 @@ const SignIn = (props) => {
                   navigate('/register')
                 }}
               >
-                Register Here!
+                Register Here
               </button>
             </div>
           </form>
