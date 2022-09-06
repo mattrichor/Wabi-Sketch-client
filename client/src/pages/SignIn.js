@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 
 import { SignInUser } from '../services/Auth'
 
@@ -18,7 +19,8 @@ const SignIn = (props) => {
     e.preventDefault()
     const payload = await SignInUser(formValues)
     setFormValues({ username: '', password: '' })
-    props.setUser(payload)
+    console.log(payload.payload.user_id)
+    props.setUserId(payload.payload.user_id)
     props.toggleAuthenticated(true)
     navigate('/')
   }
