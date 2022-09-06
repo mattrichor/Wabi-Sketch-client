@@ -3,34 +3,30 @@
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 import { SignInUser } from '../services/Auth'
 
 const SignIn = (props) => {
   let navigate = useNavigate()
-  const [formValues, setFormValues] = useState({ email: '', password: '' })
-  const [loginToggle, setLoginToggle] = useState(false)
+  const [formValues, setFormValues] = useState({ username: '', password: '' })
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
-  }
-
-  const toggleLogin = () => {
-    if (loginToggle === false) {
-      setLoginToggle(true)
-      console.log(loginToggle)
-    } else if (loginToggle === true) {
-      setLoginToggle(false)
-      console.log(loginToggle)
-    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const payload = await SignInUser(formValues)
-    setFormValues({ email: '', password: '' })
+    setFormValues({ username: '', password: '' })
     props.setUser(payload)
     props.toggleAuthenticated(true)
     navigate('/')
+  }
+
+  const apiTest = async (e) => {
+    e.preventDefault()
+    const res = await axios.get('http://localhost:8000/users')
+    console.log(res)
   }
 
   return (
@@ -40,14 +36,14 @@ const SignIn = (props) => {
           We Welcome You Freely
           <form className="col" onSubmit={handleSubmit}>
             <div className="input-wrapper">
-              <label htmlFor="email"></label>
+              <label htmlFor="username"></label>
               <input
-                className="email"
+                className="username"
                 onChange={handleChange}
-                name="email"
-                type="email"
-                placeholder="example@example.com"
-                value={formValues.email}
+                name="username"
+                type="username"
+                placeholder="username"
+                value={formValues.username}
                 required
               />
             </div>
@@ -65,7 +61,7 @@ const SignIn = (props) => {
             </div>
             <div className="button-div">
               <button
-                disabled={!formValues.email || !formValues.password}
+                disabled={!formValues.username || !formValues.password}
                 className="submit-btn"
               >
                 Submit
@@ -80,6 +76,7 @@ const SignIn = (props) => {
               >
                 Register Here
               </button>
+              <button onClick={apiTest}>TEST</button>
             </div>
           </form>
         </div>

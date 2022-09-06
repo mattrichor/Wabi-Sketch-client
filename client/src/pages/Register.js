@@ -6,7 +6,7 @@ import { RegisterUser } from '../services/Auth'
 const Register = () => {
   let navigate = useNavigate()
   const [formValues, setFormValues] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -19,12 +19,12 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await RegisterUser({
-      name: formValues.name,
+      username: formValues.username,
       email: formValues.email,
       password: formValues.password
     })
     setFormValues({
-      name: '',
+      username: '',
       email: '',
       password: '',
       confirmPassword: ''
@@ -41,14 +41,14 @@ const Register = () => {
         <h1 className="reg-title">Transience...</h1>
         <form className="col" onSubmit={handleSubmit}>
           <div className="input-wrapper">
-            <label htmlFor="name"></label>
+            <label htmlFor="username"></label>
             <input
               className="reg-input"
               onChange={handleChange}
-              name="name"
+              name="username"
               type="text"
-              placeholder="Full Name"
-              value={formValues.name}
+              placeholder="Username"
+              value={formValues.username}
               required
             />
           </div>
