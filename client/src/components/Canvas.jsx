@@ -34,7 +34,7 @@ const Canvas = ({ width, height }) => {
     // console.log(imageData)
   }
 
-  const { drawAndSaveLine, setCanvasRef, undoLine } = Draw(
+  const { drawAndSaveLine, setCanvasRef, undoLine, saveSketch } = Draw(
     onSketch,
     width,
     height
@@ -52,6 +52,7 @@ const Canvas = ({ width, height }) => {
           onMouseDown={drawAndSaveLine}
         ></canvas>
         <button onClick={undoLine}>UNDO</button>
+        <button onClick={saveSketch}>SAVE</button>
       </div>
     </ImageDimensions.Provider>
   )

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useContext } from 'react'
 import { ColorProvider } from '../App'
+import { SaveSketch } from '../services/Sketches'
 
 const Draw = (onSketch, width, height) => {
   const hexColor = useContext(ColorProvider)
@@ -103,10 +104,21 @@ const Draw = (onSketch, width, height) => {
     }
   }
 
+  const saveSketch = async () => {
+    console.log('clickd')
+    const ctx = canvasRef.current.getContext('2d')
+    let sketch_data = ctx.getImageData(0, 0, width, height)
+    let date = 12
+    console.log(sketch_data)
+    const sketch = await SaveSketch({ sketch_data: sketch_data })
+    console.log(sketch)
+  }
+
   return {
     setCanvasRef,
     drawAndSaveLine,
-    undoLine
+    undoLine,
+    saveSketch
   }
 }
 
