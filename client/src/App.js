@@ -6,11 +6,13 @@ import { CheckSession } from './services/Auth'
 import { useNavigate, Routes, Route } from 'react-router-dom'
 import React from 'react'
 
-import { w3cwebsocket as W3CWebSocket } from 'websocket'
+import useWebSocket, { ReadyState } from 'react-use-websocket'
 
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Nav from './components/Nav'
+import Home from './pages/Home'
+
 import Draw from './components/Hooks'
 import axios from 'axios'
 import { GetUserAndFriends } from './services/Users'
@@ -21,21 +23,9 @@ function App() {
   const [userId, setUserId] = useState(null)
   const [hexColor, setHexColor] = useState('#000000')
   const [authenticated, toggleAuthenticated] = useState(false)
+
   const [notifications, setNotifications] = useState()
-
-  let url = `ws://localhost:8000/ws/socket-server/`
-  const chatSocket = new WebSocket(url)
-
-  useEffect(() => {
-    chatSocket.onmessage = (e) => {
-      let data = JSON.parse(e.data)
-      console.log(data)
-
-      if (data.type === 'chat') {
-        setNotifications(data.message)
-      }
-    }
-  }, [])
+  const [formValue, setFormValue] = useState('')
 
   let navigate = useNavigate()
 
@@ -50,6 +40,37 @@ function App() {
     setUserId(user)
     toggleAuthenticated(true)
   }
+
+  ///////// SOCKET ////////////
+
+  let url = `ws://localhost:8000/ws/socket-server/`
+  const chatSocket = new WebSocket(url)
+
+  useEffect(() => {
+    chatSocket.onMessage = (e) => {
+      let data = JSON.parse(e.data)
+      console.log(data)
+
+      if (data.type === 'chat') {
+        console.log(data.message)
+        setNotifications(data.message)
+      }
+    }
+  }, [])
+
+  const handleChange = (e) => {
+    setFormValue(e.target.value)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    chatSocket.send(JSON.stringify(formValue))
+    console.log(formValue)
+    setFormValue('')
+  }
+
+  ///////// SOCKET ////////////
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -77,7 +98,6 @@ function App() {
         />
       </header>
       <main className="App">
-        <div className="notification">Notifications go here</div>
         <Routes>
           <Route path="/register" element={<Register />}></Route>
           <Route
@@ -90,9 +110,24 @@ function App() {
               />
             }
           ></Route>
+          <Route path="/" element={<Home />}></Route>
         </Routes>
         <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
-        <Canvas width={700} height={500} hexColor={hexColor} />
+        <div className="canvas">
+          <Canvas width={700} height={500} hexColor={hexColor} />
+        </div>
+        <div className="notification">
+          Notifications go here
+          <form onSubmit={handleSubmit}>
+            <input
+              type="message"
+              onChange={handleChange}
+              name="message"
+              placeholder="message"
+              value={formValue}
+            ></input>
+          </form>
+        </div>
       </main>
     </ColorProvider.Provider>
   )

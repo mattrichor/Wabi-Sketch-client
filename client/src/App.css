@@ -1,7 +1,9 @@
-.App {
-  width: 100vw;
+.Canvas {
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
+}
+.App {
+  text-align: center;
 }

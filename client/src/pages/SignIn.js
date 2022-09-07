@@ -22,7 +22,7 @@ const SignIn = (props) => {
     console.log(payload.payload.user_id)
     props.setUserId(payload.payload.user_id)
     props.toggleAuthenticated(true)
-    navigate('/')
+    // navigate('/')
   }
 
   const apiTest = async (e) => {
