@@ -53,6 +53,7 @@ const Canvas = ({ width, height }) => {
         ></canvas>
         <button onClick={undoLine}>UNDO</button>
         <button onClick={saveSketch}>SAVE</button>
+        <button>COLOR</button>
       </div>
     </ImageDimensions.Provider>
   )

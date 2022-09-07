@@ -107,12 +107,15 @@ const Draw = (onSketch, width, height) => {
   const saveSketch = async () => {
     console.log('clickd')
     const ctx = canvasRef.current.getContext('2d')
+    const thumbnail = canvasRef.current.toDataURL('image/jpeg', 0.4)
+    console.log(thumbnail)
     let sketchData = ctx.getImageData(0, 0, width, height)
     let date = 12
     let user = JSON.parse(localStorage.getItem('userObj'))
     console.log(sketchData)
     const sketch = await SaveSketch(user.id, {
-      sketchData: sketchData
+      sketchData: sketchData,
+      thumbnail: thumbnail
     })
     console.log(sketch)
   }

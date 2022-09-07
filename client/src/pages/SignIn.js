@@ -29,7 +29,7 @@ const SignIn = (props) => {
     <div className="bg-sign-in">
       <div className="signin-col-ch">
         <div className="card-overlay-centered-ch">
-          We Welcome You Freely
+          We Welcome You Fondly
           <form className="col" onSubmit={handleSubmit}>
             <div className="input-wrapper">
               <label htmlFor="username"></label>

@@ -1,9 +1,16 @@
+/* COLORS: G #205A31 P #b55d84 B #3c4993 y #E1DA79 */
+
 .Canvas {
   height: 100vh;
   display: flex;
   justify-content: center;
   /* align-items: center; */
 }
+canvas {
+  background-color: aliceblue;
+}
 .App {
   text-align: center;
+  background-color: #205a31;
+  color: #e1da79;
 }

@@ -1,5 +1,7 @@
 import './App.css'
 
+// COLORS: G #205A31 P #b55d84 B #3c4993 y #E1DA79
+
 import { useState, useEffect, useRef } from 'react'
 import { CheckSession } from './services/Auth'
 import { useNavigate, Routes, Route } from 'react-router-dom'
@@ -16,6 +18,7 @@ import PreAmble from './pages/PreAmble'
 import Draw from './components/Hooks'
 import axios from 'axios'
 import { GetUserAndFriends } from './services/Users'
+import MySketches from './pages/MySketches'
 
 function App() {
   const [user, setUser] = useState({})
@@ -43,32 +46,32 @@ function App() {
 
   ///////// SOCKET ////////////
 
-  let url = `ws://localhost:8000/ws/socket-server/`
-  const chatSocket = new WebSocket(url)
+  // let url = `ws://localhost:8000/ws/socket-server/`
+  // const chatSocket = new WebSocket(url)
 
-  useEffect(() => {
-    chatSocket.onMessage = (e) => {
-      let data = JSON.parse(e.data)
-      console.log(data)
+  // useEffect(() => {
+  //   chatSocket.onMessage = (e) => {
+  //     let data = JSON.parse(e.data)
+  //     console.log(data)
 
-      if (data.type === 'chat') {
-        console.log(data.message)
-        setNotifications(data.message)
-      }
-    }
-  }, [])
+  //     if (data.type === 'chat') {
+  //       console.log(data.message)
+  //       setNotifications(data.message)
+  //     }
+  //   }
+  // }, [])
 
-  const handleChange = (e) => {
-    setFormValue(e.target.value)
-  }
+  // const handleChange = (e) => {
+  //   setFormValue(e.target.value)
+  // }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
 
-    chatSocket.send(JSON.stringify(formValue))
-    console.log(formValue)
-    setFormValue('')
-  }
+  //   chatSocket.send(JSON.stringify(formValue))
+  //   console.log(formValue)
+  //   setFormValue('')
+  // }
 
   ///////// SOCKET ////////////
 
@@ -112,9 +115,10 @@ function App() {
           ></Route>
           <Route path="/" element={<PreAmble />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="/my_sketches" element={<MySketches />}></Route>
         </Routes>
 
-        <div className="notification">
+        {/* <div className="notification">
           Notifications go here
           <form onSubmit={handleSubmit}>
             <input
@@ -125,7 +129,7 @@ function App() {
               value={formValue}
             ></input>
           </form>
-        </div>
+        </div> */}
       </main>
     </div>
   )
