@@ -1,7 +1,7 @@
 import './App.css'
 import Canvas from './components/Canvas'
 import ColorPicker from './components/ColorPicker'
-import { useState, createContext, useEffect } from 'react'
+import { useState, createContext, useEffect, useRef } from 'react'
 import { CheckSession } from './services/Auth'
 import { useNavigate, Routes, Route } from 'react-router-dom'
 import React from 'react'
@@ -20,24 +20,26 @@ import { GetUserAndFriends } from './services/Users'
 export const ColorProvider = createContext('#000000')
 
 function App() {
-  const [userId, setUserId] = useState(null)
+  const [user, setUser] = useState({})
   const [hexColor, setHexColor] = useState('#000000')
   const [authenticated, toggleAuthenticated] = useState(false)
 
   const [notifications, setNotifications] = useState()
   const [formValue, setFormValue] = useState('')
 
+  const client = useRef(null)
+
   let navigate = useNavigate()
 
   const handleLogOut = () => {
-    setUserId(null)
+    setUser(null)
     toggleAuthenticated(false)
     localStorage.clear()
   }
 
   const checkToken = async () => {
     const user = await CheckSession()
-    setUserId(user)
+    setUser(user)
     toggleAuthenticated(true)
   }
 
@@ -79,21 +81,21 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    const getUserData = async () => {
-      const data = await GetUserAndFriends(userId)
-      // let userId = JSON.stringify(data.id)
-      localStorage.setItem('userId', userId)
-    }
-    getUserData()
-  }, [userId])
+  // useEffect(() => {
+  //   const getUserData = async () => {
+  //     const data = await GetUserAndFriends(userId)
+  //     // let userId = JSON.stringify(data.id)
+  //     localStorage.setItem('userId', userId)
+  //   }
+  //   getUserData()
+  // }, [userId])
 
   return (
     <ColorProvider.Provider value={hexColor}>
       <header>
         <Nav
           authenticated={authenticated}
-          userId={userId}
+          user={user}
           handleLogOut={handleLogOut}
         />
       </header>
@@ -104,8 +106,8 @@ function App() {
             path="/signin"
             element={
               <SignIn
-                userId={userId}
-                setUserId={setUserId}
+                user={user}
+                setUser={setUser}
                 toggleAuthenticated={toggleAuthenticated}
               />
             }

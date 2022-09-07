@@ -19,16 +19,10 @@ const SignIn = (props) => {
     e.preventDefault()
     const payload = await SignInUser(formValues)
     setFormValues({ username: '', password: '' })
-    console.log(payload.payload.user_id)
-    props.setUserId(payload.payload.user_id)
+    console.log(payload)
+    props.setUser(payload)
     props.toggleAuthenticated(true)
-    // navigate('/')
-  }
-
-  const apiTest = async (e) => {
-    e.preventDefault()
-    const res = await axios.get('http://localhost:8000/users')
-    console.log(res)
+    navigate('/')
   }
 
   return (
@@ -78,7 +72,6 @@ const SignIn = (props) => {
               >
                 Register Here
               </button>
-              <button onClick={apiTest}>TEST</button>
             </div>
           </form>
         </div>
