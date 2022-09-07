@@ -1,6 +1,6 @@
 import './App.css'
 
-import { useState, createContext, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CheckSession } from './services/Auth'
 import { useNavigate, Routes, Route } from 'react-router-dom'
 import React from 'react'
@@ -16,8 +16,6 @@ import PreAmble from './pages/PreAmble'
 import Draw from './components/Hooks'
 import axios from 'axios'
 import { GetUserAndFriends } from './services/Users'
-
-export const ColorProvider = createContext('#000000')
 
 function App() {
   const [user, setUser] = useState({})
@@ -91,7 +89,7 @@ function App() {
   // }, [userId])
 
   return (
-    <ColorProvider.Provider value={''}>
+    <div>
       <header>
         <Nav
           authenticated={authenticated}
@@ -129,7 +127,7 @@ function App() {
           </form>
         </div>
       </main>
-    </ColorProvider.Provider>
+    </div>
   )
 }
 

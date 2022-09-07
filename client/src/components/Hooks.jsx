@@ -1,5 +1,5 @@
 import { useEffect, useRef, useContext } from 'react'
-import { ColorProvider } from '../App'
+import { ColorProvider } from '../pages/Home'
 import { SaveSketch } from '../services/Sketches'
 
 const Draw = (onSketch, width, height) => {
