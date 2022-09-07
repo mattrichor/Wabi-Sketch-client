@@ -111,9 +111,8 @@ const Draw = (onSketch, width, height) => {
     let date = 12
     let user = JSON.parse(localStorage.getItem('userObj'))
     console.log(sketchData)
-    const sketch = await SaveSketch({
-      sketchData: sketchData,
-      user_Id: user.id
+    const sketch = await SaveSketch(user.id, {
+      sketchData: sketchData
     })
     console.log(sketch)
   }

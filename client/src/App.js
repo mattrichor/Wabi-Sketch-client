@@ -1,6 +1,5 @@
 import './App.css'
-import Canvas from './components/Canvas'
-import ColorPicker from './components/ColorPicker'
+
 import { useState, createContext, useEffect, useRef } from 'react'
 import { CheckSession } from './services/Auth'
 import { useNavigate, Routes, Route } from 'react-router-dom'
@@ -8,10 +7,11 @@ import React from 'react'
 
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 
+import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Nav from './components/Nav'
-import Home from './pages/Home'
+import PreAmble from './pages/PreAmble'
 
 import Draw from './components/Hooks'
 import axios from 'axios'
@@ -21,7 +21,7 @@ export const ColorProvider = createContext('#000000')
 
 function App() {
   const [user, setUser] = useState({})
-  const [hexColor, setHexColor] = useState('#000000')
+
   const [authenticated, toggleAuthenticated] = useState(false)
 
   const [notifications, setNotifications] = useState()
@@ -91,7 +91,7 @@ function App() {
   // }, [userId])
 
   return (
-    <ColorProvider.Provider value={hexColor}>
+    <ColorProvider.Provider value={''}>
       <header>
         <Nav
           authenticated={authenticated}
@@ -112,12 +112,10 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<PreAmble />}></Route>
+          <Route path="/home" element={<Home />}></Route>
         </Routes>
-        <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
-        <div className="canvas">
-          <Canvas width={700} height={500} hexColor={hexColor} />
-        </div>
+
         <div className="notification">
           Notifications go here
           <form onSubmit={handleSubmit}>

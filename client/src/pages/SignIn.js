@@ -22,7 +22,7 @@ const SignIn = (props) => {
     console.log(payload)
     props.setUser(payload)
     props.toggleAuthenticated(true)
-    navigate('/')
+    navigate('/home')
   }
 
   return (

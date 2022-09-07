@@ -1,22 +1,25 @@
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import Canvas from '../components/Canvas'
+import ColorPicker from '../components/ColorPicker'
 // import '../Home.css'
-const Home = () => {
+const PreAmble = () => {
   let navigate = useNavigate()
+  const [hexColor, setHexColor] = useState('#000000')
+
   return (
     <div className="home">
       <div className="home-title">
-        <h1 className="homeH1">W A B I S K E T C H </h1>
-        <h1 className="homeH2"> welcome</h1>
+        <h1>What's in your brain?</h1>
       </div>
       <section>
-        <div className="home-btn-div">
-          <button className="homeButton" onClick={() => navigate('/signin')}>
-            Click Here To Get Started
-          </button>
+        <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
+        <div className="canvas">
+          <Canvas width={700} height={500} hexColor={hexColor} />
         </div>
       </section>
     </div>
   )
 }
 
-export default Home
+export default PreAmble
