@@ -1,0 +1,14 @@
+.sketch-card {
+  padding: 2em 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  grid-gap: 3em;
+  justify-content: center;
+}
+
+.sketch-thumbnail {
+  max-width: 280px;
+  height: 200px;
+  border-radius: 0.3rem;
+  background-color: aliceblue;
+}

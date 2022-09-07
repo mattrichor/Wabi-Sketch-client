@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { GetSketches } from '../services/Sketches'
 import SketchCard from '../components/SketchCard'
 
+import './CSS/Sketches.css'
+
 const MySketches = ({ chooseSketch }) => {
   const [sketches, setSketches] = useState([])
 
@@ -17,7 +19,7 @@ const MySketches = ({ chooseSketch }) => {
   return (
     <div>
       <h2>echoes of the past :</h2>
-      <div className="SketchCard">
+      <div className="sketch-card">
         {sketches.map((sketch) => (
           <div onClick={() => chooseSketch(sketch)}>
             <SketchCard

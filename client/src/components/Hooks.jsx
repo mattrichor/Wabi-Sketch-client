@@ -107,7 +107,7 @@ const Draw = (onSketch, width, height) => {
   const saveSketch = async () => {
     console.log('clickd')
     const ctx = canvasRef.current.getContext('2d')
-    const thumbnail = canvasRef.current.toDataURL('image/jpeg', 0.4)
+    const thumbnail = canvasRef.current.toDataURL('image/png', 0.2)
     console.log(thumbnail)
     let sketchData = ctx.getImageData(0, 0, width, height)
     let date = 12

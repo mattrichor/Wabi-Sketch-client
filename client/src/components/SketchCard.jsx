@@ -1,9 +1,9 @@
+import '../pages/CSS/Sketches.css'
+
 const SketchCard = (props) => {
   return (
     <div className="sketch-wrap">
-      <div>
-        <img src={props.thumbnail} alt="" />
-      </div>
+      <img className="sketch-thumbnail" src={props.thumbnail} alt="" />
     </div>
   )
 }
