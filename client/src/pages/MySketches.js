@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { GetSketches } from '../services/Sketches'
 import SketchCard from '../components/SketchCard'
+import { useNavigate } from 'react-router-dom'
 
 import './CSS/Sketches.css'
 
 const MySketches = ({ chooseSketch }) => {
+  let navigate = useNavigate()
   const [sketches, setSketches] = useState([])
 
   useEffect(() => {
@@ -32,6 +34,7 @@ const MySketches = ({ chooseSketch }) => {
           </div>
         ))}
       </div>
+      <button onClick={() => navigate('/home')}>Back to Create</button>
     </div>
   )
 }

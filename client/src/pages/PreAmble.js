@@ -6,7 +6,7 @@ const PreAmble = () => {
     <div className="home">
       <div className="home-title">
         <h1 className="homeH1">W A B I S K E T C H </h1>
-        <h1 className="homeH2"> welcome</h1>
+        <h1 className="homeH2"></h1>
       </div>
       <section>
         <div className="home-btn-div">

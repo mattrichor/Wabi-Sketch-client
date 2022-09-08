@@ -1,4 +1,4 @@
-import './Canvas.css'
+import './CSS/Canvas.css'
 import Draw from './Hooks'
 import { createContext } from 'react'
 
