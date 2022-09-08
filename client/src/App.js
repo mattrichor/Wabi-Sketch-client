@@ -40,6 +40,7 @@ function App() {
 
   const checkToken = async () => {
     const user = await CheckSession()
+    console.log(user)
     setUser(user)
     toggleAuthenticated(true)
   }
@@ -114,8 +115,11 @@ function App() {
             }
           ></Route>
           <Route path="/" element={<PreAmble />}></Route>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/my_sketches" element={<MySketches />}></Route>
+          <Route path="/home" element={<Home user={user} />}></Route>
+          <Route
+            path="/my_sketches"
+            element={<MySketches user={user} />}
+          ></Route>
         </Routes>
 
         {/* <div className="notification">

@@ -21,7 +21,6 @@ const FriendSearch = () => {
   useEffect(() => {
     const userObj = localStorage.getItem('userObj')
     let selUser = JSON.parse(userObj)
-    console.log(selUser)
     setCurrentUser(selUser)
   }, [])
 
@@ -29,7 +28,6 @@ const FriendSearch = () => {
     const getUsers = async () => {
       const res = await GetAllUsers(currentUser.id)
       setUsers(res)
-      console.log(res)
     }
     if (currentUser.id) {
       getUsers()

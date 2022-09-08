@@ -5,10 +5,11 @@ import FriendsList from '../components/FriendsList'
 import ColorPicker from '../components/ColorPicker'
 import FriendSearch from '../components/FriendSearch'
 
+import '../components/CSS/FriendList.css'
+
 export const ColorProvider = createContext('#000000')
 
-// import '../Home.css'
-const PreAmble = () => {
+const Home = () => {
   let navigate = useNavigate()
   const [hexColor, setHexColor] = useState('#000000')
 
@@ -24,13 +25,17 @@ const PreAmble = () => {
             <Canvas width={700} height={500} hexColor={hexColor} />
           </div>
         </section>
-        <div className="friends">
-          <FriendsList />
+        <div className="friend-grid">
+          <div className="friends">
+            <FriendsList />
+          </div>
+          <div>
+            <FriendSearch />
+          </div>
         </div>
-        <FriendSearch />
       </div>
     </ColorProvider.Provider>
   )
 }
 
-export default PreAmble
+export default Home

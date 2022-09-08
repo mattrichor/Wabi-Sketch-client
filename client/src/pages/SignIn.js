@@ -19,7 +19,6 @@ const SignIn = (props) => {
     e.preventDefault()
     const payload = await SignInUser(formValues)
     setFormValues({ username: '', password: '' })
-    console.log(payload)
     props.setUser(payload)
     props.toggleAuthenticated(true)
     navigate('/home')

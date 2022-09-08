@@ -44,3 +44,8 @@
 .friend:not(.selected):hover {
   background: #ddd;
 }
+
+.friend-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

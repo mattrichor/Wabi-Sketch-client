@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom'
 
 const Nav = ({ authenticated, user, handleLogOut }) => {
+  console.log(user)
+  console.log(authenticated)
   let authenticatedOptions
   if (user) {
     authenticatedOptions = (
