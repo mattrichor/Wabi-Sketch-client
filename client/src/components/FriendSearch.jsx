@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { SendFriendRequest, GetAllUsers } from '../services/Users'
 import { useNavigate } from 'react-router-dom'
 
-const FriendSearch = () => {
+const FriendSearch = ({ user }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [users, setUsers] = useState([])

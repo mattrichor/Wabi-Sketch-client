@@ -9,7 +9,7 @@ import '../components/CSS/FriendList.css'
 
 export const ColorProvider = createContext('#000000')
 
-const Home = () => {
+const Home = ({ user }) => {
   let navigate = useNavigate()
   const [hexColor, setHexColor] = useState('#000000')
 
@@ -27,10 +27,10 @@ const Home = () => {
         </section>
         <div className="friend-grid">
           <div className="friends">
-            <FriendsList />
+            <FriendsList user={user} />
           </div>
           <div>
-            <FriendSearch />
+            <FriendSearch user={user} />
           </div>
         </div>
       </div>
