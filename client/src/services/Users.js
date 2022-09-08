@@ -9,9 +9,10 @@ export const GetUserAndFriends = async (userId) => {
   }
 }
 
-export const GetAllUsers = async () => {
+export const GetAllUsers = async (userId) => {
   try {
-    const res = await Client.get(`/friends/users`)
+    console.log(userId)
+    const res = await Client.get(`/friends/users/${userId}`)
     return res.data
   } catch (error) {
     throw error

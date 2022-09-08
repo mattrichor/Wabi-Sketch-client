@@ -19,20 +19,22 @@ const FriendSearch = () => {
   }, [searchTerm])
 
   useEffect(() => {
-    const getUsers = async () => {
-      const res = await GetAllUsers()
-      setUsers(res)
-      console.log(res)
-    }
-    getUsers()
-  }, [])
-
-  useEffect(() => {
     const userObj = localStorage.getItem('userObj')
     let selUser = JSON.parse(userObj)
     console.log(selUser)
     setCurrentUser(selUser)
   }, [])
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const res = await GetAllUsers(currentUser.id)
+      setUsers(res)
+      console.log(res)
+    }
+    if (currentUser.id) {
+      getUsers()
+    }
+  }, [currentUser])
 
   const sendRequest = async (friendId) => {
     const friend = await SendFriendRequest(currentUser.id, friendId)
