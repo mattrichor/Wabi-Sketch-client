@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { GetFriendRequests, SendFriendRequest } from '../services/Users'
 import './CSS/FriendList.css'
 
-const FriendsList = ({ user }) => {
+const FriendsList = ({ user, sendSketch }) => {
   const [requests, setRequests] = useState([])
   const [friends, setFriends] = useState([])
 
-  // Friend Request Logic
+  // Friend Request Logic & friendslist view
   useEffect(() => {
     console.log(user)
     const getFriendRequests = async () => {
@@ -24,10 +24,6 @@ const FriendsList = ({ user }) => {
     const friend = await SendFriendRequest(user.id, friendId)
   }
 
-  // Load Friends on pageload
-
-  useEffect(() => {}, [])
-
   let randImg
   //test /test
 
@@ -41,6 +37,9 @@ const FriendsList = ({ user }) => {
               <li class="friend">
                 <img src={randImg} />
                 <div class="friend-name">{friend.username}</div>
+                <button onClick={() => sendSketch(friend.id)}>
+                  Send Sketch
+                </button>
               </li>
             ))}
           </div>

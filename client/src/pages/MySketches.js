@@ -5,18 +5,27 @@ import { useNavigate } from 'react-router-dom'
 
 import './CSS/Sketches.css'
 
-const MySketches = ({ chooseSketch }) => {
+const MySketches = ({ user }) => {
   let navigate = useNavigate()
   const [sketches, setSketches] = useState([])
 
+  const chooseSketch = (sketch) => {
+    localStorage.setItem('selSketch', sketch.id)
+    let confirmation = window.confirm('Add to this sketch?')
+    if (confirmation) {
+      navigate('/home')
+    }
+  }
+
   useEffect(() => {
     const handleSketches = async () => {
-      let userData = JSON.parse(localStorage.getItem('userObj'))
-      const data = await GetSketches(userData.id)
+      const data = await GetSketches(user.id)
       setSketches(data)
     }
-    handleSketches()
-  }, [])
+    if (user.id) {
+      handleSketches()
+    }
+  }, [user])
 
   return (
     <div>

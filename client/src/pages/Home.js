@@ -22,14 +22,11 @@ const Home = ({ user }) => {
         <section>
           <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
           <div className="canvas">
-            <Canvas width={700} height={500} hexColor={hexColor} />
+            <Canvas width={700} height={500} hexColor={hexColor} user={user} />
           </div>
         </section>
         <div className="friend-grid">
           <div className="friends">
-            <FriendsList user={user} />
-          </div>
-          <div>
             <FriendSearch user={user} />
           </div>
         </div>

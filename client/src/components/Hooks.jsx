@@ -114,17 +114,22 @@ const Draw = (onSketch, width, height) => {
     let user = JSON.parse(localStorage.getItem('userObj'))
     console.log(sketchData)
     const sketch = await SaveSketch(user.id, {
-      sketchData: sketchData,
+      sketchData: thumbnail,
       thumbnail: thumbnail
     })
     console.log(sketch)
+  }
+
+  const sendSketch = (friendId) => {
+    console.log(friendId)
   }
 
   return {
     setCanvasRef,
     drawAndSaveLine,
     undoLine,
-    saveSketch
+    saveSketch,
+    sendSketch
   }
 }
 
