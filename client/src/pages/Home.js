@@ -9,9 +9,10 @@ import '../components/CSS/FriendList.css'
 
 export const ColorProvider = createContext('#000000')
 
-const Home = ({ user }) => {
+const Home = ({ user, selSketch, setSelSketch }) => {
   let navigate = useNavigate()
   const [hexColor, setHexColor] = useState('#000000')
+  console.log(selSketch)
 
   return (
     <ColorProvider.Provider value={hexColor}>
@@ -22,7 +23,14 @@ const Home = ({ user }) => {
         <section>
           <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
           <div className="canvas">
-            <Canvas width={700} height={500} hexColor={hexColor} user={user} />
+            <Canvas
+              width={700}
+              height={500}
+              hexColor={hexColor}
+              user={user}
+              setSelSketch={setSelSketch}
+              selSketch={selSketch}
+            />
           </div>
         </section>
         <div className="friend-grid">

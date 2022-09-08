@@ -5,7 +5,7 @@ import FriendsList from './FriendsList'
 
 export const ImageDimensions = createContext({ width: 0, height: 0 })
 
-const Canvas = ({ width, height, user }) => {
+const Canvas = ({ width, height, user, selSketch, setSelSketch }) => {
   const onSketch = (data) => {
     // if (point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height) {
     data.map((point) => {
@@ -30,7 +30,7 @@ const Canvas = ({ width, height, user }) => {
   }
 
   const { drawAndSaveLine, setCanvasRef, undoLine, saveSketch, sendSketch } =
-    Draw(onSketch, width, height)
+    Draw(onSketch, width, height, selSketch)
 
   return (
     <ImageDimensions.Provider value={{ width: width, height: height }}>

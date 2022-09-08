@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom'
 
 import './CSS/Sketches.css'
 
-const MySketches = ({ user }) => {
+const MySketches = ({ user, selSketch, setSelSketch }) => {
   let navigate = useNavigate()
   const [sketches, setSketches] = useState([])
 
   const chooseSketch = (sketch) => {
-    localStorage.setItem('selSketch', sketch.id)
     let confirmation = window.confirm('Add to this sketch?')
     if (confirmation) {
+      setSelSketch(sketch)
       navigate('/home')
     }
   }

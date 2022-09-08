@@ -22,6 +22,7 @@ import MySketches from './pages/MySketches'
 
 function App() {
   const [user, setUser] = useState({})
+  const [selSketch, setSelSketch] = useState([])
 
   const [authenticated, toggleAuthenticated] = useState(false)
 
@@ -115,10 +116,25 @@ function App() {
             }
           ></Route>
           <Route path="/" element={<PreAmble />}></Route>
-          <Route path="/home" element={<Home user={user} />}></Route>
+          <Route
+            path="/home"
+            element={
+              <Home
+                user={user}
+                selSketch={selSketch}
+                setSelSketch={setSelSketch}
+              />
+            }
+          ></Route>
           <Route
             path="/my_sketches"
-            element={<MySketches user={user} />}
+            element={
+              <MySketches
+                user={user}
+                selSketch={selSketch}
+                setSelSketch={setSelSketch}
+              />
+            }
           ></Route>
         </Routes>
 

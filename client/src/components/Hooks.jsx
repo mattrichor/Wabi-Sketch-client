@@ -2,7 +2,7 @@ import { useEffect, useRef, useContext } from 'react'
 import { ColorProvider } from '../pages/Home'
 import { SaveSketch } from '../services/Sketches'
 
-const Draw = (onSketch, width, height) => {
+const Draw = (onSketch, width, height, selSketch, setSelSketch) => {
   const hexColor = useContext(ColorProvider)
 
   const canvasRef = useRef(null)
@@ -22,6 +22,7 @@ const Draw = (onSketch, width, height) => {
       const mouseMoveListener = (event) => {
         const pointInCanvas = getCanvasCoords(event.clientX, event.clientY)
         const ctx = canvasRef.current.getContext('2d')
+
         if (isDrawingRef.current) {
           lineArray.current.push({
             ctx: ctx,
@@ -63,7 +64,6 @@ const Draw = (onSketch, width, height) => {
       // }
     }
     initializeMouseMoveListener()
-    // initializeMouseUnclickListener()
 
     return () => {
       cleanUpListeners()
@@ -71,7 +71,23 @@ const Draw = (onSketch, width, height) => {
   }, [onSketch])
 
   const setCanvasRef = (ref) => {
+    // console.log(ref)
     canvasRef.current = ref
+    if (canvasRef.current) {
+      const ctx = canvasRef.current.getContext('2d')
+      // console.log(ctx)
+      if (selSketch.thumbnail !== undefined) {
+        let sketch = new Image()
+        sketch.src = selSketch.thumbnail
+        console.log(sketch)
+        ctx.drawImage(sketch, 0, 0)
+        canvasData.current = ctx.getImageData(0, 0, width, height)
+        console.log(canvasData.current)
+        canvasArray.current.push(canvasData.current)
+        lineArray.current = []
+        lineCount.current++
+      }
+    }
   }
 
   const drawAndSaveLine = () => {
@@ -114,7 +130,7 @@ const Draw = (onSketch, width, height) => {
     let user = JSON.parse(localStorage.getItem('userObj'))
     console.log(sketchData)
     const sketch = await SaveSketch(user.id, {
-      sketchData: thumbnail,
+      sketchData: sketchData,
       thumbnail: thumbnail
     })
     console.log(sketch)
