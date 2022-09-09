@@ -68,7 +68,11 @@ const Canvas = ({
           <button className="ctn-btn" onClick={saveSketch}>
             SAVE
           </button>
-          <button className="ctn-btn ctn-btn-bottom" onClick={showColor}>
+          <button
+            className="ctn-btn ctn-btn-bottom"
+            style={{ backgroundColor: hexColor }}
+            onClick={showColor}
+          >
             COLOR
           </button>
           <div className="ctn-empty-space"></div>
