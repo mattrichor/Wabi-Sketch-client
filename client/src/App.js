@@ -7,8 +7,6 @@ import { CheckSession } from './services/Auth'
 import { useNavigate, Routes, Route } from 'react-router-dom'
 import React from 'react'
 
-import useWebSocket, { ReadyState } from 'react-use-websocket'
-
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
@@ -37,6 +35,7 @@ function App() {
     setUser(null)
     toggleAuthenticated(false)
     localStorage.clear()
+    setSelSketch([])
   }
 
   const checkToken = async () => {
@@ -45,37 +44,6 @@ function App() {
     setUser(user)
     toggleAuthenticated(true)
   }
-
-  ///////// SOCKET ////////////
-
-  // let url = `ws://localhost:8000/ws/socket-server/`
-  // const chatSocket = new WebSocket(url)
-
-  // useEffect(() => {
-  //   chatSocket.onMessage = (e) => {
-  //     let data = JSON.parse(e.data)
-  //     console.log(data)
-
-  //     if (data.type === 'chat') {
-  //       console.log(data.message)
-  //       setNotifications(data.message)
-  //     }
-  //   }
-  // }, [])
-
-  // const handleChange = (e) => {
-  //   setFormValue(e.target.value)
-  // }
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-
-  //   chatSocket.send(JSON.stringify(formValue))
-  //   console.log(formValue)
-  //   setFormValue('')
-  // }
-
-  ///////// SOCKET ////////////
 
   useEffect(() => {
     const token = localStorage.getItem('token')

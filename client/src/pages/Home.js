@@ -15,9 +15,15 @@ const Home = ({ user, selSketch, setSelSketch }) => {
   let navigate = useNavigate()
   const [hexColor, setHexColor] = useState('#000000')
 
+  ///////// SOCKET ////////////
+  const sendMessage = () => {}
+  ///////// SOCKET ////////////
+
   return (
     <ColorProvider.Provider value={hexColor}>
       <div className="home">
+        <input placeholder="Message..." />
+        <button onClick={sendMessage}>SEND MSG</button>
         <div className="home-title">
           <h1>What's in your brain?</h1>
         </div>
