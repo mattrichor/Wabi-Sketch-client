@@ -1,6 +1,6 @@
 import { useEffect, useRef, useContext } from 'react'
 import { ColorProvider } from '../pages/Home'
-import { SaveSketch, SendSketch } from '../services/Sketches'
+import { SaveSketch, SendSketch, UploadSketch } from '../services/Sketches'
 
 const Draw = (onSketch, width, height, selSketch, setSelSketch) => {
   const hexColor = useContext(ColorProvider)
@@ -125,10 +125,21 @@ const Draw = (onSketch, width, height, selSketch, setSelSketch) => {
     const thumbnail = canvasRef.current.toDataURL('image/png', 0.2)
     let sketchData = ctx.getImageData(0, 0, width, height)
     let user = JSON.parse(localStorage.getItem('userObj'))
-    const sketch = await SaveSketch(user.id, {
-      sketchData: sketchData,
-      thumbnail: thumbnail
-    })
+    if (selSketch.id !== undefined) {
+      console.log('saving!')
+      const sketch = await SaveSketch(user.id, selSketch.id, {
+        sketchData: sketchData,
+        thumbnail: thumbnail
+      })
+      console.log(sketch)
+    } else {
+      console.log('uploading!')
+      const sketch = await UploadSketch(user.id, {
+        sketchData: sketchData,
+        thumbnail: thumbnail
+      })
+      setSelSketch(sketch)
+    }
   }
 
   const sendSketch = async (friendId) => {

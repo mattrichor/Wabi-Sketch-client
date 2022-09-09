@@ -9,7 +9,7 @@ const Nav = ({ authenticated, user, handleLogOut }) => {
     authenticatedOptions = (
       <div>
         <div className="welcome-msg">Welcome {user.username}</div>
-        <nav className="nav">
+        <nav className="">
           <input
             class="menu-icon"
             type="checkbox"

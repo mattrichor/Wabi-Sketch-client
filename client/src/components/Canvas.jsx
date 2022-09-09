@@ -1,6 +1,6 @@
 import './CSS/Canvas.css'
 import Draw from './Hooks'
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import FriendsList from './FriendsList'
 import ColorPicker from '../components/ColorPicker'
 
@@ -13,9 +13,14 @@ const Canvas = ({
   selSketch,
   setSelSketch,
   hexColor,
-  setHexColor
+  setHexColor,
+  socket,
+  sketchRecip,
+  setSketchRecip
 }) => {
   const [hexToggle, setHexToggle] = useState(false)
+  const [messageRecieved, setMessageRecieved] = useState('')
+  const [message, setMessage] = useState('')
 
   const onSketch = (data) => {
     // if (point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height) {
@@ -41,7 +46,7 @@ const Canvas = ({
   }
 
   const { drawAndSaveLine, setCanvasRef, undoLine, saveSketch, sendSketch } =
-    Draw(onSketch, width, height, selSketch)
+    Draw(onSketch, width, height, selSketch, sketchRecip, setSketchRecip)
 
   const showColor = () => {
     if (hexToggle) {
@@ -50,6 +55,17 @@ const Canvas = ({
       setHexToggle(true)
     }
   }
+
+  ///////// SOCKET ////////////
+  const sendMessage = () => {
+    socket.emit('send_message', { message, sketchRecip })
+  }
+  useEffect(() => {
+    socket.on('receive_notification', (data) => {
+      setMessageRecieved(data.message)
+    })
+  }, [socket])
+  ///////// SOCKET ////////////
 
   return (
     <ImageDimensions.Provider value={{ width: width, height: height }}>
@@ -85,7 +101,20 @@ const Canvas = ({
           <div></div>
         )}
       </div>
-      <FriendsList user={user} sendSketch={sendSketch} />
+      <FriendsList
+        user={user}
+        sendSketch={sendSketch}
+        sketchRecip={sketchRecip}
+        setSketchRecip={setSketchRecip}
+      />
+      <input
+        placeholder="Message..."
+        onChange={(event) => {
+          setMessage(event.target.value)
+        }}
+      />
+      <button onClick={sendMessage}>SEND MSG</button>
+      <h3>{messageRecieved}</h3>
     </ImageDimensions.Provider>
   )
 }
