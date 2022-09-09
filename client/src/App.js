@@ -95,13 +95,11 @@ function App() {
 
   return (
     <div>
-      <header>
-        <Nav
-          authenticated={authenticated}
-          user={user}
-          handleLogOut={handleLogOut}
-        />
-      </header>
+      <Nav
+        authenticated={authenticated}
+        user={user}
+        handleLogOut={handleLogOut}
+      />
       <main className="App">
         <Routes>
           <Route path="/register" element={<Register />}></Route>
