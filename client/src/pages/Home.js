@@ -27,6 +27,15 @@ const Home = ({ user, selSketch, setSelSketch }) => {
 
   return (
     <ColorProvider.Provider value={hexColor}>
+      <div class="content">
+        <div class="identifier"></div>
+        <div class="text"></div>
+      </div>
+
+      <div class="number">
+        <p>1</p>
+      </div>
+
       <div className="home">
         <div className="home-title">
           <h1>What's in your brain?</h1>
