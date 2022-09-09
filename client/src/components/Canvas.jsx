@@ -46,7 +46,15 @@ const Canvas = ({
   }
 
   const { drawAndSaveLine, setCanvasRef, undoLine, saveSketch, sendSketch } =
-    Draw(onSketch, width, height, selSketch, sketchRecip, setSketchRecip)
+    Draw(
+      onSketch,
+      width,
+      height,
+      selSketch,
+      setSelSketch,
+      sketchRecip,
+      setSketchRecip
+    )
 
   const showColor = () => {
     if (hexToggle) {
