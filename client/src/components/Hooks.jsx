@@ -1,6 +1,6 @@
 import { useEffect, useRef, useContext } from 'react'
 import { ColorProvider } from '../pages/Home'
-import { SaveSketch } from '../services/Sketches'
+import { SaveSketch, SendSketch } from '../services/Sketches'
 
 const Draw = (onSketch, width, height, selSketch, setSelSketch) => {
   const hexColor = useContext(ColorProvider)
@@ -121,23 +121,33 @@ const Draw = (onSketch, width, height, selSketch, setSelSketch) => {
   }
 
   const saveSketch = async () => {
-    console.log('clickd')
     const ctx = canvasRef.current.getContext('2d')
     const thumbnail = canvasRef.current.toDataURL('image/png', 0.2)
-    console.log(thumbnail)
     let sketchData = ctx.getImageData(0, 0, width, height)
-    let date = 12
     let user = JSON.parse(localStorage.getItem('userObj'))
-    console.log(sketchData)
     const sketch = await SaveSketch(user.id, {
       sketchData: sketchData,
       thumbnail: thumbnail
     })
-    console.log(sketch)
   }
 
-  const sendSketch = (friendId) => {
-    console.log(friendId)
+  const sendSketch = async (friendId) => {
+    const ctx = canvasRef.current.getContext('2d')
+    const thumbnail = canvasRef.current.toDataURL('image/png', 0.2)
+    let sketchData = ctx.getImageData(0, 0, width, height)
+    if (selSketch.id === undefined) {
+      const sketch = await SendSketch(friendId, 0, {
+        sketchData: sketchData,
+        thumbnail: thumbnail
+      })
+      console.log(sketch)
+    } else {
+      const sketch = await SendSketch(friendId, selSketch.id, {
+        sketchData: sketchData,
+        thumbnail: thumbnail
+      })
+      console.log(sketch)
+    }
   }
 
   return {

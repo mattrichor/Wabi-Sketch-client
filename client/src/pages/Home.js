@@ -12,7 +12,6 @@ export const ColorProvider = createContext('#000000')
 const Home = ({ user, selSketch, setSelSketch }) => {
   let navigate = useNavigate()
   const [hexColor, setHexColor] = useState('#000000')
-  console.log(selSketch)
 
   return (
     <ColorProvider.Provider value={hexColor}>
