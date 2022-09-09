@@ -2,8 +2,10 @@ import { useNavigate } from 'react-router-dom'
 import { useState, createContext } from 'react'
 import Canvas from '../components/Canvas'
 import FriendsList from '../components/FriendsList'
-import ColorPicker from '../components/ColorPicker'
+
 import FriendSearch from '../components/FriendSearch'
+
+import './CSS/Home.css'
 
 import '../components/CSS/FriendList.css'
 
@@ -20,7 +22,6 @@ const Home = ({ user, selSketch, setSelSketch }) => {
           <h1>What's in your brain?</h1>
         </div>
         <section>
-          <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
           <div className="canvas">
             <Canvas
               width={700}
@@ -29,6 +30,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
               user={user}
               setSelSketch={setSelSketch}
               selSketch={selSketch}
+              setHexColor={setHexColor}
             />
           </div>
         </section>

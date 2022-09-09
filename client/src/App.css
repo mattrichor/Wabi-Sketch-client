@@ -1,16 +1,23 @@
 /* COLORS: G #205A31 P #b55d84 B #3c4993 y #E1DA79 */
 
+:root {
+  --green: #205a31;
+  --pink: #b55d84;
+  --blue: #3c4993;
+  --grey: #455a64;
+  --yellow: #e1da79;
+  --alice: aliceblue;
+}
+
 .Canvas {
   height: 100vh;
   display: flex;
   justify-content: center;
   /* align-items: center; */
 }
-canvas {
-  background-color: aliceblue;
-}
+
 .App {
   text-align: center;
-  background-color: #205a31;
-  color: #e1da79;
+  background-color: var(--green);
+  color: var(--yellow);
 }

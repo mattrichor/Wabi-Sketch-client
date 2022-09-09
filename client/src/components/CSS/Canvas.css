@@ -1,9 +1,41 @@
 .canvas {
-  border: 1px solid black;
-  border-radius: 0.8rem;
+  border-radius: 0.8rem 0rem 0rem 0.8rem;
+}
+canvas {
+  background-color: var(--alice);
 }
 
 .canvas-container {
   display: flex;
-  align-self: center;
+  justify-content: center;
+}
+
+.control-panel {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 5.5fr;
+}
+
+.ctn-btn-top,
+.ctn-btn-bottom {
+  border: none;
+}
+
+.ctn-btn-top {
+  border-radius: 0rem 0.8rem 0rem 0rem;
+}
+.ctn-btn {
+  border-left: none;
+  border-right: none;
+}
+
+.ctn-btn:hover {
+  background-color: var(--yellow);
+}
+
+.ctn-empty-space {
+  background-color: var(--blue);
+}
+
+.color-picker {
+  max-width: 5px;
 }
