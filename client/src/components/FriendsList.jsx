@@ -29,17 +29,22 @@ const FriendsList = ({ user, sendSketch }) => {
 
   return (
     <div>
-      <h2>Connections</h2>
       <ul id="friend-list">
+        <li className="li-tit">Connections</li>
         {friends !== [] ? (
           <div>
             {friends.map((friend) => (
-              <li class="friend">
-                <img src={randImg} />
-                <div class="friend-name">{friend.username}</div>
-                <button onClick={() => sendSketch(friend.id)}>
-                  Send Sketch
-                </button>
+              <li className="friend">
+                <img className="friend-img" src={randImg} />
+                <div className="friend-name">{friend.username}</div>
+                <div className="friend-btn-div">
+                  <button
+                    className="friend-btn"
+                    onClick={() => sendSketch(friend.id)}
+                  >
+                    Send Sketch
+                  </button>
+                </div>
               </li>
             ))}
           </div>
@@ -48,17 +53,22 @@ const FriendsList = ({ user, sendSketch }) => {
         )}
       </ul>
       <div>
-        <h2>Reaching Hands</h2>
-        <ul id="request-list friend-list">
+        <ul id="request-list">
           {requests !== [] ? (
             <div>
+              <li className="li-tit">Reaching Hands</li>
               {requests.map((request) => (
-                <li class="friend">
-                  <img src={randImg} />
-                  <div class="friend-name">{request.username}</div>
-                  <button onClick={() => acceptRequest(request.id)}>
-                    Accept
-                  </button>
+                <li className="friend">
+                  <img className="friend-img" src={randImg} />
+                  <div className="friend-name">{request.username}</div>
+                  <div className="friend-btn-div">
+                    <button
+                      className="friend-btn"
+                      onClick={() => acceptRequest(request.id)}
+                    >
+                      Accept
+                    </button>
+                  </div>
                 </li>
               ))}
             </div>
