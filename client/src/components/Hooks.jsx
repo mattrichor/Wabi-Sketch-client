@@ -85,9 +85,9 @@ const Draw = (
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext('2d')
       // console.log(ctx)
-      if (selSketch.thumbnail !== undefined) {
+      if (selSketch.sketchData !== undefined) {
         let sketch = new Image()
-        sketch.src = selSketch.thumbnail
+        sketch.src = selSketch.sketchData
         console.log(sketch)
         ctx.drawImage(sketch, 0, 0)
         canvasData.current = ctx.getImageData(0, 0, width, height)
@@ -130,22 +130,20 @@ const Draw = (
   }
 
   const saveSketch = async () => {
-    const ctx = canvasRef.current.getContext('2d')
-    const thumbnail = canvasRef.current.toDataURL('image/png', 0.2)
-    let sketchData = ctx.getImageData(0, 0, width, height)
+    // const ctx = canvasRef.current.getContext('2d')
+    const sketchData = canvasRef.current.toDataURL('image/png', 0.2)
+    // let sketchData = ctx.getImageData(0, 0, width, height)
     let user = JSON.parse(localStorage.getItem('userObj'))
     if (selSketch.id !== undefined) {
       console.log('saving!')
       const sketch = await SaveSketch(user.id, selSketch.id, {
-        sketchData: sketchData,
-        thumbnail: thumbnail
+        sketchData: sketchData
       })
       console.log(sketch)
     } else {
       console.log('uploading!')
       const sketch = await UploadSketch(user.id, {
-        sketchData: sketchData,
-        thumbnail: thumbnail
+        sketchData: sketchData
       })
       setSelSketch(sketch)
     }
@@ -153,27 +151,24 @@ const Draw = (
 
   const sendSketch = async (friendId) => {
     const ctx = canvasRef.current.getContext('2d')
-    const thumbnail = canvasRef.current.toDataURL('image/png', 0.2)
-    let sketchData = ctx.getImageData(0, 0, width, height)
+    const sketchData = canvasRef.current.toDataURL('image/png', 0.2)
+    // let sketchData = ctx.getImageData(0, 0, width, height)
     let user = JSON.parse(localStorage.getItem('userObj'))
     if (selSketch.id === undefined) {
       const sketch = await UploadSketch(user.id, {
-        sketchData: sketchData,
-        thumbnail: thumbnail
+        sketchData: sketchData
       })
       console.log(sketch)
       setSelSketch(sketch)
       const sentSketch = await SendSketch(friendId, sketch.id, {
-        sketchData: sketchData,
-        thumbnail: thumbnail
+        sketchData: sketchData
       })
       console.log(sketch)
       // setSketchRecip(friendId)
       sendNotification(friendId)
     } else {
       const sketch = await SendSketch(friendId, selSketch.id, {
-        sketchData: sketchData,
-        thumbnail: thumbnail
+        sketchData: sketchData
       })
       setSketchRecip(friendId)
       sendNotification()

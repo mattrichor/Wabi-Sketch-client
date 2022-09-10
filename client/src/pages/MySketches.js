@@ -38,7 +38,6 @@ const MySketches = ({ user, selSketch, setSelSketch }) => {
               promptId={sketch.promptId}
               sketchData={sketch.sketchData}
               userId={sketch.userId}
-              thumbnail={sketch.thumbnail}
             ></SketchCard>
           </div>
         ))}
