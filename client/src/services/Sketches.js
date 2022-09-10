@@ -39,3 +39,13 @@ export const GetSketches = async (user_id) => {
     throw error
   }
 }
+
+export const GetSketchById = async (sketch_id) => {
+  try {
+    const res = await Client.get(`/sketches/get/${sketch_id}`)
+
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

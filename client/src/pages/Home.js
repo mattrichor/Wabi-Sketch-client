@@ -31,9 +31,9 @@ const Home = ({ user, selSketch, setSelSketch }) => {
     setNotifications(notifs)
   }
 
-  // useEffect(() => {
-  //   checkNotifs()
-  // }, [])
+  useEffect(() => {
+    checkNotifs()
+  }, [])
 
   useEffect(() => {
     initRoom(user)
@@ -45,6 +45,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
         messageRecieved={messageRecieved}
         socket={socket}
         notifications={notifications}
+        setSelSketch={setSelSketch}
       />
       <div className="home">
         <div className="home-title">

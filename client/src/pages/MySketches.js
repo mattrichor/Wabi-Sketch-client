@@ -13,6 +13,7 @@ const MySketches = ({ user, selSketch, setSelSketch }) => {
     let confirmation = window.confirm('Add to this sketch?')
     if (confirmation) {
       setSelSketch(sketch)
+      console.log(sketch)
       navigate('/home')
     }
   }
@@ -34,7 +35,7 @@ const MySketches = ({ user, selSketch, setSelSketch }) => {
         {sketches.map((sketch) => (
           <div onClick={() => chooseSketch(sketch)}>
             <SketchCard
-              key={sketch.id}
+              sketchId={sketch.id}
               promptId={sketch.promptId}
               sketchData={sketch.sketchData}
               userId={sketch.userId}
