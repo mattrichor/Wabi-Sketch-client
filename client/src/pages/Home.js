@@ -19,6 +19,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
   const [sketchRecip, setSketchRecip] = useState(0)
   const [hexColor, setHexColor] = useState('#000000')
   const [messageRecieved, setMessageRecieved] = useState('')
+  const [notifications, setNotifications] = useState('')
 
   const initRoom = (user) => {
     socket.emit('create_room', user.id)
@@ -27,7 +28,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
   const checkNotifs = async () => {
     let user = JSON.parse(localStorage.getItem('userObj'))
     const notifs = await GetNotifs(user.id)
-    console.log(notifs)
+    setNotifications(notifs)
   }
 
   // useEffect(() => {
@@ -40,7 +41,11 @@ const Home = ({ user, selSketch, setSelSketch }) => {
 
   return (
     <ColorProvider.Provider value={hexColor}>
-      <Notifications messageRecieved={messageRecieved} socket={socket} />
+      <Notifications
+        messageRecieved={messageRecieved}
+        socket={socket}
+        notifications={notifications}
+      />
       <div className="home">
         <div className="home-title">
           <h1>What's in your brain?</h1>

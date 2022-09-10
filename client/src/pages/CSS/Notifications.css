@@ -1,0 +1,205 @@
+.notification {
+  position: fixed;
+  top: 120px;
+  right: -25px;
+  height: 8%;
+  width: 20%;
+  margin-top: 5%;
+  margin-left: 76%;
+  transform-origin: right;
+  -webkit-animation: notify 3s ease-in-out infinite;
+  animation: notify 3s ease-in-out infinite;
+}
+
+/* @-webkit-keyframes notify {
+  0% {
+    transform: scaleX(0);
+  }
+  10% {
+    transform: scaleX(1);
+  }
+  13% {
+    transform: scale(1.1);
+  }
+  16% {
+    transform: scale(1);
+  }
+  55% {
+    transform: scaleX(1);
+    border-radius: 0%;
+  }
+  65% {
+    transform: scaleX(0.25);
+    border-radius: 50%;
+  }
+  95% {
+    transform: scaleX(0.25);
+    border-radius: 50%;
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes notify {
+  0% {
+    transform: scaleX(0);
+  }
+  10% {
+    transform: scaleX(1);
+  }
+  13% {
+    transform: scale(1.1);
+  }
+  16% {
+    transform: scale(1);
+  }
+  55% {
+    transform: scaleX(1);
+    border-radius: 0%;
+  }
+  65% {
+    transform: scaleX(0.25);
+    border-radius: 50%;
+  }
+  95% {
+    transform: scaleX(0.25);
+    border-radius: 50%;
+  }
+  100% {
+    transform: scaleX(0);
+  }
+} */
+
+.notif-identifier {
+  position: fixed;
+  top: 20px;
+  right: 46px;
+  display: block;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  z-index: 9;
+  border: 2.5pt solid var(--dark);
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: var(--pink);
+  margin-top: 5.5px;
+  margin-left: 7.5px;
+  -webkit-animation: exit 3s ease-in-out infinite;
+  animation: exit 3s ease-in-out infinite;
+}
+
+.notif-identifier:hover {
+  transform: scale(1.1);
+}
+
+.notif-text {
+  position: fixed;
+  top: 20px;
+  right: 95px;
+  display: block;
+  width: 130px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  z-index: 9;
+  color: var(--dark);
+  font-size: small;
+  text-align: left;
+  border: 2.5pt solid var(--dark);
+  border-radius: 0.7rem;
+  background-color: #94dacd;
+  margin-top: 12.25px;
+  margin-left: 40px;
+  -webkit-animation: exit 3s ease-in-out infinite;
+  animation: exit 3s ease-in-out infinite;
+}
+
+/* @-webkit-keyframes exit {
+  0% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+} */
+
+/* @keyframes exit {
+  0% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+} */
+
+.notif-num {
+  font-family: 'Open Sans', sans-serif;
+  position: fixed;
+  top: 30px;
+  right: 58px;
+  display: block;
+  padding: 0;
+  margin: 0;
+  z-index: 9;
+  font-size: 23px;
+  color: #94dacd;
+  -webkit-animation: enter 3s ease-in-out infinite;
+  animation: enter 3s ease-in-out infinite;
+}
+
+/* @-webkit-keyframes enter {
+  0% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 0;
+  }
+  65% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  95% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes enter {
+  0% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 0;
+  }
+  65% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  95% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+} */

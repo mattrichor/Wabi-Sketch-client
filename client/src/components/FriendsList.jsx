@@ -34,7 +34,7 @@ const FriendsList = ({ user, sendSketch }) => {
         {friends !== [] ? (
           <div>
             {friends.map((friend) => (
-              <li className="friend">
+              <li key={friend.id} className="friend">
                 <img className="friend-img" src={randImg} />
                 <div className="friend-name">{friend.username}</div>
                 <div className="friend-btn-div">

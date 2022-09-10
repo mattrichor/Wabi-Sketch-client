@@ -11,12 +11,12 @@ const Nav = ({ authenticated, user, handleLogOut }) => {
         <div className="welcome-msg">Welcome {user.username}</div>
         <nav className="">
           <input
-            class="menu-icon"
+            className="menu-icon"
             type="checkbox"
             id="menu-icon"
             name="menu-icon"
           />
-          <label for="menu-icon"></label>
+          <label htmlFor="menu-icon"></label>
           <ul className="pt-5">
             <li>
               <NavLink to="/my_sketches">My Sketches</NavLink>
@@ -36,7 +36,7 @@ const Nav = ({ authenticated, user, handleLogOut }) => {
     <nav className="nav">
       <NavLink to="/register">Register</NavLink>
       <NavLink to="/signin">Sign In</NavLink>
-      <div class="dot"></div>
+      <div className="dot"></div>
     </nav>
   )
 
