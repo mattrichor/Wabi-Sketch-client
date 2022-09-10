@@ -17,7 +17,8 @@ const Canvas = ({
   socket,
   sketchRecip,
   setSketchRecip,
-  setMessageRecieved
+  setMessageRecieved,
+  messageRecieved
 }) => {
   const [hexToggle, setHexToggle] = useState(false)
 
@@ -55,7 +56,7 @@ const Canvas = ({
       console.log(data.user.username)
       setMessageRecieved(data.user.username)
     })
-  }, [socket])
+  }, [socket, messageRecieved])
   ///////// SOCKET ////////////
 
   const { drawAndSaveLine, setCanvasRef, undoLine, saveSketch, sendSketch } =

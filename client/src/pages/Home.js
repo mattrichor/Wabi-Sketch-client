@@ -55,6 +55,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
               sketchRecip={sketchRecip}
               setSketchRecip={setSketchRecip}
               setMessageRecieved={setMessageRecieved}
+              messageRecieved={messageRecieved}
             />
           </div>
         </section>

@@ -171,7 +171,7 @@ const Draw = (
         sketchData: sketchData
       })
       setSketchRecip(friendId)
-      sendNotification()
+      sendNotification(friendId)
 
       console.log(sketch)
     }
