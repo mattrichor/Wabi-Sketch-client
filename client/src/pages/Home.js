@@ -9,6 +9,7 @@ import './CSS/Home.css'
 
 import '../components/CSS/FriendList.css'
 import io from 'socket.io-client'
+import Notifications from '../components/Notifications'
 
 export const ColorProvider = createContext('#000000')
 const socket = io.connect('http://localhost:3001')
@@ -24,19 +25,12 @@ const Home = ({ user, selSketch, setSelSketch }) => {
 
   useEffect(() => {
     initRoom(user)
+    // localStorage.setItem('notifications', JSON.stringify([]))
   }, [user])
 
   return (
     <ColorProvider.Provider value={hexColor}>
-      <div class="content">
-        <div class="identifier"></div>
-        <div class="text">{messageRecieved} sent a sketch!</div>
-      </div>
-
-      <div class="number">
-        <p>1</p>
-      </div>
-
+      <Notifications messageRecieved={messageRecieved} socket={socket} />
       <div className="home">
         <div className="home-title">
           <h1>What's in your brain?</h1>

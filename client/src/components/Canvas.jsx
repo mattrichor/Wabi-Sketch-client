@@ -53,10 +53,9 @@ const Canvas = ({
   }
   useEffect(() => {
     socket.on('receive_notification', (data) => {
-      console.log(data.user.username)
       setMessageRecieved(data.user.username)
     })
-  }, [socket, messageRecieved])
+  }, [socket])
   ///////// SOCKET ////////////
 
   const { drawAndSaveLine, setCanvasRef, undoLine, saveSketch, sendSketch } =

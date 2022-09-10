@@ -145,10 +145,15 @@
 
 .number {
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  position: fixed;
+  top: 30px;
+  right: 58px;
+  display: block;
+  padding: 0;
+  margin: 0;
+  z-index: 9;
+  font-size: 23px;
   color: #94dacd;
-  margin-top: -40px;
-  margin-left: 557px;
   -webkit-animation: enter 3s ease-in-out infinite;
   animation: enter 3s ease-in-out infinite;
 }

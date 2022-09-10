@@ -2,8 +2,6 @@ import Client from './Api'
 
 export const UploadSketch = async (user_id, data) => {
   try {
-    console.log(user_id)
-    console.log(data)
     const res = await Client.post(`/sketches/upload/${user_id}`, data)
 
     return res.data

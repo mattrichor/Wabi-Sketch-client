@@ -1,6 +1,7 @@
 import { useEffect, useRef, useContext } from 'react'
 import { ColorProvider } from '../pages/Home'
 import { SaveSketch, SendSketch, UploadSketch } from '../services/Sketches'
+import { CreateNotif } from '../services/Notifs'
 
 const Draw = (
   onSketch,
@@ -80,18 +81,14 @@ const Draw = (
   }, [onSketch])
 
   const setCanvasRef = (ref) => {
-    // console.log(ref)
     canvasRef.current = ref
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext('2d')
-      // console.log(ctx)
       if (selSketch.sketchData !== undefined) {
         let sketch = new Image()
         sketch.src = selSketch.sketchData
-        console.log(sketch)
         ctx.drawImage(sketch, 0, 0)
         canvasData.current = ctx.getImageData(0, 0, width, height)
-        console.log(canvasData.current)
         canvasArray.current.push(canvasData.current)
         lineArray.current = []
         lineCount.current++
@@ -107,12 +104,9 @@ const Draw = (
       prevPoint.current = null
       const ctx = canvasRef.current.getContext('2d')
       canvasData.current = ctx.getImageData(0, 0, width, height)
-      console.log(canvasData.current)
       canvasArray.current.push(canvasData.current)
       lineArray.current = []
       lineCount.current++
-      console.log(lineCount.current)
-      // console.log(canvasArray)
     }
   }
 
@@ -135,13 +129,10 @@ const Draw = (
     // let sketchData = ctx.getImageData(0, 0, width, height)
     let user = JSON.parse(localStorage.getItem('userObj'))
     if (selSketch.id !== undefined) {
-      console.log('saving!')
       const sketch = await SaveSketch(user.id, selSketch.id, {
         sketchData: sketchData
       })
-      console.log(sketch)
     } else {
-      console.log('uploading!')
       const sketch = await UploadSketch(user.id, {
         sketchData: sketchData
       })
@@ -152,28 +143,29 @@ const Draw = (
   const sendSketch = async (friendId) => {
     const ctx = canvasRef.current.getContext('2d')
     const sketchData = canvasRef.current.toDataURL('image/png', 0.2)
-    // let sketchData = ctx.getImageData(0, 0, width, height)
     let user = JSON.parse(localStorage.getItem('userObj'))
     if (selSketch.id === undefined) {
       const sketch = await UploadSketch(user.id, {
         sketchData: sketchData
       })
-      console.log(sketch)
       setSelSketch(sketch)
       const sentSketch = await SendSketch(friendId, sketch.id, {
         sketchData: sketchData
       })
-      console.log(sketch)
-      // setSketchRecip(friendId)
       sendNotification(friendId)
+      const notif = await CreateNotif(friendId, sketch.id, {
+        username: user.username
+      })
     } else {
       const sketch = await SendSketch(friendId, selSketch.id, {
         sketchData: sketchData
       })
       setSketchRecip(friendId)
-      sendNotification(friendId)
 
-      console.log(sketch)
+      sendNotification(friendId)
+      const notif = await CreateNotif(friendId, selSketch.id, {
+        username: user.username
+      })
     }
   }
 
