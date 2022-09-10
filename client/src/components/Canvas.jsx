@@ -1,6 +1,6 @@
 import './CSS/Canvas.css'
 import Draw from './Hooks'
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useRef, createRef } from 'react'
 import FriendsList from './FriendsList'
 import ColorPicker from '../components/ColorPicker'
 
@@ -21,9 +21,38 @@ const Canvas = ({
   messageRecieved,
   checkNotifs
 }) => {
-  const [hexToggle, setHexToggle] = useState(false)
+  const canvasRef = createRef()
+  const isDrawingRef = useRef(false)
+  const prevPoint = useRef(null)
 
+  const lineArray = useRef([])
+  const canvasData = useRef([])
+  const canvasArray = useRef([])
+  const lineCount = useRef(-1)
+
+  const [hexToggle, setHexToggle] = useState(false)
   const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    const setCanvasRef = async () => {
+      if (selSketch) {
+        const ctx = canvasRef.current.getContext('2d')
+        let sketch = new Image()
+        sketch.src = await selSketch.sketchData
+        setTimeout(() => {
+          ctx.drawImage(sketch, 0, 0)
+        }, 3000)
+        canvasData.current = ctx.getImageData(0, 0, width, height)
+        canvasArray.current.push(canvasData.current)
+        lineArray.current = []
+        lineCount.current++
+      } else {
+        console.log('not loaded...')
+      }
+    }
+
+    setCanvasRef()
+  }, [selSketch])
 
   const onSketch = (data) => {
     // if (point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height) {
@@ -60,17 +89,23 @@ const Canvas = ({
   }, [socket])
   ///////// SOCKET ////////////
 
-  const { drawAndSaveLine, setCanvasRef, undoLine, saveSketch, sendSketch } =
-    Draw(
-      onSketch,
-      width,
-      height,
-      selSketch,
-      setSelSketch,
-      sketchRecip,
-      setSketchRecip,
-      sendNotification
-    )
+  const { drawAndSaveLine, undoLine, saveSketch, sendSketch } = Draw(
+    onSketch,
+    width,
+    height,
+    canvasRef,
+    isDrawingRef,
+    prevPoint,
+    lineArray,
+    canvasData,
+    canvasArray,
+    lineCount,
+    selSketch,
+    setSelSketch,
+    sketchRecip,
+    setSketchRecip,
+    sendNotification
+  )
 
   const showColor = () => {
     if (hexToggle) {
@@ -87,7 +122,7 @@ const Canvas = ({
           width={width}
           height={height}
           className="canvas"
-          ref={setCanvasRef}
+          ref={canvasRef}
           onMouseDown={drawAndSaveLine}
         ></canvas>
         <div className="control-panel">

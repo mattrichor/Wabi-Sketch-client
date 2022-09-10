@@ -7,6 +7,13 @@ const Draw = (
   onSketch,
   width,
   height,
+  canvasRef,
+  isDrawingRef,
+  prevPoint,
+  lineArray,
+  canvasData,
+  canvasArray,
+  lineCount,
   selSketch,
   setSelSketch,
   sketchRecip,
@@ -15,17 +22,8 @@ const Draw = (
 ) => {
   const hexColor = useContext(ColorProvider)
 
-  const canvasRef = useRef(null)
-  const isDrawingRef = useRef(false)
-  const prevPoint = useRef(null)
-
   const mouseMoveRef = useRef(null)
   const mouseUnclickRef = useRef(null)
-
-  const lineArray = useRef([])
-  const canvasData = useRef([])
-  const canvasArray = useRef([])
-  const lineCount = useRef(-1)
 
   useEffect(() => {
     const initializeMouseMoveListener = () => {
@@ -80,22 +78,6 @@ const Draw = (
     }
   }, [onSketch])
 
-  const setCanvasRef = (ref) => {
-    canvasRef.current = ref
-    if (canvasRef.current) {
-      const ctx = canvasRef.current.getContext('2d')
-      if (selSketch.sketchData !== undefined) {
-        let sketch = new Image()
-        sketch.src = selSketch.sketchData
-        ctx.drawImage(sketch, 0, 0)
-        canvasData.current = ctx.getImageData(0, 0, width, height)
-        canvasArray.current.push(canvasData.current)
-        lineArray.current = []
-        lineCount.current++
-      }
-    }
-  }
-
   const drawAndSaveLine = () => {
     if (!isDrawingRef.current) {
       isDrawingRef.current = true
@@ -124,9 +106,7 @@ const Draw = (
   }
 
   const saveSketch = async () => {
-    // const ctx = canvasRef.current.getContext('2d')
     const sketchData = canvasRef.current.toDataURL('image/png', 0.2)
-    // let sketchData = ctx.getImageData(0, 0, width, height)
     let user = JSON.parse(localStorage.getItem('userObj'))
     if (selSketch.id !== undefined) {
       const sketch = await SaveSketch(user.id, selSketch.id, {
@@ -171,7 +151,6 @@ const Draw = (
   }
 
   return {
-    setCanvasRef,
     drawAndSaveLine,
     undoLine,
     saveSketch,

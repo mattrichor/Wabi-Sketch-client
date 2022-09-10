@@ -13,12 +13,14 @@ const Notifications = ({
 
   const chooseSketch = async (sketchId) => {
     const sketch = await GetSketchById(sketchId)
-    let confirmation = window.confirm('Add to this sketch?')
-    if (confirmation) {
-      setSelSketch(sketch)
-      console.log(sketch)
-      navigate('/home')
+    if (sketch) {
+      let confirmation = window.confirm('Add to this sketch?')
+      if (confirmation) {
+        setSelSketch(sketch)
+        navigate('/home')
+      }
     }
+
     // console.log(sketchId)
   }
 

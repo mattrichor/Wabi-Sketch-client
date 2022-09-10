@@ -20,7 +20,7 @@ import MySketches from './pages/MySketches'
 
 function App() {
   const [user, setUser] = useState({})
-  const [selSketch, setSelSketch] = useState([])
+  const [selSketch, setSelSketch] = useState({})
 
   const [authenticated, toggleAuthenticated] = useState(false)
 
@@ -35,7 +35,7 @@ function App() {
     setUser(null)
     toggleAuthenticated(false)
     localStorage.clear()
-    setSelSketch([])
+    setSelSketch({})
   }
 
   const checkToken = async () => {
