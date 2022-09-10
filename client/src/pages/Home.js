@@ -16,6 +16,7 @@ const socket = io.connect('http://localhost:3001')
 const Home = ({ user, selSketch, setSelSketch }) => {
   const [sketchRecip, setSketchRecip] = useState(0)
   const [hexColor, setHexColor] = useState('#000000')
+  const [messageRecieved, setMessageRecieved] = useState('')
 
   const initRoom = (user) => {
     socket.emit('create_room', user.id)
@@ -29,7 +30,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
     <ColorProvider.Provider value={hexColor}>
       <div class="content">
         <div class="identifier"></div>
-        <div class="text"></div>
+        <div class="text">{messageRecieved} sent a sketch!</div>
       </div>
 
       <div class="number">
@@ -53,6 +54,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
               socket={socket}
               sketchRecip={sketchRecip}
               setSketchRecip={setSketchRecip}
+              setMessageRecieved={setMessageRecieved}
             />
           </div>
         </section>

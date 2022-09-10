@@ -9,7 +9,8 @@ const Draw = (
   selSketch,
   setSelSketch,
   sketchRecip,
-  setSketchRecip
+  setSketchRecip,
+  sendNotification
 ) => {
   const hexColor = useContext(ColorProvider)
 
@@ -167,13 +168,16 @@ const Draw = (
         thumbnail: thumbnail
       })
       console.log(sketch)
-      setSketchRecip(friendId)
+      // setSketchRecip(friendId)
+      sendNotification(friendId)
     } else {
       const sketch = await SendSketch(friendId, selSketch.id, {
         sketchData: sketchData,
         thumbnail: thumbnail
       })
       setSketchRecip(friendId)
+      sendNotification()
+
       console.log(sketch)
     }
   }

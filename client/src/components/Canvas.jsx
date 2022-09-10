@@ -16,10 +16,11 @@ const Canvas = ({
   setHexColor,
   socket,
   sketchRecip,
-  setSketchRecip
+  setSketchRecip,
+  setMessageRecieved
 }) => {
   const [hexToggle, setHexToggle] = useState(false)
-  const [messageRecieved, setMessageRecieved] = useState('')
+
   const [message, setMessage] = useState('')
 
   const onSketch = (data) => {
@@ -45,6 +46,18 @@ const Canvas = ({
     ctx.fill()
   }
 
+  ///////// SOCKET ////////////
+  const sendNotification = (id) => {
+    socket.emit('send_message', { sketchRecip: id, user: user })
+  }
+  useEffect(() => {
+    socket.on('receive_notification', (data) => {
+      console.log(data.user.username)
+      setMessageRecieved(data.user.username)
+    })
+  }, [socket])
+  ///////// SOCKET ////////////
+
   const { drawAndSaveLine, setCanvasRef, undoLine, saveSketch, sendSketch } =
     Draw(
       onSketch,
@@ -53,7 +66,8 @@ const Canvas = ({
       selSketch,
       setSelSketch,
       sketchRecip,
-      setSketchRecip
+      setSketchRecip,
+      sendNotification
     )
 
   const showColor = () => {
@@ -63,17 +77,6 @@ const Canvas = ({
       setHexToggle(true)
     }
   }
-
-  ///////// SOCKET ////////////
-  const sendMessage = () => {
-    socket.emit('send_message', { message, sketchRecip })
-  }
-  useEffect(() => {
-    socket.on('receive_notification', (data) => {
-      setMessageRecieved(data.message)
-    })
-  }, [socket])
-  ///////// SOCKET ////////////
 
   return (
     <ImageDimensions.Provider value={{ width: width, height: height }}>
@@ -121,8 +124,8 @@ const Canvas = ({
           setMessage(event.target.value)
         }}
       />
-      <button onClick={sendMessage}>SEND MSG</button>
-      <h3>{messageRecieved}</h3>
+      {/* <button onClick={sendMessage}>SEND MSG</button> */}
+      <h3></h3>
     </ImageDimensions.Provider>
   )
 }

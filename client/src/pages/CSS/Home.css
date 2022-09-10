@@ -73,14 +73,15 @@
 
 .identifier {
   position: fixed;
-  top: 23px;
-  right: 48px;
+  top: 20px;
+  right: 46px;
   display: block;
   width: 30px;
   height: 30px;
   padding: 0;
   margin: 0;
   z-index: 9;
+  border: 2.5pt solid var(--dark);
   overflow: hidden;
   border-radius: 50%;
   background-color: var(--pink);
@@ -92,7 +93,7 @@
 
 .text {
   position: fixed;
-  top: 23px;
+  top: 20px;
   right: 95px;
   display: block;
   width: 130px;
@@ -100,6 +101,11 @@
   padding: 0;
   margin: 0;
   z-index: 9;
+  color: var(--dark);
+  font-size: small;
+  text-align: left;
+  border: 2.5pt solid var(--dark);
+  border-radius: 0.7rem;
   background-color: #94dacd;
   margin-top: 12.25px;
   margin-left: 40px;
