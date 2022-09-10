@@ -18,7 +18,8 @@ const Canvas = ({
   sketchRecip,
   setSketchRecip,
   setMessageRecieved,
-  messageRecieved
+  messageRecieved,
+  checkNotifs
 }) => {
   const [hexToggle, setHexToggle] = useState(false)
 
@@ -54,6 +55,7 @@ const Canvas = ({
   useEffect(() => {
     socket.on('receive_notification', (data) => {
       setMessageRecieved(data.user.username)
+      checkNotifs()
     })
   }, [socket])
   ///////// SOCKET ////////////

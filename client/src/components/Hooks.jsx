@@ -144,6 +144,7 @@ const Draw = (
     const ctx = canvasRef.current.getContext('2d')
     const sketchData = canvasRef.current.toDataURL('image/png', 0.2)
     let user = JSON.parse(localStorage.getItem('userObj'))
+
     if (selSketch.id === undefined) {
       const sketch = await UploadSketch(user.id, {
         sketchData: sketchData
@@ -154,7 +155,7 @@ const Draw = (
       })
       sendNotification(friendId)
       const notif = await CreateNotif(friendId, sketch.id, {
-        username: user.username
+        senderName: user.username
       })
     } else {
       const sketch = await SendSketch(friendId, selSketch.id, {
@@ -164,7 +165,7 @@ const Draw = (
 
       sendNotification(friendId)
       const notif = await CreateNotif(friendId, selSketch.id, {
-        username: user.username
+        senderName: user.username
       })
     }
   }

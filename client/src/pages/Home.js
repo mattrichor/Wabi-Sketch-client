@@ -10,6 +10,7 @@ import './CSS/Home.css'
 import '../components/CSS/FriendList.css'
 import io from 'socket.io-client'
 import Notifications from '../components/Notifications'
+import { GetNotifs } from '../services/Notifs'
 
 export const ColorProvider = createContext('#000000')
 const socket = io.connect('http://localhost:3001')
@@ -23,9 +24,18 @@ const Home = ({ user, selSketch, setSelSketch }) => {
     socket.emit('create_room', user.id)
   }
 
+  const checkNotifs = async () => {
+    let user = JSON.parse(localStorage.getItem('userObj'))
+    const notifs = await GetNotifs(user.id)
+    console.log(notifs)
+  }
+
+  // useEffect(() => {
+  //   checkNotifs()
+  // }, [])
+
   useEffect(() => {
     initRoom(user)
-    // localStorage.setItem('notifications', JSON.stringify([]))
   }, [user])
 
   return (
@@ -50,6 +60,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
               setSketchRecip={setSketchRecip}
               setMessageRecieved={setMessageRecieved}
               messageRecieved={messageRecieved}
+              checkNotifs={checkNotifs}
             />
           </div>
         </section>
