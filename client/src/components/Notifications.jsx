@@ -67,6 +67,7 @@ const Notifications = ({
             {notifications.map((notif) => (
               <div key={notif.id}>
                 <div className="notif-content">
+                  <div className="notif-num">{notifications.length}</div>
                   {notifToggle ? (
                     <li
                       className="notif-text"
@@ -78,7 +79,6 @@ const Notifications = ({
                     <div></div>
                   )}
                 </div>
-                <div className="notif-num">{notifications.length}</div>
               </div>
             ))}
           </ul>
