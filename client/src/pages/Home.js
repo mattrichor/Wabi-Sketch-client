@@ -70,6 +70,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
             />
           </div>
         </section>
+
         <div className="friend-grid">
           <div className="friends">
             <FriendSearch user={user} />

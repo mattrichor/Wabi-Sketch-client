@@ -3,14 +3,18 @@
   display: block;
   margin: 0;
   padding: 0;
-  width: 300px;
-  height: 100%;
+  width: 100%;
   background: #eee;
   list-style-type: none;
+  text-align: left;
+}
+
+#friend-list {
+  border-radius: 0.3rem;
 }
 
 .friend {
-  width: 300px;
+  width: 100%;
   height: 60px;
   background: var(--alice);
   border-bottom: 1px solid #ddd;
@@ -20,7 +24,7 @@
   color: var(--blue);
 }
 
-.friend img {
+.friend-img {
   width: 45px;
   height: 45px;
   border-radius: 30px;
@@ -28,6 +32,10 @@
   object-fit: cover;
   margin-left: 5px;
   margin-right: 10px;
+}
+
+.friend-img:hover {
+  transform: scale(1.03);
 }
 
 .friend .name {
@@ -51,4 +59,9 @@
 .li-tit {
   color: black;
   padding: 2%;
+  border-radius: 1rem;
+}
+
+.friend-container {
+  margin-left: 5%;
 }

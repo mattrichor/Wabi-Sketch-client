@@ -4,6 +4,9 @@ import { createContext, useState, useEffect, useRef, createRef } from 'react'
 import FriendsList from './FriendsList'
 import ColorPicker from '../components/ColorPicker'
 
+import { SaveSketch, SendSketch, UploadSketch } from '../services/Sketches'
+import { CreateNotif } from '../services/Notifs'
+
 export const ImageDimensions = createContext({ width: 0, height: 0 })
 
 const Canvas = ({
@@ -89,7 +92,39 @@ const Canvas = ({
   }, [socket])
   ///////// SOCKET ////////////
 
-  const { drawAndSaveLine, undoLine, saveSketch, sendSketch } = Draw(
+  //////// SKETCH SEND LOGIC ///////////
+  const sendSketch = async (friendId) => {
+    const ctx = canvasRef.current.getContext('2d')
+    const sketchData = canvasRef.current.toDataURL('image/png', 1)
+    let user = JSON.parse(localStorage.getItem('userObj'))
+
+    if (selSketch.id === undefined) {
+      const sketch = await UploadSketch(user.id, {
+        sketchData: sketchData
+      })
+      setSelSketch(sketch)
+      const sentSketch = await SendSketch(friendId, sketch.id, {
+        sketchData: sketchData
+      })
+      sendNotification(friendId)
+      const notif = await CreateNotif(friendId, sketch.id, {
+        senderName: user.username
+      })
+    } else {
+      const sketch = await SendSketch(friendId, selSketch.id, {
+        sketchData: sketchData
+      })
+      setSketchRecip(friendId)
+
+      sendNotification(friendId)
+      const notif = await CreateNotif(friendId, selSketch.id, {
+        senderName: user.username
+      })
+    }
+  }
+  //////// SKETCH SEND LOGIC ///////////
+
+  const { drawAndSaveLine, undoLine, saveSketch } = Draw(
     onSketch,
     width,
     height,
@@ -117,44 +152,47 @@ const Canvas = ({
 
   return (
     <ImageDimensions.Provider value={{ width: width, height: height }}>
-      <div className="canvas-container">
-        <canvas
-          width={width}
-          height={height}
-          className="canvas"
-          ref={canvasRef}
-          onMouseDown={drawAndSaveLine}
-        ></canvas>
-        <div className="control-panel">
-          <button className="ctn-btn ctn-btn-top" onClick={undoLine}>
-            UNDO
-          </button>
-          <button className="ctn-btn" onClick={saveSketch}>
-            SAVE
-          </button>
-          <button
-            className="ctn-btn ctn-btn-bottom"
-            style={{ backgroundColor: hexColor }}
-            onClick={showColor}
-          >
-            COLOR
-          </button>
-          <div className="ctn-empty-space"></div>
-        </div>
-        {hexToggle ? (
-          <div className="color-picker">
-            <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
+      <div className="home-page-grid">
+        <FriendsList
+          user={user}
+          sendSketch={sendSketch}
+          sketchRecip={sketchRecip}
+          setSketchRecip={setSketchRecip}
+        />
+        <div className="canvas-container">
+          <canvas
+            width={width}
+            height={height}
+            className="canvas"
+            ref={canvasRef}
+            onMouseDown={drawAndSaveLine}
+          ></canvas>
+          <div className="control-panel">
+            <button className="ctn-btn ctn-btn-top" onClick={undoLine}>
+              UNDO
+            </button>
+            <button className="ctn-btn" onClick={saveSketch}>
+              SAVE
+            </button>
+            <button
+              className="ctn-btn ctn-btn-bottom"
+              style={{ backgroundColor: hexColor }}
+              onClick={showColor}
+            >
+              COLOR
+            </button>
+            <div className="ctn-empty-space"></div>
           </div>
-        ) : (
-          <div></div>
-        )}
+          {hexToggle ? (
+            <div className="color-picker">
+              <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
       </div>
-      <FriendsList
-        user={user}
-        sendSketch={sendSketch}
-        sketchRecip={sketchRecip}
-        setSketchRecip={setSketchRecip}
-      />
+
       <input
         placeholder="Message..."
         onChange={(event) => {

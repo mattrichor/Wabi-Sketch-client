@@ -17,6 +17,8 @@ import Draw from './components/Hooks'
 import axios from 'axios'
 import { GetUserAndFriends } from './services/Users'
 import MySketches from './pages/MySketches'
+import Explore from './pages/Explore'
+import DailyPrompt from './pages/DailyPrompt'
 
 function App() {
   const [user, setUser] = useState({})
@@ -52,15 +54,6 @@ function App() {
     }
   }, [])
 
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     const data = await GetUserAndFriends(userId)
-  //     // let userId = JSON.stringify(data.id)
-  //     localStorage.setItem('userId', userId)
-  //   }
-  //   getUserData()
-  // }, [userId])
-
   return (
     <div>
       <Nav
@@ -93,6 +86,20 @@ function App() {
             }
           ></Route>
           <Route
+            path="/explore"
+            element={
+              <Explore
+                user={user}
+                selSketch={selSketch}
+                setSelSketch={setSelSketch}
+              />
+            }
+          ></Route>
+          <Route
+            path="/daily_muse"
+            element={<DailyPrompt user={user} />}
+          ></Route>
+          <Route
             path="/my_sketches"
             element={
               <MySketches
@@ -103,19 +110,6 @@ function App() {
             }
           ></Route>
         </Routes>
-
-        {/* <div className="notification">
-          Notifications go here
-          <form onSubmit={handleSubmit}>
-            <input
-              type="message"
-              onChange={handleChange}
-              name="message"
-              placeholder="message"
-              value={formValue}
-            ></input>
-          </form>
-        </div> */}
       </main>
     </div>
   )

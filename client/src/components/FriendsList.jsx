@@ -28,7 +28,7 @@ const FriendsList = ({ user, sendSketch }) => {
   //test /test
 
   return (
-    <div>
+    <div className="friend-container">
       <ul id="friend-list">
         <li className="li-tit">Connections</li>
         {friends !== [] ? (

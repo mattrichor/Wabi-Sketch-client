@@ -39,3 +39,8 @@ canvas {
 .color-picker {
   max-width: 5px;
 }
+
+.home-page-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}

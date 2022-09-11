@@ -2,12 +2,16 @@
 
 :root {
   --green: #205a31;
-  --pink: #b55d84;
-  --blue: #3c4993;
+  /* --pink: #b55d84; */
+  --pink: #b07c6d;
+  /* --blue: #3c4993; */
+  --blue: #917d7c;
   --grey: #455a64;
   --yellow: #e1da79;
+  --yellow: #d6b084;
   --alice: aliceblue;
   --dark: #353746;
+  --brown: #32160d;
 }
 
 .Canvas {

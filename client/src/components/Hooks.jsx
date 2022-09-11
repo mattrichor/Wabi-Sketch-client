@@ -120,41 +120,10 @@ const Draw = (
     }
   }
 
-  const sendSketch = async (friendId) => {
-    const ctx = canvasRef.current.getContext('2d')
-    const sketchData = canvasRef.current.toDataURL('image/png', 1)
-    let user = JSON.parse(localStorage.getItem('userObj'))
-
-    if (selSketch.id === undefined) {
-      const sketch = await UploadSketch(user.id, {
-        sketchData: sketchData
-      })
-      setSelSketch(sketch)
-      const sentSketch = await SendSketch(friendId, sketch.id, {
-        sketchData: sketchData
-      })
-      sendNotification(friendId)
-      const notif = await CreateNotif(friendId, sketch.id, {
-        senderName: user.username
-      })
-    } else {
-      const sketch = await SendSketch(friendId, selSketch.id, {
-        sketchData: sketchData
-      })
-      setSketchRecip(friendId)
-
-      sendNotification(friendId)
-      const notif = await CreateNotif(friendId, selSketch.id, {
-        senderName: user.username
-      })
-    }
-  }
-
   return {
     drawAndSaveLine,
     undoLine,
-    saveSketch,
-    sendSketch
+    saveSketch
   }
 }
 

@@ -1,21 +1,21 @@
 import { useNavigate } from 'react-router-dom'
-// import '../Home.css'
+import './CSS/Home.css'
 const PreAmble = () => {
   let navigate = useNavigate()
   return (
-    <div className="home">
-      <div className="home-title">
-        <h1 className="homeH1">W A B I S K E T C H </h1>
-        <h1 className="homeH2"></h1>
+    <body className="pre">
+      <div className="pre-title">
+        <h1 className="preH1">W A B I S K E T C H </h1>
+        <h1 className="preH2"></h1>
       </div>
       <section>
-        <div className="home-btn-div">
-          <button className="homeButton" onClick={() => navigate('/signin')}>
-            Click Here To Get Started
-          </button>
+        <div className="pre-btn-div">
+          <a className="preButton" onClick={() => navigate('/signin')}>
+            Begin
+          </a>
         </div>
       </section>
-    </div>
+    </body>
   )
 }
 
