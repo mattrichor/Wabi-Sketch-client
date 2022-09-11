@@ -33,7 +33,7 @@ const Home = ({ user, selSketch, setSelSketch }) => {
 
   useEffect(() => {
     checkNotifs()
-  }, [])
+  }, [selSketch])
 
   useEffect(() => {
     initRoom(user)

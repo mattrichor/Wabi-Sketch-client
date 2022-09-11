@@ -15,7 +15,15 @@ export const CreateNotif = async (user_id, sketch_id, username) => {
       `/notifs/create/${user_id}/${sketch_id}`,
       username
     )
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
 
+export const DeleteNotif = async (notif_id) => {
+  try {
+    const res = await Client.delete(`/notifs/destroy/${notif_id}`)
     return res.data
   } catch (error) {
     throw error
