@@ -28,3 +28,22 @@ a.preButton:hover {
   background-color: var(--yellow);
   cursor: pointer;
 }
+
+.home-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 5000;
+  padding-top: 2%;
+  font-size: 4.5vw;
+  margin-top: 0;
+  padding-top: 0;
+  line-height: 1;
+  color: #ffeba7;
+  text-align: center;
+  -webkit-text-stroke: 2px var(--yellow);
+  color: transparent;
+}
+
+.welcome-msg {
+  padding-top: 2%;
+  font-size: larger;
+}

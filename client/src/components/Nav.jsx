@@ -1,28 +1,45 @@
 import { NavLink } from 'react-router-dom'
+import { useState } from 'react'
 import './CSS/Nav.css'
 
 const Nav = ({ authenticated, user, handleLogOut, entered }) => {
   console.log(user)
   console.log(authenticated)
+  const [isChecked, setIsChecked] = useState(false)
+
+  const handleChange = () => {
+    if (!isChecked) {
+      setIsChecked(true)
+      console.log(isChecked)
+    } else if (isChecked) {
+      setIsChecked(false)
+      console.log(isChecked)
+    }
+  }
+
   let authenticatedOptions
   let publicOptions
   if (user) {
     authenticatedOptions = (
       <div>
-        <div className="welcome-msg">Welcome {user.username}</div>
-
         <input
           className="menu-icon"
           type="checkbox"
           id="menu-icon"
           name="menu-icon"
+          value={isChecked}
+          onChange={handleChange}
         />
         <label htmlFor="menu-icon"></label>
         <nav className="nav">
           <ul className="pt-5">
             <li>
               <li>
-                <NavLink to="/home" className="my-sketches">
+                <NavLink
+                  to="/home"
+                  className="my-sketches"
+                  onClick={() => handleChange()}
+                >
                   Home
                 </NavLink>
               </li>

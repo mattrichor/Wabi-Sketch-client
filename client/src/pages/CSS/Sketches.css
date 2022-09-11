@@ -5,6 +5,10 @@
   grid-gap: 3em;
   justify-content: center;
 }
+.sketch-wrap:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}
 
 .sketch-thumbnail {
   max-width: 280px;

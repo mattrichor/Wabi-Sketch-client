@@ -5,18 +5,6 @@ header {
   margin: none;
 }
 
-h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 5000;
-  padding-top: 2%;
-  font-size: 4.5vw;
-  line-height: 1;
-  color: #ffeba7;
-  text-align: center;
-  -webkit-text-stroke: 2px var(--yellow);
-  color: transparent;
-}
-
 [type='checkbox']:checked,
 [type='checkbox']:not(:checked) {
   position: absolute;

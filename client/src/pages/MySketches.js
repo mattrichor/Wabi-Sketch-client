@@ -10,10 +10,9 @@ const MySketches = ({ user, selSketch, setSelSketch }) => {
   const [sketches, setSketches] = useState([])
 
   const chooseSketch = (sketch) => {
-    setSelSketch(sketch)
     let confirmation = window.confirm('Add to this sketch?')
     if (confirmation) {
-      console.log(sketch)
+      setSelSketch(sketch)
       navigate('/home')
     }
   }

@@ -48,8 +48,9 @@ const Home = ({ user, selSketch, setSelSketch }) => {
         setSelSketch={setSelSketch}
       />
       <div className="home">
-        <div className="home-title">
-          <h1>What's in your brain?</h1>
+        <div className="welcome-msg">Welcome {user.username}</div>
+        <div>
+          <h1 className="home-title">What's in your brain?</h1>
         </div>
         <section>
           <div className="canvas">

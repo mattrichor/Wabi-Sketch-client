@@ -2,10 +2,10 @@
 
 :root {
   --green: #205a31;
-  /* --pink: #b55d84; */
-  --pink: #b07c6d;
-  /* --blue: #3c4993; */
-  --blue: #917d7c;
+  --pink: #b55d84;
+  --mauve: #b07c6d;
+  --blue: #3c4993;
+  --purple: #917d7c;
   --grey: #455a64;
   --yellow: #e1da79;
   --yellow: #d6b084;
@@ -23,7 +23,8 @@
 
 .App {
   text-align: center;
-  background-color: var(--green);
+  /* background-image: linear-gradient(var(--alice), var(--pink)); */
+  background-color: var(--mauve);
   color: var(--yellow);
 }
 

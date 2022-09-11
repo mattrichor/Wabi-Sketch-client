@@ -5,7 +5,7 @@ const PreAmble = () => {
   return (
     <body className="pre">
       <div className="pre-title">
-        <h1 className="preH1">W A B I S K E T C H </h1>
+        <h1 className="home-title">W A B I S K E T C H </h1>
         <h1 className="preH2"></h1>
       </div>
       <section>
