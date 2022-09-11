@@ -95,26 +95,50 @@
   transform: scale(1.1);
 }
 
-.notif-text {
+/* .notif-content {
   position: fixed;
   top: 20px;
   right: 95px;
-  display: block;
+  display: flex;
   width: 130px;
   height: 20px;
   padding: 0;
   margin: 0;
   z-index: 9;
+} */
+
+.notif-list {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+}
+
+.notif-text {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px;
+  z-index: 9;
   color: var(--dark);
   font-size: small;
   text-align: left;
   border: 2.5pt solid var(--dark);
-  border-radius: 0.7rem;
-  background-color: #94dacd;
-  margin-top: 12.25px;
-  margin-left: 40px;
+  border-radius: 0.3rem;
+  background-color: var(--alice);
+  /* margin-top: 12.25px;
+  margin-left: 40px; */
   -webkit-animation: exit 3s ease-in-out infinite;
   animation: exit 3s ease-in-out infinite;
+}
+/* li:nth-child(1) {
+  top: 25px;
+}
+li:nth-child(2) {
+  top: 50px;
+  right: 95px;
+} */
+.notif-text:nth-child(3) {
+}
+.notif-text:nth-child(4) {
 }
 
 /* @-webkit-keyframes exit {

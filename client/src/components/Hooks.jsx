@@ -106,7 +106,7 @@ const Draw = (
   }
 
   const saveSketch = async () => {
-    const sketchData = canvasRef.current.toDataURL('image/png', 0.2)
+    const sketchData = canvasRef.current.toDataURL('image/png', 1)
     let user = JSON.parse(localStorage.getItem('userObj'))
     if (selSketch.id !== undefined) {
       const sketch = await SaveSketch(user.id, selSketch.id, {
@@ -122,7 +122,7 @@ const Draw = (
 
   const sendSketch = async (friendId) => {
     const ctx = canvasRef.current.getContext('2d')
-    const sketchData = canvasRef.current.toDataURL('image/png', 0.2)
+    const sketchData = canvasRef.current.toDataURL('image/png', 1)
     let user = JSON.parse(localStorage.getItem('userObj'))
 
     if (selSketch.id === undefined) {
