@@ -62,12 +62,16 @@ const Notifications = ({
     <div>
       {notifications ? (
         <div>
-          <div className="notif-identifier" onClick={() => showNotifs()}></div>
           <ul className="notif-list">
             {notifications.map((notif) => (
               <div key={notif.id}>
                 <div className="notif-content">
-                  <div className="notif-num">{notifications.length}</div>
+                  <button
+                    className="notif-identifier"
+                    onClick={() => showNotifs()}
+                  >
+                    {notifications.length}
+                  </button>
                   {notifToggle ? (
                     <li
                       className="notif-text"
