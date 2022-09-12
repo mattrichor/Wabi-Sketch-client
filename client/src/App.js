@@ -20,6 +20,9 @@ import { GetNotifs } from './services/Notifs'
 import MySketches from './pages/MySketches'
 import Explore from './pages/Explore'
 import DailyPrompt from './pages/DailyPrompt'
+import io from 'socket.io-client'
+
+const socket = io.connect('http://localhost:3001')
 
 function App() {
   const [user, setUser] = useState({})
@@ -29,6 +32,18 @@ function App() {
 
   const [notifications, setNotifications] = useState()
   const [formValue, setFormValue] = useState('')
+
+  const initRoom = (user) => {
+    socket.emit('create_room', user.id)
+  }
+
+  useEffect(() => {
+    checkNotifs()
+  }, [selSketch])
+
+  useEffect(() => {
+    initRoom(user)
+  }, [user])
 
   const client = useRef(null)
 
@@ -55,23 +70,23 @@ function App() {
     }
   }, [])
 
-  ///////// SOCKET ////////////
+  /////// SOCKET ////////////
 
-  // const checkNotifs = async () => {
-  //   let user = JSON.parse(localStorage.getItem('userObj'))
-  //   const notifs = await GetNotifs(user.id)
-  //   setNotifications(notifs)
-  // }
+  const checkNotifs = async () => {
+    let user = JSON.parse(localStorage.getItem('userObj'))
+    const notifs = await GetNotifs(user.id)
+    setNotifications(notifs)
+  }
 
-  // const sendNotification = (id) => {
-  //   socket.emit('send_message', { sketchRecip: id, user: user })
-  // }
-  // useEffect(() => {
-  //   socket.on('receive_notification', () => {
-  //     checkNotifs()
-  //   })
-  // }, [socket])
-  ///////// SOCKET ////////////
+  const sendNotification = (id) => {
+    socket.emit('send_message', { sketchRecip: id, user: user })
+  }
+  useEffect(() => {
+    socket.on('receive_notification', () => {
+      checkNotifs()
+    })
+  }, [socket])
+  /////// SOCKET ////////////
 
   return (
     <div>
@@ -101,6 +116,10 @@ function App() {
                 user={user}
                 selSketch={selSketch}
                 setSelSketch={setSelSketch}
+                sendNotification={sendNotification}
+                socket={socket}
+                checkNotifs={checkNotifs}
+                notifications={notifications}
               />
             }
           ></Route>

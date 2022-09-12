@@ -10,52 +10,55 @@ import { CreateNotif } from '../services/Notifs'
 import './CSS/Home.css'
 
 import '../components/CSS/FriendList.css'
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 import Notifications from '../components/Notifications'
 import { GetNotifs } from '../services/Notifs'
 
 export const ColorProvider = createContext('#000000')
-const socket = io.connect('http://localhost:3001')
+// const socket = io.connect('http://localhost:3001')
 
 const Home = ({
   user,
   selSketch,
-  setSelSketch
-  // sendNotification
+  setSelSketch,
+  sendNotification,
+  socket,
+  checkNotifs,
+  notifications
 }) => {
   const canvasRef = createRef()
 
   const [sketchRecip, setSketchRecip] = useState(0)
   const [hexColor, setHexColor] = useState('#000000')
-  const [notifications, setNotifications] = useState('')
+  // const [notifications, setNotifications] = useState('')
 
-  const initRoom = (user) => {
-    socket.emit('create_room', user.id)
-  }
+  // const initRoom = (user) => {
+  //   socket.emit('create_room', user.id)
+  // }
 
-  const checkNotifs = async () => {
-    let user = JSON.parse(localStorage.getItem('userObj'))
-    const notifs = await GetNotifs(user.id)
-    setNotifications(notifs)
-  }
+  // const checkNotifs = async () => {
+  //   let user = JSON.parse(localStorage.getItem('userObj'))
+  //   const notifs = await GetNotifs(user.id)
+  //   setNotifications(notifs)
+  // }
 
-  useEffect(() => {
-    checkNotifs()
-  }, [selSketch])
+  // useEffect(() => {
+  //   checkNotifs()
+  // }, [selSketch])
 
-  useEffect(() => {
-    initRoom(user)
-  }, [user])
+  // useEffect(() => {
+  //   initRoom(user)
+  // }, [user])
 
   /////// SOCKET ////////////
-  const sendNotification = (id) => {
-    socket.emit('send_message', { sketchRecip: id, user: user })
-  }
-  useEffect(() => {
-    socket.on('receive_notification', () => {
-      checkNotifs()
-    })
-  }, [socket])
+  // const sendNotification = (id) => {
+  //   socket.emit('send_message', { sketchRecip: id, user: user })
+  // }
+  // useEffect(() => {
+  //   socket.on('receive_notification', () => {
+  //     checkNotifs()
+  //   })
+  // }, [socket])
   /////// SOCKET ////////////
 
   //////// SKETCH SEND LOGIC ///////////
