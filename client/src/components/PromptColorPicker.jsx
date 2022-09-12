@@ -4,11 +4,15 @@ const PromptColorPicker = ({ hexColor, setHexColor, prompt }) => {
   }
 
   return (
-    <div>
+    <div className="square-holder">
       {prompt.colors.map((color) => (
-        <div style={{ backgroundColor: color }} onClick={() => pickHex(color)}>
+        <button
+          className="color-square"
+          style={{ backgroundColor: color }}
+          onClick={() => pickHex(color)}
+        >
           {color}
-        </div>
+        </button>
       ))}
     </div>
   )

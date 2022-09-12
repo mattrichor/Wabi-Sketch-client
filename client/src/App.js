@@ -36,16 +36,18 @@ function App() {
   const [hexColor, setHexColor] = useState('#000000')
 
   const initRoom = (user) => {
-    socket.emit('create_room', user.id)
+    if (authenticated) {
+      socket.emit('create_room', user.id)
+    }
   }
 
   useEffect(() => {
     checkNotifs()
-  }, [selSketch])
+  }, [selSketch && authenticated])
 
   useEffect(() => {
     initRoom(user)
-  }, [user])
+  }, [user && authenticated])
 
   const client = useRef(null)
 
@@ -75,9 +77,11 @@ function App() {
   /////// SOCKET ////////////
 
   const checkNotifs = async () => {
-    let user = JSON.parse(localStorage.getItem('userObj'))
-    const notifs = await GetNotifs(user.id)
-    setNotifications(notifs)
+    if (authenticated) {
+      let user = JSON.parse(localStorage.getItem('userObj'))
+      const notifs = await GetNotifs(user.id)
+      setNotifications(notifs)
+    }
   }
 
   const sendNotification = (id) => {

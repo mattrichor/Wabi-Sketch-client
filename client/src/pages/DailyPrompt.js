@@ -15,6 +15,7 @@ const DailyPrompt = ({
   const [prompt, setPrompt] = useState({})
 
   useEffect(() => {
+    setSelSketch({})
     setPromptCanvas(true)
     const date = new Date()
     let today =
