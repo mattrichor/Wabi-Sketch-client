@@ -28,8 +28,9 @@ const Notifications = ({ socket, notifications, setSelSketch }) => {
       let confirmation = window.confirm('Add to this sketch?')
       if (confirmation) {
         setSelSketch(sketch)
-        const res = await DeleteNotif(notifId)
         navigate('/home')
+        const res = await DeleteNotif(notifId)
+
         //
       }
     }

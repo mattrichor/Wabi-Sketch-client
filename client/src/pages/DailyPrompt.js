@@ -15,6 +15,7 @@ const DailyPrompt = () => {
     const getDailyPrompt = async () => {
       const prompt = await GetPromptByDate(today)
       setPrompt(prompt)
+      console.log(prompt.colors)
     }
     getDailyPrompt()
   }, [])
@@ -23,9 +24,15 @@ const DailyPrompt = () => {
     <div>
       <div>{prompt.text}</div>
       <div>
-        {prompt.colors.map((color) => (
-          <li>{color}</li>
-        ))}
+        {prompt.colors ? (
+          <div>
+            {prompt.colors.map((color) => (
+              <li>{color}</li>
+            ))}
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   )

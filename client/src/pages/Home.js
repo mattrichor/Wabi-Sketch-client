@@ -95,11 +95,6 @@ const Home = ({
 
   return (
     <ColorProvider.Provider value={hexColor}>
-      <Notifications
-        socket={socket}
-        notifications={notifications}
-        setSelSketch={setSelSketch}
-      />
       <div className="home">
         <div className="welcome-msg">Welcome {user.username}</div>
         <div>
@@ -125,7 +120,6 @@ const Home = ({
                 socket={socket}
                 sketchRecip={sketchRecip}
                 setSketchRecip={setSketchRecip}
-                checkNotifs={checkNotifs}
                 canvasRef={canvasRef}
                 sendNotification={sendNotification}
               />

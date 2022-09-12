@@ -12,7 +12,7 @@ import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Nav from './components/Nav'
 import PreAmble from './pages/PreAmble'
-
+import Notifications from './components/Notifications'
 import Draw from './components/Hooks'
 import axios from 'axios'
 import { GetUserAndFriends } from './services/Users'
@@ -95,6 +95,11 @@ function App() {
         user={user}
         handleLogOut={handleLogOut}
       />
+      <Notifications
+        socket={socket}
+        notifications={notifications}
+        setSelSketch={setSelSketch}
+      />
       <main className="App">
         <Routes>
           <Route path="/register" element={<Register />}></Route>
@@ -130,12 +135,22 @@ function App() {
                 user={user}
                 selSketch={selSketch}
                 setSelSketch={setSelSketch}
+                socket={socket}
+                checkNotifs={checkNotifs}
+                notifications={notifications}
               />
             }
           ></Route>
           <Route
             path="/daily_muse"
-            element={<DailyPrompt user={user} />}
+            element={
+              <DailyPrompt
+                user={user}
+                socket={socket}
+                checkNotifs={checkNotifs}
+                notifications={notifications}
+              />
+            }
           ></Route>
           <Route
             path="/my_sketches"
@@ -144,6 +159,9 @@ function App() {
                 user={user}
                 selSketch={selSketch}
                 setSelSketch={setSelSketch}
+                socket={socket}
+                checkNotifs={checkNotifs}
+                notifications={notifications}
               />
             }
           ></Route>
