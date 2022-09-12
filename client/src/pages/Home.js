@@ -14,7 +14,6 @@ import '../components/CSS/FriendList.css'
 import Notifications from '../components/Notifications'
 import { GetNotifs } from '../services/Notifs'
 
-export const ColorProvider = createContext('#000000')
 // const socket = io.connect('http://localhost:3001')
 
 const Home = ({
@@ -24,12 +23,13 @@ const Home = ({
   sendNotification,
   socket,
   checkNotifs,
-  notifications
+  notifications,
+  hexColor,
+  setHexColor
 }) => {
   const canvasRef = createRef()
 
   const [sketchRecip, setSketchRecip] = useState(0)
-  const [hexColor, setHexColor] = useState('#000000')
 
   //////// SKETCH SEND LOGIC ///////////
   const sendSketch = async (friendId) => {
@@ -64,46 +64,44 @@ const Home = ({
   //////// SKETCH SEND LOGIC ///////////
 
   return (
-    <ColorProvider.Provider value={hexColor}>
-      <div className="home">
-        <div className="welcome-msg">Welcome {user.username}</div>
-        <div>
-          <h1 className="home-title">What's in your brain?</h1>
-        </div>
-        <section>
-          <div className="home-page-grid">
-            <FriendsList
+    <div className="home">
+      <div className="welcome-msg">Welcome {user.username}</div>
+      <div>
+        <h1 className="home-title">What's in your brain?</h1>
+      </div>
+      <section>
+        <div className="home-page-grid">
+          <FriendsList
+            user={user}
+            sendSketch={sendSketch}
+            sketchRecip={sketchRecip}
+            setSketchRecip={setSketchRecip}
+          />
+          <div className="canvas">
+            <Canvas
+              width={700}
+              height={500}
+              hexColor={hexColor}
               user={user}
-              sendSketch={sendSketch}
+              setSelSketch={setSelSketch}
+              selSketch={selSketch}
+              setHexColor={setHexColor}
+              socket={socket}
               sketchRecip={sketchRecip}
               setSketchRecip={setSketchRecip}
+              canvasRef={canvasRef}
+              sendNotification={sendNotification}
             />
-            <div className="canvas">
-              <Canvas
-                width={700}
-                height={500}
-                hexColor={hexColor}
-                user={user}
-                setSelSketch={setSelSketch}
-                selSketch={selSketch}
-                setHexColor={setHexColor}
-                socket={socket}
-                sketchRecip={sketchRecip}
-                setSketchRecip={setSketchRecip}
-                canvasRef={canvasRef}
-                sendNotification={sendNotification}
-              />
-            </div>
-          </div>
-        </section>
-
-        <div className="friend-grid">
-          <div className="friends">
-            <FriendSearch user={user} />
           </div>
         </div>
+      </section>
+
+      <div className="friend-grid">
+        <div className="friends">
+          <FriendSearch user={user} />
+        </div>
       </div>
-    </ColorProvider.Provider>
+    </div>
   )
 }
 

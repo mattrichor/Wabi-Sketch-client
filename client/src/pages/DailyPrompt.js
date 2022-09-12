@@ -6,7 +6,9 @@ const DailyPrompt = ({
   setSelSketch,
   selSketch,
   setPromptCanvas,
-  promptCanvas
+  promptCanvas,
+  hexColor,
+  setHexColor
 }) => {
   const canvasRef = createRef()
 
@@ -46,6 +48,8 @@ const DailyPrompt = ({
               canvasRef={canvasRef}
               promptCanvas={promptCanvas}
               prompt={prompt}
+              setHexColor={setHexColor}
+              hexColor={hexColor}
             />
           </div>
         ) : (

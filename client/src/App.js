@@ -2,7 +2,7 @@ import './App.css'
 
 // COLORS: G #205A31 P #b55d84 B #3c4993 y #E1DA79
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, createContext } from 'react'
 import { CheckSession } from './services/Auth'
 import { useNavigate, Routes, Route } from 'react-router-dom'
 import React from 'react'
@@ -22,6 +22,7 @@ import Explore from './pages/Explore'
 import DailyPrompt from './pages/DailyPrompt'
 import io from 'socket.io-client'
 
+export const ColorProvider = createContext('#000000')
 const socket = io.connect('http://localhost:3001')
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
   const [promptCanvas, setPromptCanvas] = useState(false)
   const [notifications, setNotifications] = useState()
   const [formValue, setFormValue] = useState('')
+  const [hexColor, setHexColor] = useState('#000000')
 
   const initRoom = (user) => {
     socket.emit('create_room', user.id)
@@ -89,90 +91,96 @@ function App() {
   /////// SOCKET ////////////
 
   return (
-    <div>
-      <Nav
-        authenticated={authenticated}
-        user={user}
-        handleLogOut={handleLogOut}
-      />
-      <Notifications
-        socket={socket}
-        notifications={notifications}
-        setSelSketch={setSelSketch}
-      />
-      <main className="App">
-        <Routes>
-          <Route path="/register" element={<Register />}></Route>
-          <Route
-            path="/signin"
-            element={
-              <SignIn
-                user={user}
-                setUser={setUser}
-                toggleAuthenticated={toggleAuthenticated}
-              />
-            }
-          ></Route>
-          <Route path="/" element={<PreAmble />}></Route>
-          <Route
-            path="/home"
-            element={
-              <Home
-                setPromptCanvas={setPromptCanvas}
-                user={user}
-                selSketch={selSketch}
-                setSelSketch={setSelSketch}
-                sendNotification={sendNotification}
-                socket={socket}
-                checkNotifs={checkNotifs}
-                notifications={notifications}
-              />
-            }
-          ></Route>
-          <Route
-            path="/explore"
-            element={
-              <Explore
-                user={user}
-                selSketch={selSketch}
-                setSelSketch={setSelSketch}
-                socket={socket}
-                checkNotifs={checkNotifs}
-                notifications={notifications}
-              />
-            }
-          ></Route>
-          <Route
-            path="/daily_muse"
-            element={
-              <DailyPrompt
-                setPromptCanvas={setPromptCanvas}
-                promptCanvas={promptCanvas}
-                user={user}
-                selSketch={selSketch}
-                setSelSketch={setSelSketch}
-                socket={socket}
-                checkNotifs={checkNotifs}
-                notifications={notifications}
-              />
-            }
-          ></Route>
-          <Route
-            path="/my_sketches"
-            element={
-              <MySketches
-                user={user}
-                selSketch={selSketch}
-                setSelSketch={setSelSketch}
-                socket={socket}
-                checkNotifs={checkNotifs}
-                notifications={notifications}
-              />
-            }
-          ></Route>
-        </Routes>
-      </main>
-    </div>
+    <ColorProvider.Provider value={hexColor}>
+      <div>
+        <Nav
+          authenticated={authenticated}
+          user={user}
+          handleLogOut={handleLogOut}
+        />
+        <Notifications
+          socket={socket}
+          notifications={notifications}
+          setSelSketch={setSelSketch}
+        />
+        <main className="App">
+          <Routes>
+            <Route path="/register" element={<Register />}></Route>
+            <Route
+              path="/signin"
+              element={
+                <SignIn
+                  user={user}
+                  setUser={setUser}
+                  toggleAuthenticated={toggleAuthenticated}
+                />
+              }
+            ></Route>
+            <Route path="/" element={<PreAmble />}></Route>
+            <Route
+              path="/home"
+              element={
+                <Home
+                  setPromptCanvas={setPromptCanvas}
+                  user={user}
+                  selSketch={selSketch}
+                  setSelSketch={setSelSketch}
+                  sendNotification={sendNotification}
+                  socket={socket}
+                  checkNotifs={checkNotifs}
+                  notifications={notifications}
+                  hexColor={hexColor}
+                  setHexColor={setHexColor}
+                />
+              }
+            ></Route>
+            <Route
+              path="/explore"
+              element={
+                <Explore
+                  user={user}
+                  selSketch={selSketch}
+                  setSelSketch={setSelSketch}
+                  socket={socket}
+                  checkNotifs={checkNotifs}
+                  notifications={notifications}
+                />
+              }
+            ></Route>
+            <Route
+              path="/daily_muse"
+              element={
+                <DailyPrompt
+                  setPromptCanvas={setPromptCanvas}
+                  promptCanvas={promptCanvas}
+                  user={user}
+                  selSketch={selSketch}
+                  setSelSketch={setSelSketch}
+                  socket={socket}
+                  checkNotifs={checkNotifs}
+                  notifications={notifications}
+                  hexColor={hexColor}
+                  setHexColor={setHexColor}
+                />
+              }
+            ></Route>
+            <Route
+              path="/my_sketches"
+              element={
+                <MySketches
+                  user={user}
+                  selSketch={selSketch}
+                  setSelSketch={setSelSketch}
+                  socket={socket}
+                  checkNotifs={checkNotifs}
+                  notifications={notifications}
+                />
+              }
+            ></Route>
+          </Routes>
+        </main>
+      </div>
+    </ColorProvider.Provider>
   )
 }
 

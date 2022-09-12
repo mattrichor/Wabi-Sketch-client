@@ -1,5 +1,5 @@
 import { useEffect, useRef, useContext } from 'react'
-import { ColorProvider } from '../pages/Home'
+import { ColorProvider } from '../App'
 import { SaveSketch, SendSketch, UploadSketch } from '../services/Sketches'
 import { CreateNotif } from '../services/Notifs'
 
