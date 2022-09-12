@@ -3,6 +3,7 @@ import Draw from './Hooks'
 import { createContext, useState, useEffect, useRef, createRef } from 'react'
 import FriendsList from './FriendsList'
 import ColorPicker from '../components/ColorPicker'
+import PromptColorPicker from './PromptColorPicker'
 
 import { SaveSketch, SendSketch, UploadSketch } from '../services/Sketches'
 import { CreateNotif } from '../services/Notifs'
@@ -21,7 +22,9 @@ const Canvas = ({
   sketchRecip,
   setSketchRecip,
   canvasRef,
-  sendNotification
+  sendNotification,
+  promptCanvas,
+  prompt
 }) => {
   // const canvasRef = createRef()
   const isDrawingRef = useRef(false)
@@ -97,6 +100,25 @@ const Canvas = ({
     sendNotification
   )
 
+  let colorPickerOption
+  if (!promptCanvas) {
+    colorPickerOption = (
+      <div className="color-picker">
+        <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
+      </div>
+    )
+  } else if (promptCanvas) {
+    colorPickerOption = (
+      <div className="color-picker">
+        <PromptColorPicker
+          hexColor={hexColor}
+          setHexColor={setHexColor}
+          prompt={prompt}
+        />
+      </div>
+    )
+  }
+
   const showColor = () => {
     if (hexToggle) {
       setHexToggle(false)
@@ -131,13 +153,7 @@ const Canvas = ({
           </button>
           <div className="ctn-empty-space"></div>
         </div>
-        {hexToggle ? (
-          <div className="color-picker">
-            <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
-          </div>
-        ) : (
-          <div></div>
-        )}
+        {hexToggle ? colorPickerOption : <div></div>}
       </div>
       {/* </div> */}
 

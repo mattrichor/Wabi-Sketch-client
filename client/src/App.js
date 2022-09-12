@@ -29,7 +29,7 @@ function App() {
   const [selSketch, setSelSketch] = useState({})
 
   const [authenticated, toggleAuthenticated] = useState(false)
-
+  const [promptCanvas, setPromptCanvas] = useState(false)
   const [notifications, setNotifications] = useState()
   const [formValue, setFormValue] = useState('')
 
@@ -118,6 +118,7 @@ function App() {
             path="/home"
             element={
               <Home
+                setPromptCanvas={setPromptCanvas}
                 user={user}
                 selSketch={selSketch}
                 setSelSketch={setSelSketch}
@@ -145,6 +146,8 @@ function App() {
             path="/daily_muse"
             element={
               <DailyPrompt
+                setPromptCanvas={setPromptCanvas}
+                promptCanvas={promptCanvas}
                 user={user}
                 selSketch={selSketch}
                 setSelSketch={setSelSketch}

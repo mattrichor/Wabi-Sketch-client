@@ -1,12 +1,19 @@
 import { useEffect, useState, createRef } from 'react'
 import { GetPromptByDate } from '../services/Prompts'
 import Canvas from '../components/Canvas'
-const DailyPrompt = ({ user, setSelSketch, selSketch }) => {
+const DailyPrompt = ({
+  user,
+  setSelSketch,
+  selSketch,
+  setPromptCanvas,
+  promptCanvas
+}) => {
   const canvasRef = createRef()
 
   const [prompt, setPrompt] = useState({})
 
   useEffect(() => {
+    setPromptCanvas(true)
     const date = new Date()
     let today =
       date.getFullYear() * 1e4 +
@@ -24,26 +31,27 @@ const DailyPrompt = ({ user, setSelSketch, selSketch }) => {
 
   return (
     <div>
-      <div>{prompt.text}</div>
+      <div className="prompt-subtitle">{prompt.date}</div>
+      <div className="home-title">{prompt.text}</div>
+
       <div>
         {prompt.colors ? (
           <div>
-            {prompt.colors.map((color) => (
-              <li>{color}</li>
-            ))}
+            <Canvas
+              width={700}
+              height={500}
+              user={user}
+              setSelSketch={setSelSketch}
+              selSketch={selSketch}
+              canvasRef={canvasRef}
+              promptCanvas={promptCanvas}
+              prompt={prompt}
+            />
           </div>
         ) : (
           <div></div>
         )}
       </div>
-      <Canvas
-        width={700}
-        height={500}
-        user={user}
-        setSelSketch={setSelSketch}
-        selSketch={selSketch}
-        canvasRef={canvasRef}
-      />
     </div>
   )
 }
