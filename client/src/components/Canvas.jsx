@@ -97,7 +97,8 @@ const Canvas = ({
     setSelSketch,
     sketchRecip,
     setSketchRecip,
-    sendNotification
+    sendNotification,
+    prompt
   )
 
   let colorPickerOption

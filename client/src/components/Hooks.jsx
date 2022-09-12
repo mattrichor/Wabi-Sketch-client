@@ -18,7 +18,8 @@ const Draw = (
   setSelSketch,
   sketchRecip,
   setSketchRecip,
-  sendNotification
+  sendNotification,
+  prompt
 ) => {
   const hexColor = useContext(ColorProvider)
 
@@ -108,15 +109,30 @@ const Draw = (
   const saveSketch = async () => {
     const sketchData = canvasRef.current.toDataURL('image/png', 1)
     let user = JSON.parse(localStorage.getItem('userObj'))
-    if (selSketch.id !== undefined) {
-      const sketch = await SaveSketch(user.id, selSketch.id, {
-        sketchData: sketchData
-      })
-    } else {
-      const sketch = await UploadSketch(user.id, {
-        sketchData: sketchData
-      })
-      setSelSketch(sketch)
+    if (prompt) {
+      if (selSketch.id !== undefined) {
+        const sketch = await SaveSketch(user.id, selSketch.id, {
+          sketchData: sketchData,
+          promptId: prompt.id
+        })
+      } else {
+        const sketch = await UploadSketch(user.id, {
+          sketchData: sketchData,
+          promptId: prompt.id
+        })
+        setSelSketch(sketch)
+      }
+    } else if (!prompt) {
+      if (selSketch.id !== undefined) {
+        const sketch = await SaveSketch(user.id, selSketch.id, {
+          sketchData: sketchData
+        })
+      } else {
+        const sketch = await UploadSketch(user.id, {
+          sketchData: sketchData
+        })
+        setSelSketch(sketch)
+      }
     }
   }
 
