@@ -12,10 +12,9 @@ canvas {
 
 .control-panel {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 5.5fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 5.5fr;
 }
 
-.ctn-btn-top,
 .ctn-btn-bottom {
   border: none;
 }
@@ -26,6 +25,7 @@ canvas {
 .ctn-btn {
   border-left: none;
   border-right: none;
+  border-top: none;
 }
 
 .ctn-btn:hover {

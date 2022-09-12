@@ -144,3 +144,16 @@ const Draw = (
 }
 
 export default Draw
+
+//  for (let i = 0; i < bristleCount; i++) {
+//    strokeBristle(
+//      ctx,
+//      { originX: start.x + i * gap, originY: start.y + (i * gap) / 2 },
+//      {
+//        destinationX: end.x + i * gap,
+//        destinationY: end.y + (i * gap) / 2
+//      },
+//      bristle,
+//      1.5
+//    )
+//  }

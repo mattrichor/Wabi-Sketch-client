@@ -1,5 +1,6 @@
 import './CSS/Canvas.css'
 import Draw from './Hooks'
+import tinycolor from 'tinycolor2'
 import { createContext, useState, useEffect, useRef, createRef } from 'react'
 import FriendsList from './FriendsList'
 import ColorPicker from '../components/ColorPicker'
@@ -36,6 +37,7 @@ const Canvas = ({
   const lineCount = useRef(-1)
 
   const [hexToggle, setHexToggle] = useState(false)
+  const [drawToolState, setDrawToolState] = useState('line')
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -59,6 +61,13 @@ const Canvas = ({
     setCanvasRef()
   }, [selSketch])
 
+  const varyColor = (color) => {
+    const amount = Math.round(Math.random() * 10)
+    const c = tinycolor(color)
+    const varied = amount > 5 ? c.brighten(amount - 5) : c.darken(amount)
+    return varied.toHexString()
+  }
+
   const onSketch = (data) => {
     // if (point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height) {
     data.map((point) => {
@@ -67,16 +76,58 @@ const Canvas = ({
     })
   }
 
+  const strokeBristle = (ctx, start, end, width, variedColor) => {
+    ctx.beginPath()
+
+    ctx.moveTo(start.originX, start.originY)
+    ctx.strokeStyle = variedColor
+    ctx.lineWidth = width
+    ctx.lineCap = 'round'
+    ctx.lineJoin = 'round'
+    ctx.shadowColor = variedColor
+    ctx.shadowBlur = width / 3
+    ctx.lineTo(end.destinationX, end.destinationY)
+    ctx.stroke()
+    ctx.fill()
+  }
+
+  const chooseTool = () => {}
+
   const fillPoints = (start, end, ctx, hexColor, width) => {
     if (!start) {
       start = end
     }
+    const strokeWidth = width * 5.5
+    const bristleCount = Math.round(strokeWidth / 3)
+    const gap = strokeWidth / bristleCount
+
+    if (drawToolState === 'brush') {
+      for (let i = 0; i < bristleCount; i++) {
+        let variedColor = varyColor(hexColor)
+        strokeBristle(
+          ctx,
+          {
+            originX: start.x + (i * gap) / 2,
+            originY: start.y + (i * gap) / 2
+          },
+          {
+            destinationX: end.x + (i * gap) / 2,
+            destinationY: end.y + (i * gap) / 2
+          },
+          1.5,
+          variedColor
+        )
+      }
+    }
+
     ctx.beginPath()
     ctx.lineWidth = width
     ctx.strokeStyle = hexColor
     ctx.moveTo(start.x, start.y)
     ctx.lineTo(end.x, end.y)
     ctx.stroke()
+    ctx.lineCap = 'round'
+    ctx.lineJoin = 'round'
     ctx.beginPath()
     ctx.arc(start.x, start.y, 1.8, 0, 1.8 * Math.PI)
     ctx.fill()
@@ -144,6 +195,9 @@ const Canvas = ({
           </button>
           <button className="ctn-btn" onClick={saveSketch}>
             SAVE
+          </button>
+          <button className="ctn-btn" onClick={chooseTool}>
+            TOOL
           </button>
           <button
             className="ctn-btn ctn-btn-bottom"
