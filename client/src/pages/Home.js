@@ -30,36 +30,6 @@ const Home = ({
 
   const [sketchRecip, setSketchRecip] = useState(0)
   const [hexColor, setHexColor] = useState('#000000')
-  // const [notifications, setNotifications] = useState('')
-
-  // const initRoom = (user) => {
-  //   socket.emit('create_room', user.id)
-  // }
-
-  // const checkNotifs = async () => {
-  //   let user = JSON.parse(localStorage.getItem('userObj'))
-  //   const notifs = await GetNotifs(user.id)
-  //   setNotifications(notifs)
-  // }
-
-  // useEffect(() => {
-  //   checkNotifs()
-  // }, [selSketch])
-
-  // useEffect(() => {
-  //   initRoom(user)
-  // }, [user])
-
-  /////// SOCKET ////////////
-  // const sendNotification = (id) => {
-  //   socket.emit('send_message', { sketchRecip: id, user: user })
-  // }
-  // useEffect(() => {
-  //   socket.on('receive_notification', () => {
-  //     checkNotifs()
-  //   })
-  // }, [socket])
-  /////// SOCKET ////////////
 
   //////// SKETCH SEND LOGIC ///////////
   const sendSketch = async (friendId) => {

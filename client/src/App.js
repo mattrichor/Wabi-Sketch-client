@@ -146,6 +146,8 @@ function App() {
             element={
               <DailyPrompt
                 user={user}
+                selSketch={selSketch}
+                setSelSketch={setSelSketch}
                 socket={socket}
                 checkNotifs={checkNotifs}
                 notifications={notifications}

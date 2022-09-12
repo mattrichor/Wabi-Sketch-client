@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, createRef } from 'react'
 import { GetPromptByDate } from '../services/Prompts'
+import Canvas from '../components/Canvas'
+const DailyPrompt = ({ user, setSelSketch, selSketch }) => {
+  const canvasRef = createRef()
 
-const DailyPrompt = () => {
   const [prompt, setPrompt] = useState({})
 
   useEffect(() => {
@@ -34,6 +36,14 @@ const DailyPrompt = () => {
           <div></div>
         )}
       </div>
+      <Canvas
+        width={700}
+        height={500}
+        user={user}
+        setSelSketch={setSelSketch}
+        selSketch={selSketch}
+        canvasRef={canvasRef}
+      />
     </div>
   )
 }
