@@ -1,6 +1,7 @@
-const PromptColorPicker = ({ hexColor, setHexColor, prompt }) => {
+const PromptColorPicker = ({ hexColor, setHexColor, prompt, showColor }) => {
   const pickHex = (color) => {
     setHexColor(color)
+    showColor()
   }
 
   return (

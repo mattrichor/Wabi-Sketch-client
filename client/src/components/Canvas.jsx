@@ -6,8 +6,12 @@ import FriendsList from './FriendsList'
 import ColorPicker from '../components/ColorPicker'
 import PromptColorPicker from './PromptColorPicker'
 
-import { SaveSketch, SendSketch, UploadSketch } from '../services/Sketches'
-import { CreateNotif } from '../services/Notifs'
+import pencil from '../pages/CSS/paintbrush.png'
+import paintBrush from '../pages/CSS/brush.png'
+import fractal from '../pages/CSS/galaxy-spiral.png'
+import saveicon from '../pages/CSS/growth.png'
+import undo from '../pages/CSS/eraser1.png'
+import color from '../pages/CSS/zen3.png'
 
 export const ImageDimensions = createContext({ width: 0, height: 0 })
 
@@ -37,7 +41,10 @@ const Canvas = ({
   const lineCount = useRef(-1)
 
   const [hexToggle, setHexToggle] = useState(false)
+  const [toolMenu, toggleToolMenu] = useState(false)
   const [drawToolState, setDrawToolState] = useState('line')
+  const [toolSrc, setToolSrc] = useState(pencil)
+
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -90,8 +97,6 @@ const Canvas = ({
     ctx.stroke()
     ctx.fill()
   }
-
-  const chooseTool = () => {}
 
   const fillPoints = (start, end, ctx, hexColor, width) => {
     if (!start) {
@@ -152,6 +157,37 @@ const Canvas = ({
     prompt
   )
 
+  const showColor = () => {
+    if (hexToggle) {
+      setHexToggle(false)
+    } else if (!hexToggle) {
+      setHexToggle(true)
+    }
+  }
+
+  const chooseTool = () => {
+    if (toolMenu) {
+      toggleToolMenu(false)
+    } else if (!toolMenu) {
+      toggleToolMenu(true)
+    }
+  }
+
+  useEffect(() => {
+    if (drawToolState === 'line') {
+      setToolSrc(pencil)
+    } else if (drawToolState === 'brush') {
+      setToolSrc(paintBrush)
+    } else if (drawToolState === 'fractal') {
+      setToolSrc(fractal)
+    }
+  }, [drawToolState])
+
+  const chooseDrawTool = (tool) => {
+    setDrawToolState(tool)
+    chooseTool()
+  }
+
   let colorPickerOption
   if (!promptCanvas) {
     colorPickerOption = (
@@ -163,20 +199,13 @@ const Canvas = ({
     colorPickerOption = (
       <div className="color-picker">
         <PromptColorPicker
+          showColor={showColor}
           hexColor={hexColor}
           setHexColor={setHexColor}
           prompt={prompt}
         />
       </div>
     )
-  }
-
-  const showColor = () => {
-    if (hexToggle) {
-      setHexToggle(false)
-    } else if (!hexToggle) {
-      setHexToggle(true)
-    }
   }
 
   return (
@@ -190,25 +219,43 @@ const Canvas = ({
           onMouseDown={drawAndSaveLine}
         ></canvas>
         <div className="control-panel">
-          <button className="ctn-btn ctn-btn-top" onClick={undoLine}>
-            UNDO
-          </button>
-          <button className="ctn-btn" onClick={saveSketch}>
-            SAVE
-          </button>
-          <button className="ctn-btn" onClick={chooseTool}>
-            TOOL
-          </button>
-          <button
+          <img
+            src={undo}
+            className="ctn-btn ctn-btn-top"
+            onClick={undoLine}
+          ></img>
+          <img className="ctn-btn" src={saveicon} onClick={saveSketch}></img>
+          <img className="ctn-btn" src={toolSrc} onClick={chooseTool}></img>
+          <img
+            src={color}
             className="ctn-btn ctn-btn-bottom"
             style={{ backgroundColor: hexColor }}
             onClick={showColor}
-          >
-            COLOR
-          </button>
+          ></img>
           <div className="ctn-empty-space"></div>
         </div>
         {hexToggle ? colorPickerOption : <div></div>}
+        {toolMenu ? (
+          <div className="tool-toggle">
+            <img
+              className="tool"
+              src={pencil}
+              onClick={() => chooseDrawTool('line')}
+            ></img>
+            <img
+              className="tool"
+              src={paintBrush}
+              onClick={() => chooseDrawTool('brush')}
+            ></img>
+            <img
+              className="tool"
+              src={fractal}
+              onClick={() => chooseDrawTool('fractal')}
+            ></img>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
       {/* </div> */}
 
