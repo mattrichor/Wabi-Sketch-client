@@ -16,6 +16,7 @@ import PreAmble from './pages/PreAmble'
 import Draw from './components/Hooks'
 import axios from 'axios'
 import { GetUserAndFriends } from './services/Users'
+import { GetNotifs } from './services/Notifs'
 import MySketches from './pages/MySketches'
 import Explore from './pages/Explore'
 import DailyPrompt from './pages/DailyPrompt'
@@ -53,6 +54,24 @@ function App() {
       checkToken()
     }
   }, [])
+
+  ///////// SOCKET ////////////
+
+  // const checkNotifs = async () => {
+  //   let user = JSON.parse(localStorage.getItem('userObj'))
+  //   const notifs = await GetNotifs(user.id)
+  //   setNotifications(notifs)
+  // }
+
+  // const sendNotification = (id) => {
+  //   socket.emit('send_message', { sketchRecip: id, user: user })
+  // }
+  // useEffect(() => {
+  //   socket.on('receive_notification', () => {
+  //     checkNotifs()
+  //   })
+  // }, [socket])
+  ///////// SOCKET ////////////
 
   return (
     <div>

@@ -20,11 +20,10 @@ const Canvas = ({
   socket,
   sketchRecip,
   setSketchRecip,
-  setMessageRecieved,
-  messageRecieved,
-  checkNotifs
+  canvasRef,
+  sendNotification
 }) => {
-  const canvasRef = createRef()
+  // const canvasRef = createRef()
   const isDrawingRef = useRef(false)
   const prevPoint = useRef(null)
 
@@ -80,50 +79,6 @@ const Canvas = ({
     ctx.fill()
   }
 
-  ///////// SOCKET ////////////
-  const sendNotification = (id) => {
-    socket.emit('send_message', { sketchRecip: id, user: user })
-  }
-  useEffect(() => {
-    socket.on('receive_notification', (data) => {
-      setMessageRecieved(data.user.username)
-      checkNotifs()
-    })
-  }, [socket])
-  ///////// SOCKET ////////////
-
-  //////// SKETCH SEND LOGIC ///////////
-  const sendSketch = async (friendId) => {
-    const ctx = canvasRef.current.getContext('2d')
-    const sketchData = canvasRef.current.toDataURL('image/png', 1)
-    let user = JSON.parse(localStorage.getItem('userObj'))
-
-    if (selSketch.id === undefined) {
-      const sketch = await UploadSketch(user.id, {
-        sketchData: sketchData
-      })
-      setSelSketch(sketch)
-      const sentSketch = await SendSketch(friendId, sketch.id, {
-        sketchData: sketchData
-      })
-      sendNotification(friendId)
-      const notif = await CreateNotif(friendId, sketch.id, {
-        senderName: user.username
-      })
-    } else {
-      const sketch = await SendSketch(friendId, selSketch.id, {
-        sketchData: sketchData
-      })
-      setSketchRecip(friendId)
-
-      sendNotification(friendId)
-      const notif = await CreateNotif(friendId, selSketch.id, {
-        senderName: user.username
-      })
-    }
-  }
-  //////// SKETCH SEND LOGIC ///////////
-
   const { drawAndSaveLine, undoLine, saveSketch } = Draw(
     onSketch,
     width,
@@ -152,46 +107,39 @@ const Canvas = ({
 
   return (
     <ImageDimensions.Provider value={{ width: width, height: height }}>
-      <div className="home-page-grid">
-        <FriendsList
-          user={user}
-          sendSketch={sendSketch}
-          sketchRecip={sketchRecip}
-          setSketchRecip={setSketchRecip}
-        />
-        <div className="canvas-container">
-          <canvas
-            width={width}
-            height={height}
-            className="canvas"
-            ref={canvasRef}
-            onMouseDown={drawAndSaveLine}
-          ></canvas>
-          <div className="control-panel">
-            <button className="ctn-btn ctn-btn-top" onClick={undoLine}>
-              UNDO
-            </button>
-            <button className="ctn-btn" onClick={saveSketch}>
-              SAVE
-            </button>
-            <button
-              className="ctn-btn ctn-btn-bottom"
-              style={{ backgroundColor: hexColor }}
-              onClick={showColor}
-            >
-              COLOR
-            </button>
-            <div className="ctn-empty-space"></div>
-          </div>
-          {hexToggle ? (
-            <div className="color-picker">
-              <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
-            </div>
-          ) : (
-            <div></div>
-          )}
+      <div className="canvas-container">
+        <canvas
+          width={width}
+          height={height}
+          className="canvas"
+          ref={canvasRef}
+          onMouseDown={drawAndSaveLine}
+        ></canvas>
+        <div className="control-panel">
+          <button className="ctn-btn ctn-btn-top" onClick={undoLine}>
+            UNDO
+          </button>
+          <button className="ctn-btn" onClick={saveSketch}>
+            SAVE
+          </button>
+          <button
+            className="ctn-btn ctn-btn-bottom"
+            style={{ backgroundColor: hexColor }}
+            onClick={showColor}
+          >
+            COLOR
+          </button>
+          <div className="ctn-empty-space"></div>
         </div>
+        {hexToggle ? (
+          <div className="color-picker">
+            <ColorPicker hexColor={hexColor} setHexColor={setHexColor} />
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
+      {/* </div> */}
 
       <input
         placeholder="Message..."

@@ -4,12 +4,7 @@ import '../pages/CSS/Notifications.css'
 import { DeleteNotif } from '../services/Notifs'
 import { GetSketchById } from '../services/Sketches'
 
-const Notifications = ({
-  messageRecieved,
-  socket,
-  notifications,
-  setSelSketch
-}) => {
+const Notifications = ({ socket, notifications, setSelSketch }) => {
   let navigate = useNavigate()
   const [notifToggle, setNotiftoggle] = useState(false)
   const [randomMessage, setRandomMessage] = useState('sent a sketch!')
