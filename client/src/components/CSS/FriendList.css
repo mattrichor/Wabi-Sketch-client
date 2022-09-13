@@ -52,8 +52,12 @@
 }
 
 .friend-btn-div {
-  display: flex;
-  justify-content: flex-end;
+  justify-self: flex-end;
+  column-gap: 50%;
+}
+
+.friend-btn {
+  float: right;
 }
 
 .li-tit {

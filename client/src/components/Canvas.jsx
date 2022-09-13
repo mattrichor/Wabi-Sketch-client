@@ -48,8 +48,6 @@ const Canvas = ({
   const [drawToolState, setDrawToolState] = useState('line')
   const [toolSrc, setToolSrc] = useState(pencil)
 
-  const [message, setMessage] = useState('')
-
   useEffect(() => {
     const setCanvasRef = async () => {
       if (selSketch) {
@@ -264,13 +262,6 @@ const Canvas = ({
       </div>
       {/* </div> */}
 
-      <input
-        placeholder="Message..."
-        onChange={(event) => {
-          setMessage(event.target.value)
-        }}
-      />
-      {/* <button onClick={sendMessage}>SEND MSG</button> */}
       <h3></h3>
     </ImageDimensions.Provider>
   )

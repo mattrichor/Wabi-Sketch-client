@@ -92,7 +92,7 @@ function App() {
   }
 
   const sendNotification = (id) => {
-    socket.emit('send_message', { sketchRecip: id, user: user })
+    socket.emit('send_sketch', { sketchRecip: id, user: user })
   }
   useEffect(() => {
     socket.on('receive_notification', () => {

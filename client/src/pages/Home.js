@@ -25,8 +25,33 @@ const Home = ({
   setIsLoading
 }) => {
   const canvasRef = createRef()
-
   const [sketchRecip, setSketchRecip] = useState(0)
+  const [randomGreeting, setRandomGreeting] = useState(`What's In Your Brain?`)
+
+  let chooseRandomGreeting = (randNum) => {
+    switch (randNum) {
+      case 1:
+        setRandomGreeting(`What's In Your Brain?`)
+        break
+      case 2:
+        setRandomGreeting(`What Grabs You Today?`)
+        break
+      case 3:
+        setRandomGreeting(`What Persists Within You?`)
+        break
+      case 4:
+        setRandomGreeting(`What Flows Through You?`)
+        break
+      case 5:
+        setRandomGreeting(`What Lies Your The Mind?`)
+        break
+    }
+  }
+
+  useEffect(() => {
+    let randNum = Math.floor(Math.random() * 5)
+    chooseRandomGreeting(randNum)
+  }, [])
 
   //////// SKETCH SEND LOGIC ///////////
   const sendSketch = async (friendId) => {
@@ -65,7 +90,7 @@ const Home = ({
       <div className="home-top">
         <div className="welcome-msg">Welcome {user.username}</div>
         <div>
-          <h1 className="home-title">What's in your brain?</h1>
+          <h1 className="home-title">{randomGreeting}</h1>
         </div>
       </div>
       <section className="home-body">

@@ -83,3 +83,10 @@ canvas {
 .canvas-div {
   margin: 2%;
 }
+
+.chat-box {
+  border: 1pt solid;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-left: 7%;
+}
