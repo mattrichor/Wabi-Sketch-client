@@ -79,3 +79,7 @@ canvas {
 .tool:hover {
   background-color: var(--blue);
 }
+
+.canvas-div {
+  margin: 2%;
+}

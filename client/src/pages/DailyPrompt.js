@@ -34,24 +34,38 @@ const DailyPrompt = ({
 
   return (
     <div>
-      <div className="prompt-subtitle">{prompt.date}</div>
-      <div className="home-title">{prompt.text}</div>
-
       <div>
         {prompt.colors ? (
-          <div>
-            <Canvas
-              width={700}
-              height={500}
-              user={user}
-              setSelSketch={setSelSketch}
-              selSketch={selSketch}
-              canvasRef={canvasRef}
-              promptCanvas={promptCanvas}
-              prompt={prompt}
-              setHexColor={setHexColor}
-              hexColor={hexColor}
-            />
+          <div style={{ backgroundColor: prompt.colors[0] }}>
+            <div
+              className="prompt-subtitle"
+              style={{ backgroundColor: prompt.colors[0] }}
+            >
+              {prompt.date}
+            </div>
+            <div
+              className="home-title"
+              style={{
+                backgroundColor: prompt.colors[1],
+                color: prompt.colors[4]
+              }}
+            >
+              {prompt.text}
+            </div>
+            <div className="canvas-div">
+              <Canvas
+                width={700}
+                height={500}
+                user={user}
+                setSelSketch={setSelSketch}
+                selSketch={selSketch}
+                canvasRef={canvasRef}
+                promptCanvas={promptCanvas}
+                prompt={prompt}
+                setHexColor={setHexColor}
+                hexColor={hexColor}
+              />
+            </div>
           </div>
         ) : (
           <div></div>

@@ -12,9 +12,9 @@ const Explore = ({ user }) => {
       <div className="explore-grid">
         <div className="friend-grid explore">
           <FriendsList user={user} exploreToggle={exploreToggle} />
-        </div>
-        <div className="search-grid">
-          <FriendSearch user={user} />
+          <div className="search-grid">
+            <FriendSearch user={user} />
+          </div>
         </div>
       </div>
     </div>

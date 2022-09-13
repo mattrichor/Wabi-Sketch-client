@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import './CSS/Sketches.css'
 
-const MySketches = ({ user, selSketch, setSelSketch }) => {
+const MySketches = ({ user, selSketch, setSelSketch, setIsLoading }) => {
   let navigate = useNavigate()
   const [sketches, setSketches] = useState([])
 
@@ -13,6 +13,7 @@ const MySketches = ({ user, selSketch, setSelSketch }) => {
     let confirmation = window.confirm('Add to this sketch?')
     if (confirmation) {
       setSelSketch(sketch)
+      setIsLoading(true)
       navigate('/home')
     }
   }
