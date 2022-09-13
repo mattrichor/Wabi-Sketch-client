@@ -14,7 +14,6 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
 
   // Friend Request Logic & friendslist view
   useEffect(() => {
-    console.log(user)
     const getFriendRequests = async () => {
       const res = await GetFriendRequests(user.id)
       setRequests(res.requests)
@@ -31,18 +30,40 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
   }
 
   const chooseRandImg = (username) => {
-    switch (username.charAt(0)) {
-      case 'a' || 'b' || 'c' || 'd':
+    let uName = username.toLowerCase()
+    console.log(uName)
+    switch (uName.charAt(0)) {
+      case 'a':
+      case 'b':
+      case 'c':
+      case 'd':
         return iconBird
-      case 'e' || 'f' || 'g' || 'h':
+      case 'e':
+      case 'f':
+      case 'g':
+      case 'h':
         return iconCat
-      case 'i' || 'j' || 'k' || 'l':
+      case 'i':
+      case 'j':
+      case 'k':
+      case 'l':
         return iconKoi
-      case 'm' || 'n' || 'o' || 'p':
+      case 'm':
+      case 'n':
+      case 'o':
+      case 'p':
         return iconMtn
-      case 'q' || 'r' || 's' || 't':
+      case 'q':
+      case 'r':
+      case 's':
+      case 't':
         return iconFish
-      case 'u' || 'v' || 'w' || 'x' || 'y' || 'z':
+      case 'u':
+      case 'v':
+      case 'w':
+      case 'x':
+      case 'y':
+      case 'z':
         return iconFlower
     }
   }
@@ -83,7 +104,7 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
         <ul id="request-list">
           {requests !== [] ? (
             <div>
-              <li className="li-tit">Reaching Hands</li>
+              <li className="li-tit">Requests</li>
               {requests.map((request) => (
                 <li className="friend">
                   <img

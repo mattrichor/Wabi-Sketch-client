@@ -40,7 +40,7 @@ const FriendSearch = ({ user }) => {
 
   return (
     <div>
-      <h2>Connection</h2>
+      <h2>Find Friends</h2>
       <input
         className="search-input"
         type="text"

@@ -3,6 +3,7 @@ import { useState, createContext, useEffect, createRef } from 'react'
 import Canvas from '../components/Canvas'
 import FriendsList from '../components/FriendsList'
 import FriendSearch from '../components/FriendSearch'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 import { SaveSketch, SendSketch, UploadSketch } from '../services/Sketches'
 import { CreateNotif } from '../services/Notifs'
@@ -10,11 +11,8 @@ import { CreateNotif } from '../services/Notifs'
 import './CSS/Home.css'
 
 import '../components/CSS/FriendList.css'
-// import io from 'socket.io-client'
 import Notifications from '../components/Notifications'
 import { GetNotifs } from '../services/Notifs'
-
-// const socket = io.connect('http://localhost:3001')
 
 const Home = ({
   user,
@@ -22,10 +20,10 @@ const Home = ({
   setSelSketch,
   sendNotification,
   socket,
-  checkNotifs,
-  notifications,
   hexColor,
-  setHexColor
+  setHexColor,
+  isLoading,
+  setIsLoading
 }) => {
   const canvasRef = createRef()
 
@@ -65,11 +63,13 @@ const Home = ({
 
   return (
     <div className="home">
-      <div className="welcome-msg">Welcome {user.username}</div>
-      <div>
-        <h1 className="home-title">What's in your brain?</h1>
+      <div className="home-top">
+        <div className="welcome-msg">Welcome {user.username}</div>
+        <div>
+          <h1 className="home-title">What's in your brain?</h1>
+        </div>
       </div>
-      <section>
+      <section className="home-body">
         <div className="home-page-grid">
           <FriendsList
             user={user}
@@ -77,12 +77,15 @@ const Home = ({
             sketchRecip={sketchRecip}
             setSketchRecip={setSketchRecip}
           />
+
           <div className="canvas">
             <Canvas
               width={700}
               height={500}
               hexColor={hexColor}
               user={user}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
               setSelSketch={setSelSketch}
               selSketch={selSketch}
               setHexColor={setHexColor}

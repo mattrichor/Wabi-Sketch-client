@@ -10,12 +10,11 @@ import React from 'react'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
+import LoadingSpinner from './components/LoadingSpinner'
 import Nav from './components/Nav'
 import PreAmble from './pages/PreAmble'
 import Notifications from './components/Notifications'
-import Draw from './components/Hooks'
-import axios from 'axios'
-import { GetUserAndFriends } from './services/Users'
+
 import { GetNotifs } from './services/Notifs'
 import MySketches from './pages/MySketches'
 import Explore from './pages/Explore'
@@ -26,13 +25,16 @@ export const ColorProvider = createContext('#000000')
 const socket = io.connect('http://localhost:3001')
 
 function App() {
+  const [colorWay, setColorWay] = useState('')
   const [user, setUser] = useState({})
   const [selSketch, setSelSketch] = useState({})
 
   const [authenticated, toggleAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
   const [promptCanvas, setPromptCanvas] = useState(false)
-  const [notifications, setNotifications] = useState()
-  const [formValue, setFormValue] = useState('')
+  const [notifications, setNotifications] = useState(null)
+
   const [hexColor, setHexColor] = useState('#000000')
 
   const initRoom = (user) => {
@@ -43,11 +45,16 @@ function App() {
 
   useEffect(() => {
     checkNotifs()
-  }, [selSketch && authenticated])
+  }, [selSketch, authenticated])
 
   useEffect(() => {
     initRoom(user)
   }, [user && authenticated])
+
+  useEffect(() => {
+    let today = new Date()
+    let now = today.getTime() / 10000
+  }, [])
 
   const client = useRef(null)
 
@@ -58,6 +65,7 @@ function App() {
     toggleAuthenticated(false)
     localStorage.clear()
     setSelSketch({})
+    setNotifications(null)
   }
 
   const checkToken = async () => {
@@ -77,11 +85,10 @@ function App() {
   /////// SOCKET ////////////
 
   const checkNotifs = async () => {
-    if (authenticated) {
-      let user = JSON.parse(localStorage.getItem('userObj'))
-      const notifs = await GetNotifs(user.id)
-      setNotifications(notifs)
-    }
+    let user = JSON.parse(localStorage.getItem('userObj'))
+    console.log('checking')
+    const notifs = await GetNotifs(user.id)
+    setNotifications(notifs)
   }
 
   const sendNotification = (id) => {
@@ -89,6 +96,7 @@ function App() {
   }
   useEffect(() => {
     socket.on('receive_notification', () => {
+      console.log('notification...')
       checkNotifs()
     })
   }, [socket])
@@ -106,6 +114,8 @@ function App() {
           socket={socket}
           notifications={notifications}
           setSelSketch={setSelSketch}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
         <main className="App">
           <Routes>
@@ -135,6 +145,8 @@ function App() {
                   notifications={notifications}
                   hexColor={hexColor}
                   setHexColor={setHexColor}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
                 />
               }
             ></Route>
@@ -165,6 +177,8 @@ function App() {
                   notifications={notifications}
                   hexColor={hexColor}
                   setHexColor={setHexColor}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
                 />
               }
             ></Route>
@@ -178,6 +192,8 @@ function App() {
                   socket={socket}
                   checkNotifs={checkNotifs}
                   notifications={notifications}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
                 />
               }
             ></Route>

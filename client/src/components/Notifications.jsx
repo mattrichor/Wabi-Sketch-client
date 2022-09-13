@@ -4,7 +4,12 @@ import '../pages/CSS/Notifications.css'
 import { DeleteNotif } from '../services/Notifs'
 import { GetSketchById } from '../services/Sketches'
 
-const Notifications = ({ socket, notifications, setSelSketch }) => {
+const Notifications = ({
+  notifications,
+  setSelSketch,
+  setIsLoading,
+  isLoading
+}) => {
   let navigate = useNavigate()
   const [notifToggle, setNotiftoggle] = useState(false)
   const [randomMessage, setRandomMessage] = useState('sent a sketch!')
@@ -27,11 +32,10 @@ const Notifications = ({ socket, notifications, setSelSketch }) => {
     if (sketch) {
       let confirmation = window.confirm('Add to this sketch?')
       if (confirmation) {
+        setIsLoading(true)
         setSelSketch(sketch)
         navigate('/home')
         const res = await DeleteNotif(notifId)
-
-        //
       }
     }
   }
@@ -72,6 +76,7 @@ const Notifications = ({ socket, notifications, setSelSketch }) => {
                     <li
                       className="notif-text"
                       onClick={() => chooseSketch(notif.sketchId, notif.id)}
+                      disabled={isLoading}
                     >
                       {notif.senderName} {randomMessage}
                     </li>

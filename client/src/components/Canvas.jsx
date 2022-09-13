@@ -3,6 +3,7 @@ import Draw from './Hooks'
 import tinycolor from 'tinycolor2'
 import { createContext, useState, useEffect, useRef, createRef } from 'react'
 import FriendsList from './FriendsList'
+import LoadingSpinner from './LoadingSpinner'
 import ColorPicker from '../components/ColorPicker'
 import PromptColorPicker from './PromptColorPicker'
 
@@ -29,7 +30,9 @@ const Canvas = ({
   canvasRef,
   sendNotification,
   promptCanvas,
-  prompt
+  prompt,
+  isLoading,
+  setIsLoading
 }) => {
   // const canvasRef = createRef()
   const isDrawingRef = useRef(false)
@@ -55,7 +58,8 @@ const Canvas = ({
         sketch.src = await selSketch.sketchData
         setTimeout(() => {
           ctx.drawImage(sketch, 0, 0)
-        }, 3000)
+          setIsLoading(false)
+        }, 2000)
         canvasData.current = ctx.getImageData(0, 0, width, height)
         canvasArray.current.push(canvasData.current)
         lineArray.current = []
@@ -211,6 +215,7 @@ const Canvas = ({
   return (
     <ImageDimensions.Provider value={{ width: width, height: height }}>
       <div className="canvas-container">
+        {isLoading ? <LoadingSpinner /> : <div></div>}
         <canvas
           width={width}
           height={height}

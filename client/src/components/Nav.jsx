@@ -3,8 +3,6 @@ import { useState } from 'react'
 import './CSS/Nav.css'
 
 const Nav = ({ authenticated, user, handleLogOut, entered }) => {
-  console.log(user)
-  console.log(authenticated)
   const [isChecked, setIsChecked] = useState(false)
 
   const handleChange = () => {

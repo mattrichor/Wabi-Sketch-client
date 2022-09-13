@@ -41,9 +41,25 @@ a.preButton:hover {
   text-align: center;
   -webkit-text-stroke: 2px var(--yellow);
   color: transparent;
+  margin-bottom: 0;
 }
 
 .welcome-msg {
   padding-top: 2%;
   font-size: larger;
+}
+
+.home-top {
+  background-color: var(--blue);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.home-body {
+  padding-top: 3%;
+  background-image: url(test_background.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
