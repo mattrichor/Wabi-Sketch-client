@@ -1,5 +1,8 @@
 import { useEffect, useState, createRef } from 'react'
 import { GetPromptByDate } from '../services/Prompts'
+
+import Typewriter from 'typewriter-effect'
+
 import Canvas from '../components/Canvas'
 const DailyPrompt = ({
   user,
@@ -50,7 +53,18 @@ const DailyPrompt = ({
                 color: prompt.colors[4]
               }}
             >
-              {prompt.text}
+              <Typewriter
+                wrapperClassName="home-title"
+                options={{ loop: false }}
+                onInit={(typewriter) => {
+                  typewriter
+                    .typeString(`today's musing...`)
+                    .pauseFor(1000)
+                    .deleteAll()
+                    .typeString(`${prompt.text}`)
+                    .start()
+                }}
+              />
             </div>
             <div className="canvas-div">
               <Canvas
