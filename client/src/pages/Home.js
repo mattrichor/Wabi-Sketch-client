@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import { useState, createContext, useEffect, createRef } from 'react'
 import Canvas from '../components/Canvas'
 import FriendsList from '../components/FriendsList'
@@ -98,12 +97,6 @@ const Home = ({
           </div>
         </div>
       </section>
-
-      <div className="friend-grid">
-        <div className="friends">
-          <FriendSearch user={user} />
-        </div>
-      </div>
     </div>
   )
 }

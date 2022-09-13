@@ -66,6 +66,9 @@ canvas {
   height: 50px;
   color: transparent;
 }
+.color-square:hover {
+  transform: scale(1.04);
+}
 
 .tool {
   max-width: 52px;

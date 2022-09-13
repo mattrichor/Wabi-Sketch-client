@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate, useRouteMatch } from 'react-router-dom'
 import { GetFriendRequests, SendFriendRequest } from '../services/Users'
 import './CSS/FriendList.css'
 import iconBird from './CSS/iconbird.png'
@@ -9,6 +10,8 @@ import iconFlower from './CSS/iconflower.png'
 import iconMtn from './CSS/iconmtn.png'
 
 const FriendsList = ({ user, sendSketch, exploreToggle }) => {
+  let navigate = useNavigate()
+
   const [requests, setRequests] = useState([])
   const [friends, setFriends] = useState([])
 
@@ -128,6 +131,11 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
           )}
         </ul>
       </div>
+      {!exploreToggle ? (
+        <button onClick={() => navigate('/explore')}>Explore</button>
+      ) : (
+        <button onClick={() => navigate('/home')}>Back Home</button>
+      )}
     </div>
   )
 }

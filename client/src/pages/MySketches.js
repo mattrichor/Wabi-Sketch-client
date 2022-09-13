@@ -28,8 +28,8 @@ const MySketches = ({ user, selSketch, setSelSketch }) => {
   }, [user])
 
   return (
-    <div>
-      <h2>echoes of the past :</h2>
+    <div className="my-sketches">
+      <h2 className="home-title sketches-title">R E M I N I S C E</h2>
       <div className="sketch-card">
         {sketches.map((sketch) => (
           <div onClick={() => chooseSketch(sketch)}>
