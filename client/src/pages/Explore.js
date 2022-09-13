@@ -7,8 +7,8 @@ const Explore = ({ user }) => {
   const [exploreToggle, setExploreToggle] = useState(true)
 
   return (
-    <div>
-      <div className="home-title">E X P L O R E </div>
+    <div className="explore-pg">
+      <div className="home-title explore-title">E X P L O R E </div>
       <div className="explore-grid">
         <div className="friend-grid explore">
           <FriendsList user={user} exploreToggle={exploreToggle} />

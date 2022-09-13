@@ -86,7 +86,7 @@ const Home = ({
   //////// SKETCH SEND LOGIC ///////////
 
   return (
-    <div className="home">
+    <div className="home-pg">
       <div className="home-top">
         <div className="welcome-msg">Welcome {user.username}</div>
         <div>

@@ -8,10 +8,8 @@ const Nav = ({ authenticated, user, handleLogOut, entered }) => {
   const handleChange = () => {
     if (!isChecked) {
       setIsChecked(true)
-      console.log(isChecked)
     } else if (isChecked) {
       setIsChecked(false)
-      console.log(isChecked)
     }
   }
 

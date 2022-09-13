@@ -1,12 +1,3 @@
-.pre {
-  background-image: url(dandelionStart2.gif);
-  height: 100vh;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
 a.preButton {
   display: inline-block;
   padding: 0.35em 1.2em;
@@ -62,4 +53,37 @@ a.preButton:hover {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.pre,
+.register,
+.signin {
+  background-image: url(dandelionStart2.gif);
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* body styling for pages */
+
+.prompt-pg,
+.home-pg,
+.explore-pg {
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.explore-title {
+  background-color: var(--green);
+  margin-bottom: 8%;
 }

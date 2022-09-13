@@ -21,7 +21,6 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
       const res = await GetFriendRequests(user.id)
       setRequests(res.requests)
       setFriends(res.friends)
-      console.log(res)
     }
     if (user.id) {
       getFriendRequests()
@@ -34,7 +33,6 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
 
   const chooseRandImg = (username) => {
     let uName = username.toLowerCase()
-    console.log(uName)
     switch (uName.charAt(0)) {
       case 'a':
       case 'b':
@@ -132,9 +130,13 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
         </ul>
       </div>
       {!exploreToggle ? (
-        <button onClick={() => navigate('/explore')}>Explore</button>
+        <button className="button-55" onClick={() => navigate('/explore')}>
+          Explore
+        </button>
       ) : (
-        <button onClick={() => navigate('/home')}>Back Home</button>
+        <button className="button-55" onClick={() => navigate('/home')}>
+          Back Home
+        </button>
       )}
     </div>
   )

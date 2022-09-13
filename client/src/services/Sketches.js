@@ -31,7 +31,6 @@ export const SaveSketch = async (user_id, sketch_id, data) => {
 }
 export const GetSketches = async (user_id) => {
   try {
-    console.log(user_id)
     const res = await Client.get(`/sketches/${user_id}`)
 
     return res.data

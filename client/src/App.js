@@ -70,7 +70,6 @@ function App() {
 
   const checkToken = async () => {
     const user = await CheckSession()
-    console.log(user)
     setUser(user)
     toggleAuthenticated(true)
   }
@@ -86,7 +85,6 @@ function App() {
 
   const checkNotifs = async () => {
     let user = JSON.parse(localStorage.getItem('userObj'))
-    console.log('checking')
     const notifs = await GetNotifs(user.id)
     setNotifications(notifs)
   }
@@ -96,7 +94,6 @@ function App() {
   }
   useEffect(() => {
     socket.on('receive_notification', () => {
-      console.log('notification...')
       checkNotifs()
     })
   }, [socket])

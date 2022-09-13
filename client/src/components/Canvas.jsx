@@ -63,7 +63,7 @@ const Canvas = ({
         lineArray.current = []
         lineCount.current++
       } else {
-        console.log('not loaded...')
+        alert(`Cannot access sketch at this time :(`)
       }
     }
 

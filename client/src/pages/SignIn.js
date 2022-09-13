@@ -24,7 +24,7 @@ const SignIn = (props) => {
   }
 
   return (
-    <div className="bg-sign-in">
+    <div className="signin">
       <div className="signin-col-ch">
         <div className="card-overlay-centered-ch">
           We Welcome You Fondly
@@ -56,14 +56,14 @@ const SignIn = (props) => {
             <div className="button-div">
               <button
                 disabled={!formValues.username || !formValues.password}
-                className="submit-btn"
+                className="submit-btn button-55"
               >
                 Submit
               </button>
             </div>
             <div className="button-div">
               <button
-                className="submit-btn reg-btn"
+                className="submit-btn reg-btn button-55"
                 onClick={() => {
                   navigate('/register')
                 }}

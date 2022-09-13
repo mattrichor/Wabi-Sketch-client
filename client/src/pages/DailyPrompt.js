@@ -29,11 +29,9 @@ const DailyPrompt = ({
       (date.getMonth() + 1) * 100 +
       date.getDate() +
       ''
-    console.log(today)
     const getDailyPrompt = async () => {
       const prompt = await GetPromptByDate(today)
       setPrompt(prompt)
-      console.log(prompt.colors)
     }
     getDailyPrompt()
   }, [])
@@ -47,13 +45,15 @@ const DailyPrompt = ({
     socket.on('receive_chat', (data) =>
       setMsgArray((msgArray) => [...msgArray, data])
     )
-    console.log(msgArray)
   }, [socket])
   return (
-    <div>
+    <div className="prompt-pg">
       <div>
         {prompt.colors ? (
-          <div style={{ backgroundColor: prompt.colors[0] }}>
+          <div
+            className="prompt-pg"
+            style={{ backgroundColor: prompt.colors[0] }}
+          >
             <div
               className="prompt-subtitle"
               style={{ backgroundColor: prompt.colors[0] }}
