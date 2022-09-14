@@ -87,7 +87,7 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
                 ) : (
                   <div className="friend-btn-div">
                     <button
-                      className="friend-btn"
+                      className="friend-btn button-55"
                       onClick={() => sendSketch(friend.id)}
                     >
                       Send Sketch

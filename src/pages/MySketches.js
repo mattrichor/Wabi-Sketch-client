@@ -43,7 +43,9 @@ const MySketches = ({ user, selSketch, setSelSketch, setIsLoading }) => {
           </div>
         ))}
       </div>
-      <button onClick={() => navigate('/home')}>Back to Create</button>
+      <button className="button-55" onClick={() => navigate('/home')}>
+        Back to Create
+      </button>
     </div>
   )
 }

@@ -234,7 +234,12 @@ const Canvas = ({
             className="ctn-btn ctn-btn-top"
             onClick={undoLine}
           ></img>
-          <img className="ctn-btn" src={saveicon} onClick={saveSketch}></img>
+          <img
+            className="ctn-btn"
+            title="save"
+            src={saveicon}
+            onClick={saveSketch}
+          ></img>
           <img className="ctn-btn" src={toolSrc} onClick={chooseTool}></img>
           <img
             src={color}
