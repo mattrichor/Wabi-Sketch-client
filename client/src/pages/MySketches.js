@@ -29,7 +29,7 @@ const MySketches = ({ user, selSketch, setSelSketch, setIsLoading }) => {
   }, [user])
 
   return (
-    <div className="my-sketches">
+    <div className="sketches-pg">
       <h2 className="home-title sketches-title">R E M I N I S C E</h2>
       <div className="sketch-card">
         {sketches.map((sketch) => (
