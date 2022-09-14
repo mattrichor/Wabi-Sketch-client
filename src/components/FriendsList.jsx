@@ -115,7 +115,7 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
                   <div className="friend-name">{request.username}</div>
                   <div className="friend-btn-div">
                     <button
-                      className="friend-btn"
+                      className="friend-btn button-55"
                       onClick={() => acceptRequest(request.id)}
                     >
                       Accept
