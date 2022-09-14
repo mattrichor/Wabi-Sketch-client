@@ -1,4 +1,4 @@
-import Client from './Api'
+import Client from './api'
 
 export const UploadSketch = async (user_id, data) => {
   try {

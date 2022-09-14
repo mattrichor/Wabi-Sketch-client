@@ -1,4 +1,4 @@
-import Client from './Api'
+import Client from './api'
 
 export const GetUserAndFriends = async (userId) => {
   try {
