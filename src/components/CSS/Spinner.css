@@ -14,7 +14,8 @@
   animation: spinner 1.3s linear infinite;
 }
 
-.spinner-container {
+.spinner-container,
+.sketch-sent-text {
   display: grid;
   position: fixed;
   top: 30%;
@@ -22,4 +23,15 @@
   justify-content: center;
   align-items: center;
   height: 350px;
+}
+
+.sketch-sent-text {
+  color: black;
+  font-style: italic;
+  letter-spacing: 2px;
+  /* background-color: rgba(240, 248, 255, 0.264); */
+  height: 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 20px;
+  font-size: large;
 }

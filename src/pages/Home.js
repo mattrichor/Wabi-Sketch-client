@@ -26,6 +26,7 @@ const Home = ({
 }) => {
   const canvasRef = createRef()
   const [sketchRecip, setSketchRecip] = useState(0)
+  const [sentDisplay, setSentDisplay] = useState(false)
   const [randomGreeting, setRandomGreeting] = useState(`What's In Your Brain?`)
 
   let chooseRandomGreeting = (randNum) => {
@@ -67,20 +68,27 @@ const Home = ({
       const sentSketch = await SendSketch(friendId, sketch.id, {
         sketchData: sketchData
       })
+      setSentDisplay(true)
       sendNotification(friendId)
       const notif = await CreateNotif(friendId, sketch.id, {
         senderName: user.username
       })
+      setTimeout(() => {
+        setSentDisplay(false)
+      }, 1200)
     } else {
       const sketch = await SendSketch(friendId, selSketch.id, {
         sketchData: sketchData
       })
       setSketchRecip(friendId)
-
+      setSentDisplay(true)
       sendNotification(friendId)
       const notif = await CreateNotif(friendId, selSketch.id, {
         senderName: user.username
       })
+      setTimeout(() => {
+        setSentDisplay(false)
+      }, 1500)
     }
   }
   //////// SKETCH SEND LOGIC ///////////
@@ -109,6 +117,8 @@ const Home = ({
               hexColor={hexColor}
               user={user}
               isLoading={isLoading}
+              setSentDisplay={setSentDisplay}
+              sentDisplay={sentDisplay}
               setIsLoading={setIsLoading}
               setSelSketch={setSelSketch}
               selSketch={selSketch}
