@@ -1,8 +1,7 @@
 import Axios from 'axios'
 
-// export const BASE_URL = 'http://localhost:3001'
-// export const BASE_URL = 'https://wabi-sketch-database.fly.dev/'
-export const BASE_URL = 'https://wabi-sketch.herokuapp.com/'
+export const BASE_URL = 'http://localhost:3001'
+// export const BASE_URL = 'https://wabi-sketch.herokuapp.com/'
 
 const Client = Axios.create({ baseURL: BASE_URL })
 

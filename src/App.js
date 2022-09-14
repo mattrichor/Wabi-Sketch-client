@@ -20,9 +20,10 @@ import MySketches from './pages/MySketches'
 import Explore from './pages/Explore'
 import DailyPrompt from './pages/DailyPrompt'
 import io from 'socket.io-client'
+import { BASE_URL } from './services/api'
 
 export const ColorProvider = createContext('#000000')
-const socket = io.connect('http://localhost:3001')
+const socket = io.connect(BASE_URL)
 
 function App() {
   const [colorWay, setColorWay] = useState('')
