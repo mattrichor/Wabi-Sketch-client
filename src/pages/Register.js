@@ -37,7 +37,7 @@ const Register = () => {
   }
   return (
     <div className="register">
-      <div className="card-overlay-centered-ch coach-reg">
+      <div className="signin-col-ch">
         <h1 className="reg-title">Transience...</h1>
         <form className="col" onSubmit={handleSubmit}>
           <div className="input-wrapper">

@@ -4,7 +4,9 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  background: #eee;
+  background-color: #dee1e530;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 20px;
   list-style-type: none;
   text-align: left;
 }
@@ -21,7 +23,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  color: var(--blue);
+  color: black;
 }
 
 .friend-img {
@@ -68,4 +70,6 @@
 
 .friend-container {
   margin-left: 5%;
+}
+.friends-list {
 }

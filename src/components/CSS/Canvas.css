@@ -87,6 +87,18 @@ canvas {
 .chat-box {
   border: 1pt solid;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  justify-content: flex-end;
   margin-left: 7%;
+}
+
+.chat-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 5fr;
+}
+.chat-user {
+  justify-content: flex-start;
+}
+.chat-msg {
+  justify-content: flex-end;
 }

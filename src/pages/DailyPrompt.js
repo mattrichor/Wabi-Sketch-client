@@ -86,9 +86,9 @@ const DailyPrompt = ({
                   {msgArray ? (
                     <ul>
                       {msgArray.map((msg) => (
-                        <li>
-                          <div>{msg.username}</div>
-                          <div>{msg.message}</div>
+                        <li className="chat-list">
+                          <div className="chat-user">{msg.username}</div>
+                          <div className="chat-msg">{msg.message}</div>
                         </li>
                       ))}
                     </ul>

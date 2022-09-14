@@ -69,6 +69,7 @@ a.preButton:hover {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  padding-top: 20%;
 }
 
 /* body styling for pages */

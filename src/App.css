@@ -31,3 +31,37 @@ html {
 button:hover {
   cursor: pointer;
 }
+
+.input-wrapper {
+  margin-bottom: 2px;
+}
+.input-wrapper-last {
+  margin-bottom: 15px;
+}
+
+.reg-input {
+  border-radius: 0.25rem;
+  border: #6977bb;
+  height: 25px;
+  margin: 0.6%;
+  width: 65%;
+}
+
+.signin-col-ch {
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+  width: 300px;
+  background-color: #dee1e530;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 20px;
+}
+
+.reg-title {
+  margin-top: 0%;
+}
+
+.login-title {
+  padding-top: 15%;
+}

@@ -27,12 +27,14 @@ const SignIn = (props) => {
     <div className="signin">
       <div className="signin-col-ch">
         <div className="card-overlay-centered-ch">
-          We Welcome You Fondly
+          <h2 className="login-title">
+            We Welcome You <br></br>Fondly
+          </h2>
           <form className="col" onSubmit={handleSubmit}>
             <div className="input-wrapper">
               <label htmlFor="username"></label>
               <input
-                className="username"
+                className="reg-input"
                 onChange={handleChange}
                 name="username"
                 type="username"
@@ -44,7 +46,7 @@ const SignIn = (props) => {
             <div className="input-wrapper">
               <label htmlFor="password"></label>
               <input
-                className="password"
+                className="reg-input"
                 onChange={handleChange}
                 type="password"
                 name="password"
