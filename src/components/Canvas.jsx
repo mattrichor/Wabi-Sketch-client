@@ -80,7 +80,6 @@ const Canvas = ({
   }
 
   const onSketch = (data) => {
-    // if (point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height) {
     data.map((point) => {
       fillPoints(point.start, point.end, point.ctx, point.hexColor, 4)
       point.ctx.fillStyle = point.hexColor
@@ -272,9 +271,6 @@ const Canvas = ({
           <div></div>
         )}
       </div>
-      {/* </div> */}
-
-      <h3></h3>
     </ImageDimensions.Provider>
   )
 }

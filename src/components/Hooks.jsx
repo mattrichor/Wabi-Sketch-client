@@ -47,14 +47,6 @@ const Draw = (
       window.addEventListener('mousemove', mouseMoveListener)
     }
 
-    // const initializeMouseUnclickListener = () => {
-    //   const listener = () => {
-    //     isDrawingRef.current = false
-    //     prevPoint.current = null
-    //   }
-    //   window.addEventListener('mouseup', listener)
-    // }
-
     const getCanvasCoords = (x, y) => {
       if (canvasRef.current) {
         const canvasCoord = canvasRef.current.getBoundingClientRect()
@@ -68,9 +60,6 @@ const Draw = (
       if (mouseMoveRef.current) {
         window.removeEventListener('mousemove', mouseMoveRef.current)
       }
-      // if (mouseUnclickRef.current) {
-      //   window.removeEventListener('mouseup', mouseUnclickRef.current)
-      // }
     }
     initializeMouseMoveListener()
 
@@ -99,6 +88,13 @@ const Draw = (
       ctx.clearRect(0, 0, width, height)
       canvasArray.current.pop()
       lineCount.current--
+      if (selSketch) {
+        let sketch = new Image()
+        sketch.src = selSketch.sketchData
+        ctx.drawImage(sketch, 0, 0)
+        canvasData.current = ctx.getImageData(0, 0, width, height)
+        canvasArray.current.push(canvasData.current)
+      }
     } else {
       ctx.putImageData(canvasArray.current[lineCount.current - 1], 0, 0)
       canvasArray.current.pop()
@@ -144,16 +140,3 @@ const Draw = (
 }
 
 export default Draw
-
-//  for (let i = 0; i < bristleCount; i++) {
-//    strokeBristle(
-//      ctx,
-//      { originX: start.x + i * gap, originY: start.y + (i * gap) / 2 },
-//      {
-//        destinationX: end.x + i * gap,
-//        destinationY: end.y + (i * gap) / 2
-//      },
-//      bristle,
-//      1.5
-//    )
-//  }
