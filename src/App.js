@@ -22,7 +22,7 @@ import DailyPrompt from './pages/DailyPrompt'
 import io from 'socket.io-client'
 import { BASE_URL } from './services/api'
 
-export const ColorProvider = createContext('#000000')
+export const ColorProvider = createContext('#B3B3B3')
 const socket = io.connect(BASE_URL)
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
   const [promptCanvas, setPromptCanvas] = useState(false)
   const [notifications, setNotifications] = useState(null)
 
-  const [hexColor, setHexColor] = useState('#000000')
+  const [hexColor, setHexColor] = useState('#B3B3B3')
 
   const initRoom = (user) => {
     if (authenticated) {

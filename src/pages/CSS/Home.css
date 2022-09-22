@@ -49,7 +49,8 @@ a.preButton:hover {
 
 .home-body {
   padding-top: 3%;
-  background-image: url(test_background.webp);
+  background-color: #b3b3b3;
+  /* background-image: url(test_background.webp); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -88,4 +89,18 @@ a.preButton:hover {
 .explore-title {
   background-color: var(--green);
   margin-bottom: 8%;
+}
+
+@media screen and (max-width: 1330px) {
+  .home-page-grid {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .friend-container {
+    margin-top: 5%;
+    width: 50%;
+  }
+  .friend {
+    grid-template-columns: 1fr 8fr 1fr;
+  }
 }

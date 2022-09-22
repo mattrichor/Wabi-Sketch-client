@@ -1,5 +1,5 @@
 .canvas {
-  border-radius: 0.8rem 0rem 0rem 0.8rem;
+  /* border-radius: 0.8rem 0rem 0rem 0.8rem; */
 }
 canvas {
   background-color: var(--alice);
@@ -12,6 +12,8 @@ canvas {
 
 .control-panel {
   display: grid;
+  border-right: black solid;
+  border-radius: 0rem 0.8rem 0rem 0rem;
   grid-template-rows: 1fr 1fr 1fr 1fr 5.5fr;
 }
 
@@ -19,7 +21,9 @@ canvas {
   border-radius: 0rem 0.8rem 0rem 0rem;
 }
 .ctn-btn {
-  border-right: black solid;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  /* border-right: black solid; */
   border-bottom: black solid;
   max-width: 52px;
   background-image: none,
@@ -28,14 +32,14 @@ canvas {
 
 .ctn-btn-bottom {
   border: none;
-  border-right: black solid;
+  /* border-right: black solid; */
   border-bottom: black solid;
   max-width: 36px;
   padding: 8px;
   background-image: linear-gradient(
       to bottom,
-      var(--mauve) 0%,
-      var(--mauve) 100%
+      rgba(240, 40, 40, 0) 0%,
+      rgba(240, 40, 40, 0) 100%
     ),
     linear-gradient(to bottom, rgba(240, 40, 40, 0) 80%, black 100%);
   background-clip: content-box, padding-box;
@@ -45,6 +49,18 @@ canvas {
     linear-gradient(to bottom, rgba(240, 40, 40, 0) 80%, black 100%);
   background-color: var(--yellow);
 }
+/* .ctn-btn-bottom:hover {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(240, 40, 40, 0) 80%,
+      black 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(240, 40, 40, 0) 0%,
+      rgba(240, 40, 40, 0) 100%
+    );
+} */
 
 .ctn-empty-space {
   background-color: black;
@@ -101,4 +117,39 @@ canvas {
 }
 .chat-msg {
   justify-content: flex-end;
+}
+
+.lbl {
+  position: absolute;
+  margin-top: 0.8%;
+  margin-left: 2%;
+  color: aliceblue;
+  background-color: var(--dark);
+  border: 1px solid grey;
+  padding-left: 0.4%;
+  padding-right: 0.4%;
+  padding-bottom: 0.3%;
+  border-radius: 0.35rem;
+  display: none;
+}
+
+.ch-undo:hover ~ .lbl {
+  display: inline;
+}
+.ch-save:hover ~ .lbl {
+  display: inline;
+}
+.ch-tool:hover ~ .lbl {
+  display: inline;
+}
+.ch-color:hover ~ .lbl {
+  display: inline;
+}
+.ctn-div {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(240, 40, 40, 0) 80%,
+      black 100%
+    ),
+    linear-gradient(to bottom, rgba(240, 40, 40, 0) 90%, black 100%);
 }

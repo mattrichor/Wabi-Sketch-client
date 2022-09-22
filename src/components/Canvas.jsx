@@ -49,6 +49,14 @@ const Canvas = ({
   const [toolMenu, toggleToolMenu] = useState(false)
   const [drawToolState, setDrawToolState] = useState('line')
   const [toolSrc, setToolSrc] = useState(pencil)
+  const [isHover, setIsHover] = useState(false)
+
+  const handleMouseEnter = () => {
+    setIsHover(true)
+  }
+  const handleMouseLeave = () => {
+    setIsHover(false)
+  }
 
   useEffect(() => {
     const setCanvasRef = async () => {
@@ -228,24 +236,44 @@ const Canvas = ({
           onMouseDown={drawAndSaveLine}
         ></canvas>
         <div className="control-panel">
-          <img
-            src={undo}
-            className="ctn-btn ctn-btn-top"
-            onClick={undoLine}
-          ></img>
-          <img
-            className="ctn-btn"
-            title="save"
-            src={saveicon}
-            onClick={saveSketch}
-          ></img>
-          <img className="ctn-btn" src={toolSrc} onClick={chooseTool}></img>
-          <img
-            src={color}
-            className="ctn-btn ctn-btn-bottom"
-            style={{ backgroundColor: hexColor }}
-            onClick={showColor}
-          ></img>
+          <div className="ctn-div">
+            <img
+              src={undo}
+              className="ctn-btn ctn-btn-top ch-undo"
+              onClick={undoLine}
+            ></img>
+            <label className="undo-lbl lbl">undo</label>
+          </div>
+          <div className="ctn-div">
+            <img
+              className="ctn-btn ch-save"
+              title="save"
+              src={saveicon}
+              onClick={saveSketch}
+            ></img>
+            <label className="save-lbl lbl">save</label>
+          </div>
+          <div className="ctn-div">
+            <img
+              className="ctn-btn ch-tool"
+              src={toolSrc}
+              onClick={chooseTool}
+            ></img>
+            <label className="choose-lbl lbl">tool</label>
+          </div>
+          <div className="ctn-div">
+            <img
+              src={color}
+              className="ctn-btn ctn-btn-bottom ch-color"
+              style={{
+                backgroundColor: isHover ? 'var(--yellow)' : hexColor
+              }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onClick={showColor}
+            ></img>
+            <label className="color-lbl lbl">color</label>
+          </div>
           <div className="ctn-empty-space"></div>
         </div>
         {hexToggle ? colorPickerOption : <div></div>}
