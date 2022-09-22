@@ -85,6 +85,9 @@ a.preButton:hover {
   background-position: center;
   background-size: cover;
 }
+.home-pg {
+  background-color: #b3b3b3;
+}
 
 .explore-title {
   background-color: var(--green);
@@ -103,4 +106,8 @@ a.preButton:hover {
   .friend {
     grid-template-columns: 1fr 8fr 1fr;
   }
+}
+
+.home-page-grid {
+  background-image: linear-gradient(#b3b3b3 90%, var(--pink));
 }
