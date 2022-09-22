@@ -55,6 +55,8 @@ function App() {
   useEffect(() => {
     let today = new Date()
     let now = today.getTime() / 10000
+    var randomColor = Math.floor(Math.random() * 16777215).toString(16)
+    setHexColor(`#${randomColor}`)
   }, [])
 
   const client = useRef(null)
