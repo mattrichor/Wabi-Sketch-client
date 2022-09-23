@@ -113,7 +113,7 @@ const Home = ({
           <div className="canvas">
             <Canvas
               width={700}
-              height={500}
+              height={560}
               hexColor={hexColor}
               user={user}
               isLoading={isLoading}
