@@ -94,7 +94,7 @@ a.preButton:hover {
   margin-bottom: 8%;
 }
 
-@media screen and (max-width: 1330px) {
+@media screen and (max-width: 1150px) {
   .home-page-grid {
     display: flex;
     flex-direction: column-reverse;
@@ -104,7 +104,7 @@ a.preButton:hover {
     width: 50%;
   }
   .friend {
-    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-columns: 1fr 8fr 2fr;
   }
 }
 

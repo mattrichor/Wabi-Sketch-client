@@ -14,6 +14,7 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
 
   const [requests, setRequests] = useState([])
   const [friends, setFriends] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
 
   // Friend Request Logic & friendslist view
   useEffect(() => {

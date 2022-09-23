@@ -14,6 +14,11 @@
 #friend-list {
   border-radius: 0.3rem;
 }
+@media screen and (max-width: 1300px) {
+  #friend-list {
+    width: 90%;
+  }
+}
 
 .friend {
   width: 100%;
@@ -44,9 +49,61 @@
 .friend .name {
   font-size: 18px;
 }
+.friend-btn {
+  display: none;
+  float: right;
+  justify-self: flex-end;
+  column-gap: 50%;
+  /* transition: 50ms; */
+}
 
 .friend:not(.selected):hover {
   background: rgb(213, 220, 241);
+}
+.friend:hover .friend-btn {
+  display: flex;
+  /* transform: translateX(-20px); */
+  -webkit-animation: translate-right-out 200ms 1 cubic-bezier(0.7, 0, 0.3, 1);
+  animation: translate-right-out 200ms 1 cubic-bezier(0.7, 0, 0.3, 1);
+  /* -webkit-transform: translateX(-30px); */
+  /* transform: translateX(-30px); */
+}
+
+@-webkit-keyframes translate-left-in {
+  0% {
+    -webkit-transform: translateX(30px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+  }
+}
+@keyframes translate-left-in {
+  0% {
+    width: 25%;
+  }
+  100% {
+    width: 100%;
+    color: aliceblue;
+  }
+}
+
+@-webkit-keyframes translate-right-out {
+  0% {
+    -webkit-transform: translateX(0%);
+  }
+  100% {
+    -webkit-transform: translateX(-30px);
+  }
+}
+@keyframes translate-right-out {
+  0% {
+    width: 25%;
+    color: transparent;
+  }
+  100% {
+    width: 100%;
+    color: aliceblue;
+  }
 }
 
 .friend-grid {
@@ -54,13 +111,13 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.friend-btn-div {
-  justify-self: flex-end;
-  column-gap: 50%;
-}
-
 .friend-btn {
-  float: right;
+  border-radius: 0.8rem 0 0 0.8rem;
+  height: 60px;
+  width: 100%;
+  color: aliceblue;
+  background-color: var(--dark);
+  border: 1px solid grey;
 }
 
 .li-tit {
