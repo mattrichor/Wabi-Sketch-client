@@ -100,8 +100,10 @@ a.preButton:hover {
     flex-direction: column-reverse;
   }
   .friend-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-top: 5%;
-    width: 50%;
+    width: 90%;
   }
   .friend {
     grid-template-columns: 1fr 8fr 2fr;
@@ -121,4 +123,8 @@ a.preButton:hover {
   margin: 0 auto;
   width: 755px;
   height: 20px;
+  font-size: larger;
+  letter-spacing: 0.2rem;
+  padding-bottom: 5px;
+  font-style: italic;
 }

@@ -1,3 +1,5 @@
+/*  */
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
@@ -8,21 +10,40 @@
 }
 .spinner {
   /* background-image: url(zen.png); */
-  width: 120px;
-  height: 120px;
+  border: 10px solid var(--grey);
+  border-top: 10px solid var(--dark);
   border-radius: 50%;
+  width: 80px;
+  height: 80px;
   animation: spinner 1.3s linear infinite;
 }
 
-.spinner-container,
-.sketch-sent-text {
+.spinner-container {
   display: grid;
-  position: fixed;
-  top: 30%;
-  left: 45%;
+  position: absolute;
+  top: 350px;
+  left: 44%;
   justify-content: center;
   align-items: center;
-  height: 350px;
+}
+
+@media screen and (max-width: 850px) {
+  .spinner-container {
+    top: 320px;
+    left: 40%;
+  }
+}
+@media screen and (min-width: 1350px) {
+  .spinner-container {
+    top: 380px;
+    /* left: 45%; */
+  }
+}
+@media screen and (min-width: 1350px) {
+  .spinner-container {
+    top: 400px;
+    left: 46%;
+  }
 }
 
 .sketch-sent-text {

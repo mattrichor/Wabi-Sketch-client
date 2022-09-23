@@ -6,14 +6,11 @@
   width: 100%;
   background-color: #dee1e530;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  border-radius: 20px;
+  border-radius: 0.3rem;
   list-style-type: none;
   text-align: left;
 }
 
-#friend-list {
-  border-radius: 0.3rem;
-}
 @media screen and (max-width: 1300px) {
   #friend-list {
     width: 90%;
@@ -27,7 +24,8 @@
   border-bottom: 1px solid #ddd;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
+
   align-items: center;
   color: black;
 }
@@ -61,7 +59,6 @@
 }
 .friend:hover .friend-btn {
   display: flex;
-
   -webkit-animation: translate-right-out 200ms 1 cubic-bezier(0.7, 0, 0.3, 1);
   animation: translate-right-out 200ms 1 cubic-bezier(0.7, 0, 0.3, 1);
 }
@@ -97,12 +94,13 @@
   color: aliceblue;
   background-color: var(--dark);
   border: 1px solid grey;
+  margin: 0 auto;
 }
 
 .li-tit {
   color: black;
   padding: 2%;
-  border-radius: 1rem;
+  /* border-radius: ; */
 }
 
 .friend-container {
