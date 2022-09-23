@@ -33,8 +33,8 @@ const Canvas = ({
   prompt,
   isLoading,
   setIsLoading,
-  sentDisplay,
-  setSentDisplay
+  display,
+  setDisplay
 }) => {
   // const canvasRef = createRef()
   const isDrawingRef = useRef(false)
@@ -165,7 +165,8 @@ const Canvas = ({
     sketchRecip,
     setSketchRecip,
     sendNotification,
-    prompt
+    prompt,
+    setDisplay
   )
 
   const showColor = () => {
@@ -222,11 +223,6 @@ const Canvas = ({
   return (
     <ImageDimensions.Provider value={{ width: width, height: height }}>
       <div className="canvas-container">
-        {sentDisplay ? (
-          <div className="sketch-sent-text">sketch sent!</div>
-        ) : (
-          <div></div>
-        )}
         {isLoading ? <LoadingSpinner /> : <div></div>}
         <canvas
           width={width}

@@ -19,7 +19,8 @@ const Draw = (
   sketchRecip,
   setSketchRecip,
   sendNotification,
-  prompt
+  prompt,
+  setDisplay
 ) => {
   const hexColor = useContext(ColorProvider)
 
@@ -111,23 +112,27 @@ const Draw = (
           sketchData: sketchData,
           promptId: prompt.id
         })
+        setDisplay('Sketch Saved!')
       } else {
         const sketch = await UploadSketch(user.id, {
           sketchData: sketchData,
           promptId: prompt.id
         })
         setSelSketch(sketch)
+        setDisplay('Sketch Uploaded!')
       }
     } else if (!prompt) {
       if (selSketch.id !== undefined) {
         const sketch = await SaveSketch(user.id, selSketch.id, {
           sketchData: sketchData
         })
+        setDisplay('Sketch Saved!')
       } else {
         const sketch = await UploadSketch(user.id, {
           sketchData: sketchData
         })
         setSelSketch(sketch)
+        setDisplay('Sketch Uploaded!')
       }
     }
   }

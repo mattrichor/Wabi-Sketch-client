@@ -26,7 +26,7 @@ const Home = ({
 }) => {
   const canvasRef = createRef()
   const [sketchRecip, setSketchRecip] = useState(0)
-  const [sentDisplay, setSentDisplay] = useState(false)
+  const [display, setDisplay] = useState(null)
   const [randomGreeting, setRandomGreeting] = useState(`What's In Your Brain?`)
 
   let chooseRandomGreeting = (randNum) => {
@@ -54,6 +54,12 @@ const Home = ({
     chooseRandomGreeting(randNum)
   }, [])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setDisplay(null)
+    }, 1500)
+  }, [display])
+
   //////// SKETCH SEND LOGIC ///////////
   const sendSketch = async (friendId) => {
     const ctx = canvasRef.current.getContext('2d')
@@ -68,27 +74,21 @@ const Home = ({
       const sentSketch = await SendSketch(friendId, sketch.id, {
         sketchData: sketchData
       })
-      setSentDisplay(true)
+      setDisplay('Sketch Sent!')
       sendNotification(friendId)
       const notif = await CreateNotif(friendId, sketch.id, {
         senderName: user.username
       })
-      setTimeout(() => {
-        setSentDisplay(false)
-      }, 1200)
     } else {
       const sketch = await SendSketch(friendId, selSketch.id, {
         sketchData: sketchData
       })
       setSketchRecip(friendId)
-      setSentDisplay(true)
+      setDisplay('Sketch Sent!')
       sendNotification(friendId)
       const notif = await CreateNotif(friendId, selSketch.id, {
         senderName: user.username
       })
-      setTimeout(() => {
-        setSentDisplay(false)
-      }, 1500)
     }
   }
   //////// SKETCH SEND LOGIC ///////////
@@ -102,6 +102,7 @@ const Home = ({
         </div>
       </div>
       <section className="home-body">
+        {display ? <div className="display-text">{display}</div> : <div></div>}
         <div className="home-page-grid">
           <FriendsList
             user={user}
@@ -117,8 +118,8 @@ const Home = ({
               hexColor={hexColor}
               user={user}
               isLoading={isLoading}
-              setSentDisplay={setSentDisplay}
-              sentDisplay={sentDisplay}
+              setDisplay={setDisplay}
+              display={display}
               setIsLoading={setIsLoading}
               setSelSketch={setSelSketch}
               selSketch={selSketch}
