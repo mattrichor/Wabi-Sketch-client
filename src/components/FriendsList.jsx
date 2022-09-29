@@ -71,57 +71,31 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
   }
 
   return (
-    <div className="friend-container">
-      <ul id="friend-list">
-        <li className="li-tit">Connections</li>
-        {friends !== [] ? (
-          <div>
-            {friends.map((friend) => (
-              <li key={friend.id} className="friend">
-                <img
-                  className="friend-img"
-                  src={chooseRandImg(friend.username)}
-                />
-                <div className="friend-name">{friend.username}</div>
-                {exploreToggle ? (
-                  <div></div>
-                ) : (
-                  <div className="friend-btn-div">
-                    <button
-                      className="friend-btn button-55"
-                      onClick={() => sendSketch(friend.id)}
-                    >
-                      Send Sketch
-                    </button>
-                  </div>
-                )}
-              </li>
-            ))}
-          </div>
-        ) : (
-          <div></div>
-        )}
-      </ul>
-      <div>
-        <ul id="request-list">
-          {requests !== [] ? (
+    <div>
+      <div className="friend-container">
+        <ul id="friend-list">
+          <li className="li-tit">Connections</li>
+          {friends !== [] ? (
             <div>
-              <li className="li-tit">Requests</li>
-              {requests.map((request) => (
-                <li className="friend">
+              {friends.map((friend) => (
+                <li key={friend.id} className="friend">
                   <img
                     className="friend-img"
-                    src={chooseRandImg(request.username)}
+                    src={chooseRandImg(friend.username)}
                   />
-                  <div className="friend-name">{request.username}</div>
-                  <div className="friend-btn-div">
-                    <button
-                      className="friend-btn button-55"
-                      onClick={() => acceptRequest(request.id)}
-                    >
-                      Accept
-                    </button>
-                  </div>
+                  <div className="friend-name">{friend.username}</div>
+                  {exploreToggle ? (
+                    <div></div>
+                  ) : (
+                    <div className="friend-btn-div">
+                      <button
+                        className="friend-btn button-55"
+                        onClick={() => sendSketch(friend.id)}
+                      >
+                        Send Sketch
+                      </button>
+                    </div>
+                  )}
                 </li>
               ))}
             </div>
@@ -129,9 +103,40 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
             <div></div>
           )}
         </ul>
+        <div>
+          <ul id="request-list">
+            {requests !== [] ? (
+              <div>
+                <li className="li-tit">Requests</li>
+                {requests.map((request) => (
+                  <li className="friend">
+                    <img
+                      className="friend-img"
+                      src={chooseRandImg(request.username)}
+                    />
+                    <div className="friend-name">{request.username}</div>
+                    <div className="friend-btn-div">
+                      <button
+                        className="friend-btn button-55"
+                        onClick={() => acceptRequest(request.id)}
+                      >
+                        Accept
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </div>
+            ) : (
+              <div></div>
+            )}
+          </ul>
+        </div>
       </div>
       {!exploreToggle ? (
-        <button className="button-55" onClick={() => navigate('/explore')}>
+        <button
+          className="button-55 explore-btn"
+          onClick={() => navigate('/explore')}
+        >
           Explore
         </button>
       ) : (

@@ -80,7 +80,7 @@ const DailyPrompt = ({
                 }}
               />
             </div>
-            <div className="home-page-grid">
+            <div className="prompt-grid">
               <div className="chat-box">
                 <div>
                   {msgArray ? (
@@ -107,7 +107,7 @@ const DailyPrompt = ({
               <div className="canvas-div">
                 <Canvas
                   width={700}
-                  height={500}
+                  height={560}
                   user={user}
                   setSelSketch={setSelSketch}
                   selSketch={selSketch}

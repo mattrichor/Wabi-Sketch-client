@@ -99,6 +99,16 @@ a.preButton:hover {
     display: flex;
     flex-direction: column-reverse;
   }
+  .prompt-grid {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .chat-box {
+    width: 60%;
+    align-self: center;
+    margin-left: 0%;
+    height: 200px;
+  }
   .friend-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -108,10 +118,13 @@ a.preButton:hover {
   .friend {
     grid-template-columns: 1fr 8fr 2fr;
   }
+  .explore-btn {
+    justify-content: center;
+  }
 }
 
 .home-page-grid {
-  background-image: linear-gradient(#b3b3b3 90%, var(--pink));
+  background-color: var(grey);
 }
 
 .display-text {
