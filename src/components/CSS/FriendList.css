@@ -4,11 +4,19 @@
   margin: 0;
   padding: 0;
   width: 100%;
+
   background-color: #dee1e530;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   border-radius: 0.3rem;
   list-style-type: none;
   text-align: left;
+  /* overflow: hidden;
+  overflow-y: scroll; */
+}
+.friends-scroll {
+  max-height: 280px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 @media screen and (max-width: 1300px) {

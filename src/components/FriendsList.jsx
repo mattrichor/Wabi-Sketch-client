@@ -76,7 +76,7 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
         <ul id="friend-list">
           <li className="li-tit">Connections</li>
           {friends !== [] ? (
-            <div>
+            <div className="friends-scroll">
               {friends.map((friend) => (
                 <li key={friend.id} className="friend">
                   <img
@@ -104,10 +104,10 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
           )}
         </ul>
         <div>
-          <ul id="request-list">
-            {requests !== [] ? (
-              <div>
-                <li className="li-tit">Requests</li>
+          {requests !== [] ? (
+            <ul id="request-list">
+              <li className="li-tit">Requests</li>
+              <div className="friends-scroll">
                 {requests.map((request) => (
                   <li className="friend">
                     <img
@@ -126,10 +126,10 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
                   </li>
                 ))}
               </div>
-            ) : (
-              <div></div>
-            )}
-          </ul>
+            </ul>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       {!exploreToggle ? (
