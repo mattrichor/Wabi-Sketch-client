@@ -1,5 +1,4 @@
 import './App.css'
-
 // COLORS: G #205A31 P #b55d84 B #3c4993 y #E1DA79
 
 import { useState, useEffect, useRef, createContext } from 'react'

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilites;
+
 :root {
   --green: #205a31;
   --pink: #b55d84;
