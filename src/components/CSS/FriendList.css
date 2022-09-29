@@ -18,11 +18,17 @@
   overflow: hidden;
   overflow-y: scroll;
 }
+.fr-whole {
+  background-color: var(--grey);
+}
 
 @media screen and (max-width: 1300px) {
   #friend-list,
   #request-list {
     width: 90%;
+  }
+  .friends-scroll {
+    max-height: 230px;
   }
 }
 
@@ -112,7 +118,8 @@
   /* border-radius: ; */
 }
 
-.friend-container {
+.friend-container,
+.explore-container {
   margin-left: 5%;
 }
 .friends-list {

@@ -71,8 +71,8 @@ const FriendsList = ({ user, sendSketch, exploreToggle }) => {
   }
 
   return (
-    <div>
-      <div className="friend-container">
+    <div className={exploreToggle ? 'ex-whole' : 'fr-whole'}>
+      <div className={exploreToggle ? 'explore-container' : 'friend-container'}>
         <ul id="friend-list">
           <li className="li-tit">Connections</li>
           {friends !== [] ? (
