@@ -112,6 +112,9 @@ canvas {
   flex-direction: column;
   justify-content: flex-end;
   margin-left: 7%;
+  overflow-y: scroll;
+  background-color: #dee1e530;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 4px 12px;
 }
 
 .chat-list {

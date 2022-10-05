@@ -47,6 +47,7 @@ const DailyPrompt = ({
       setMsgArray((msgArray) => [...msgArray, data])
     )
   }, [socket])
+
   return (
     <div className="prompt-pg">
       <div>
@@ -86,6 +87,7 @@ const DailyPrompt = ({
                 msgArray={msgArray}
                 setMessage={setMessage}
                 sendChat={sendChat}
+                message={message}
               />
               <div className="canvas-div">
                 <Canvas

@@ -1,4 +1,4 @@
-const ChatBox = ({ msgArray, setMessage, sendChat }) => {
+const ChatBox = ({ msgArray, setMessage, sendChat, message }) => {
   return (
     <div className="chat-box">
       <div>
@@ -20,6 +20,7 @@ const ChatBox = ({ msgArray, setMessage, sendChat }) => {
         onChange={(event) => {
           setMessage(event.target.value)
         }}
+        value={message}
       />
       <button onClick={sendChat}>SEND MSG</button>
     </div>
