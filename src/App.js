@@ -35,6 +35,7 @@ function App() {
   const [promptCanvas, setPromptCanvas] = useState(false)
   const [notifications, setNotifications] = useState(null)
 
+  const [display, setDisplay] = useState(null)
   const [hexColor, setHexColor] = useState('#B3B3B3')
 
   const initRoom = (user) => {
@@ -146,6 +147,8 @@ function App() {
                   setHexColor={setHexColor}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
+                  display={display}
+                  setDisplay={setDisplay}
                 />
               }
             ></Route>
@@ -178,6 +181,8 @@ function App() {
                   setHexColor={setHexColor}
                   isLoading={isLoading}
                   setIsLoading={setIsLoading}
+                  display={display}
+                  setDisplay={setDisplay}
                 />
               }
             ></Route>

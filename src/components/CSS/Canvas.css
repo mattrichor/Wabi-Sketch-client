@@ -1,8 +1,6 @@
-.canvas {
-  /* border-radius: 0.8rem 0rem 0rem 0.8rem; */
-}
 canvas {
   background-color: var(--alice);
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 4px 12px;
 }
 
 .canvas-container {
@@ -15,6 +13,7 @@ canvas {
   border-right: black solid;
   border-radius: 0rem 0.8rem 0rem 0rem;
   grid-template-rows: 1fr 1fr 1fr 1fr 5.5fr;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 4px 12px;
 }
 
 .ctn-btn-top {
@@ -115,6 +114,7 @@ canvas {
   overflow-y: scroll;
   background-color: #dee1e530;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 4px 12px;
+  max-height: 560px;
 }
 .msg-input {
   width: calc(100% - 3.3vw - 3.3vw - 14px - 15px - 15px);

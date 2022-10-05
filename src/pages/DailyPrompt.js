@@ -13,7 +13,9 @@ const DailyPrompt = ({
   promptCanvas,
   hexColor,
   setHexColor,
-  socket
+  socket,
+  display,
+  setDisplay
 }) => {
   const canvasRef = createRef()
   const [msgArray, setMsgArray] = useState([])
@@ -42,6 +44,12 @@ const DailyPrompt = ({
     socket.emit('send_chat', { username: user.username, message: message })
     setMessage('')
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDisplay(null)
+    }, 1500)
+  }, [display])
 
   useEffect(() => {
     socket.on('receive_chat', (data) =>
@@ -91,6 +99,11 @@ const DailyPrompt = ({
                 message={message}
               />
               <div className="canvas-div">
+                {display ? (
+                  <div className="display-text">{display}</div>
+                ) : (
+                  <div></div>
+                )}
                 <Canvas
                   width={700}
                   height={560}
@@ -102,6 +115,8 @@ const DailyPrompt = ({
                   prompt={prompt}
                   setHexColor={setHexColor}
                   hexColor={hexColor}
+                  display={display}
+                  setDisplay={setDisplay}
                 />
               </div>
             </div>

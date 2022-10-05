@@ -17,6 +17,7 @@ const ChatBox = ({ msgArray, setMessage, sendChat, message }) => {
       </div>
       <form onSubmit={sendChat}>
         <input
+          maxLength={25}
           className="msg-input"
           placeholder="Message..."
           onChange={(event) => {

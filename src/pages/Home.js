@@ -22,11 +22,13 @@ const Home = ({
   hexColor,
   setHexColor,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  display,
+  setDisplay
 }) => {
   const canvasRef = createRef()
   const [sketchRecip, setSketchRecip] = useState(0)
-  const [display, setDisplay] = useState(null)
+
   const [randomGreeting, setRandomGreeting] = useState(`What's In Your Brain?`)
 
   let chooseRandomGreeting = (randNum) => {
