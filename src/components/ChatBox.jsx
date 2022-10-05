@@ -3,11 +3,11 @@ const ChatBox = ({ msgArray, setMessage, sendChat, message }) => {
     <div className="chat-box">
       <div>
         {msgArray ? (
-          <ul>
+          <ul className="chat-ul">
             {msgArray.map((msg) => (
               <li className="chat-list">
-                <div className="chat-user">{msg.username}</div>
-                <div className="chat-msg">{msg.message}</div>
+                <span className="chat-user">{msg.username}</span>
+                <span className="chat-msg">{msg.message}</span>
               </li>
             ))}
           </ul>
@@ -15,14 +15,19 @@ const ChatBox = ({ msgArray, setMessage, sendChat, message }) => {
           <div></div>
         )}
       </div>
-      <input
-        placeholder="Message..."
-        onChange={(event) => {
-          setMessage(event.target.value)
-        }}
-        value={message}
-      />
-      <button onClick={sendChat}>SEND MSG</button>
+      <form onSubmit={sendChat}>
+        <input
+          className="msg-input"
+          placeholder="Message..."
+          onChange={(event) => {
+            setMessage(event.target.value)
+          }}
+          value={message}
+        />
+        <button type="submit" className="send-button">
+          SEND
+        </button>
+      </form>
     </div>
   )
 }

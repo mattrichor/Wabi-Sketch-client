@@ -37,7 +37,8 @@ const DailyPrompt = ({
     getDailyPrompt()
   }, [])
 
-  const sendChat = () => {
+  const sendChat = (e) => {
+    e.preventDefault()
     socket.emit('send_chat', { username: user.username, message: message })
     setMessage('')
   }
