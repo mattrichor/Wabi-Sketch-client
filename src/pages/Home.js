@@ -10,8 +10,6 @@ import { CreateNotif } from '../services/Notifs'
 import './CSS/Home.css'
 
 import '../components/CSS/FriendList.css'
-import Notifications from '../components/Notifications'
-import { GetNotifs } from '../services/Notifs'
 
 const Home = ({
   user,
@@ -46,7 +44,7 @@ const Home = ({
         setRandomGreeting(`What Flows Through You?`)
         break
       case 5:
-        setRandomGreeting(`What Lies Your The Mind?`)
+        setRandomGreeting(`What Comes To Mind?`)
         break
     }
   }
