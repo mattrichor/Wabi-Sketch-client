@@ -134,6 +134,8 @@ const Canvas = ({
           variedColor
         )
       }
+    } else if (drawToolState === 'fractal') {
+      console.log('fractal')
     }
 
     ctx.beginPath()
