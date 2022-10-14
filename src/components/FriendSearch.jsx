@@ -10,7 +10,7 @@ const FriendSearch = ({ user }) => {
   const [currentUser, setCurrentUser] = useState([])
 
   const handleChange = (e) => {
-    setSearchTerm(e.target.value)
+    setSearchTerm(e.target.value.toLowerCase())
   }
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -45,32 +45,39 @@ const FriendSearch = ({ user }) => {
   }
 
   return (
-    <div>
-      <h2 className="find-friend-title">Find Friends</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="search-input"
-          type="text"
-          placeholder="username"
-          value={searchTerm}
-          onChange={handleChange}
-        />
-        <button type="submit" className="send-button">
-          Search
-        </button>
-      </form>
+    <div className="friend-search">
+      <div className="find-friends-bar">
+        <span className="find-friend-title">Find Friends</span>
+        <form onSubmit={handleSubmit}>
+          <input
+            className="search-input"
+            type="text"
+            placeholder="username"
+            value={searchTerm}
+            onChange={handleChange}
+          />
+          <button type="submit" className="send-button">
+            Search
+          </button>
+        </form>
+      </div>
 
-      {searchResults.map((user) => (
-        <div className="grid-container">
-          <div className="search-item">{user.username}</div>
+      <ul className="user-list">
+        {searchResults.map((user) => (
+          <li className="grid-container">
+            <div className="search-item">{user.username}</div>
 
-          <div className="choose-btn-div">
-            <button className="choose-btn" onClick={() => sendRequest(user.id)}>
-              Connect
-            </button>
-          </div>
-        </div>
-      ))}
+            <div className="friend-btn-div">
+              <button
+                className="friend-btn friend-search-btn"
+                onClick={() => sendRequest(user.id)}
+              >
+                <div className="send-btn-txt">Connect</div>
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

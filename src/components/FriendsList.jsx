@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useRouteMatch } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { GetFriendRequests, SendFriendRequest } from '../services/Users'
 import './CSS/FriendList.css'
 import iconBird from './CSS/iconbird.png'
